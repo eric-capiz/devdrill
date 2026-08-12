@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import { BrandMark } from "@/components/BrandMark";
 import { Buzzer } from "@/components/bits/Buzzer";
 import { SlamText } from "@/components/bits/SlamText";
 
@@ -19,6 +20,19 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
       />
 
       <div className="shell relative flex min-h-[min(100svh,52rem)] flex-col items-center justify-center py-14 text-center sm:min-h-[calc(100svh-4.25rem)] sm:py-20">
+        <motion.div
+          className="mb-5 sm:mb-6"
+          initial={{ opacity: 0, scale: 0.86, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 320, damping: 22 }}
+        >
+          <BrandMark
+            size={96}
+            priority
+            className="h-16 w-16 sm:h-24 sm:w-24"
+          />
+        </motion.div>
+
         <h1 className="max-w-full font-display text-[clamp(2.75rem,15vw,8.5rem)] leading-[0.9] tracking-wide text-[var(--spot)]">
           <SlamText text="DEV DRILL" />
         </h1>

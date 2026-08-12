@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logoutAction } from "@/app/actions/auth";
+import { BrandMark } from "@/components/BrandMark";
 import { Buzzer } from "@/components/bits/Buzzer";
 
 function navClass(active: boolean) {
@@ -24,17 +25,31 @@ export function SiteHeader({ username }: { username: string | null }) {
   return (
     <header className="broadcast-bar sticky top-0 z-40">
       <div className="shell flex w-full items-center justify-between gap-2 py-2.5 sm:gap-4 sm:py-3">
-        <div className="flex min-w-0 items-center gap-2 sm:gap-4">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <span className="on-air hidden sm:inline-flex">On air</span>
           <Link
             href="/"
-            className={`font-display shrink-0 text-lg tracking-wide sm:text-2xl ${
+            aria-label="Dev Drill home"
+            className={`flex min-w-0 items-center gap-2 sm:gap-2.5 ${
               onHome
-                ? "text-[var(--spot)] underline decoration-[var(--live)] decoration-2 underline-offset-4 sm:underline-offset-8"
+                ? "text-[var(--spot)]"
                 : "text-[var(--spot)]/80 hover:text-[var(--spot)]"
             }`}
           >
-            DEV DRILL
+            <BrandMark
+              size={34}
+              priority
+              className="h-7 w-7 sm:h-[34px] sm:w-[34px]"
+            />
+            <span
+              className={`font-display shrink-0 text-lg tracking-wide sm:text-2xl ${
+                onHome
+                  ? "underline decoration-[var(--live)] decoration-2 underline-offset-4 sm:underline-offset-8"
+                  : ""
+              }`}
+            >
+              DEV DRILL
+            </span>
           </Link>
         </div>
         <nav className="flex shrink-0 items-center gap-0.5 text-[0.7rem] font-extrabold uppercase tracking-wide sm:gap-2 sm:text-sm">

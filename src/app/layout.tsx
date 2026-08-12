@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "Dev Drill",
   description:
     "The championship web dev quiz show. Levels, tracks, subjects, and AI backed questions.",
+  applicationName: "Dev Drill",
 };
 
 export const viewport: Viewport = {
