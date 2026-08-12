@@ -59,7 +59,7 @@ export async function getQuestionsForQuiz(opts: {
 
   async function generateFresh(count: number): Promise<QuestionLean[]> {
     if (count <= 0) return [];
-    if (!(await canUseAi(count * 450))) return [];
+    if (!(await canUseAi(count * 520))) return [];
 
     const created: QuestionLean[] = [];
     const perLevel = Math.max(1, Math.ceil(count / levels.length));
@@ -97,7 +97,7 @@ export async function getQuestionsForQuiz(opts: {
     return created.slice(0, count);
   }
 
-  const aiBudgetOk = await canUseAi(Math.max(1, Math.ceil(need / 2)) * 450);
+  const aiBudgetOk = await canUseAi(Math.max(1, Math.ceil(need / 2)) * 520);
   const hasBank = existing.length > 0;
 
   let bankTarget = 0;

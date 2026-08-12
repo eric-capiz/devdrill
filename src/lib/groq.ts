@@ -1,6 +1,7 @@
 import Groq from "groq-sdk";
 import { z } from "zod";
 import type { Track } from "@/lib/catalog";
+import { isCodeHeavySubject } from "@/lib/codeSubjects";
 import type { StoredLevel } from "@/models/Question";
 import { addTokensUsed, canUseAi } from "@/models/TokenUsage";
 
@@ -25,32 +26,53 @@ function getClient() {
 
 const MODEL = "llama-3.3-70b-versatile";
 
-export async function generateQuestions(opts: {
-  level: StoredLevel;
-  track: Track;
-  subject: string;
-  count: number;
-}): Promise<{ questions: GeneratedQuestion[]; tokensUsed: number } | null> {
-  const estimated = opts.count * 450;
-  if (!(await canUseAi(estimated))) {
-    return null;
-  }
+function buildSystemPrompt(codeHeavy: boolean) {
+  const codeRules = codeHeavy
+    ? `* About half the questions must include a short code snippet in the prompt
+* Put each snippet inside a markdown code fence (triple backticks) with an optional language tag
+* Keep snippets small (about 3 to 12 lines) so they read well on mobile
+* For snippet questions, ask what is wrong, what the output or result is, which fix is correct, or what the code does
+* The other half can be concept or scenario questions without code
+* Choices should usually be short plain text; short inline code in a choice is fine`
+    : `* Prefer clear concept and scenario questions
+* You may include a short code snippet in at most one question if it truly helps
+* If you include a snippet, put it inside a markdown code fence (triple backticks)`;
 
-  const client = getClient();
-  const system = `You are an expert web development quiz author. Return ONLY valid JSON matching this shape:
+  return `You are an expert web development quiz author. Return ONLY valid JSON matching this shape:
 {"questions":[{"prompt":"...","choices":["A","B","C","D"],"correctIndex":0,"explanation":"..."}]}
 Rules:
 * Exactly 4 choices per question
 * correctIndex is 0 to 3
 * Difficulty must match the level
 * Explanations are brief (1 to 3 sentences) and make the correct answer clear
-* No markdown fences`;
+* Do not wrap the whole JSON in markdown fences
+${codeRules}`;
+}
 
+export async function generateQuestions(opts: {
+  level: StoredLevel;
+  track: Track;
+  subject: string;
+  count: number;
+}): Promise<{ questions: GeneratedQuestion[]; tokensUsed: number } | null> {
+  const estimated = opts.count * 520;
+  if (!(await canUseAi(estimated))) {
+    return null;
+  }
+
+  const codeHeavy = isCodeHeavySubject(opts.subject);
+  const client = getClient();
+  const system = buildSystemPrompt(codeHeavy);
   const user = `Generate ${opts.count} multiple choice questions.
 Level: ${opts.level}
 Track: ${opts.track}
 Subject: ${opts.subject}
-Make questions practical and distinct from each other.`;
+Make questions practical and distinct from each other.
+${
+  codeHeavy
+    ? "Target about a 50/50 mix of code snippet questions and concept questions."
+    : "Keep most questions conceptual unless a tiny snippet clearly helps."
+}`;
 
   const completion = await client.chat.completions.create({
     model: MODEL,

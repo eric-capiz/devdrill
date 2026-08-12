@@ -146,7 +146,7 @@ export default async function HomePage() {
           {[
             [
               "AI PRODUCER",
-              "Questions are written on demand, stored in the bank, and reused when tokens run dry.",
+              "Questions are written on demand, including short code snippets where it fits. They are stored in the bank and mixed with fresh AI when tokens allow.",
             ],
             [
               "FAIR JUDGING",

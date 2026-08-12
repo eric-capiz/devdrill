@@ -7,6 +7,7 @@ import {
   gradeQuizAction,
   saveAnswerAction,
 } from "@/app/actions/quiz";
+import { RichPrompt } from "@/components/RichPrompt";
 
 export type QuizQuestionView = {
   id: string;
@@ -239,9 +240,10 @@ export function QuizPlayer({
             animate={{ opacity: 1, rotateY: 0, scale: 1 }}
             exit={{ opacity: 0, rotateY: -20, scale: 0.98 }}
           >
-            <p className="font-display text-xl leading-snug tracking-wide text-[var(--spot)] sm:text-3xl">
-              {current.prompt}
-            </p>
+            <RichPrompt
+              text={current.prompt}
+              className="font-display text-xl leading-snug tracking-wide text-[var(--spot)] sm:text-3xl"
+            />
             <ul className="mt-5 space-y-2.5 sm:mt-6 sm:space-y-3">
               {current.choices.map((choice, index) => {
                 const active = selected === index;

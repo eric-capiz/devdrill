@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ConfettiBurst } from "@/components/bits/ConfettiBurst";
 import { FlipScore } from "@/components/bits/FlipScore";
+import { RichPrompt } from "@/components/RichPrompt";
 import { connectDB } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { Question } from "@/models/Question";
@@ -79,10 +80,15 @@ export default async function ResultsPage({
             return (
               <li key={q._id.toString()} className="board-tile p-4 sm:p-6">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <p className="min-w-0 font-display text-lg leading-snug tracking-wide sm:text-xl">
-                    <span className="mr-2 text-[var(--gold)]">{idx + 1}.</span>
-                    {q.prompt}
-                  </p>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-display text-lg tracking-wide text-[var(--gold)] sm:text-xl">
+                      {idx + 1}.
+                    </p>
+                    <RichPrompt
+                      text={q.prompt}
+                      className="mt-1 font-display text-lg leading-snug tracking-wide sm:text-xl"
+                    />
+                  </div>
                   <span
                     className={`w-fit shrink-0 rounded-lg px-2 py-1 text-xs font-extrabold ${
                       correct

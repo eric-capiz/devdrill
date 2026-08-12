@@ -11,4 +11,4 @@ export function getSiteUrl() {
 export const SITE_NAME = "Dev Drill";
 
 export const SITE_DESCRIPTION =
-  "The championship web development quiz show. Pick a level, track, and subject. Play fixed length or unlimited quizzes with AI backed questions, saved recaps, and a live scoreboard.";
+  "The championship web development quiz show. Pick a level, track, and subject. Play fixed length or unlimited quizzes with AI backed questions, short code snippets where it fits, saved recaps, and a live scoreboard.";
