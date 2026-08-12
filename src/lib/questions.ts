@@ -19,6 +19,17 @@ function shuffle<T>(items: T[]) {
   return arr;
 }
 
+type QuestionLean = {
+  _id: mongoose.Types.ObjectId;
+  prompt: string;
+  choices: string[];
+  correctIndex: number;
+  explanation: string;
+  level: StoredLevel;
+  track: string;
+  subject: string;
+};
+
 export async function getQuestionsForQuiz(opts: {
   level: Level;
   track: Track;
@@ -29,30 +40,33 @@ export async function getQuestionsForQuiz(opts: {
   await connectDB();
   const levels = expandLevels(opts.level);
   const exclude = new Set(opts.excludeIds ?? []);
+  const need = opts.count;
 
-  const existing = await Question.find({
-    track: opts.track,
-    subject: opts.subject,
-    level: { $in: levels },
-    ...(exclude.size
-      ? {
-          _id: {
-            $nin: [...exclude].map((id) => new mongoose.Types.ObjectId(id)),
-          },
-        }
-      : {}),
-  }).lean();
+  const existing = shuffle(
+    await Question.find({
+      track: opts.track,
+      subject: opts.subject,
+      level: { $in: levels },
+      ...(exclude.size
+        ? {
+            _id: {
+              $nin: [...exclude].map((id) => new mongoose.Types.ObjectId(id)),
+            },
+          }
+        : {}),
+    }).lean(),
+  ) as QuestionLean[];
 
-  let pool = shuffle(existing);
+  async function generateFresh(count: number): Promise<QuestionLean[]> {
+    if (count <= 0) return [];
+    if (!(await canUseAi(count * 450))) return [];
 
-  async function generateIntoPool(need: number) {
-    const aiOk = await canUseAi(need * 450);
-    if (!aiOk) return;
+    const created: QuestionLean[] = [];
+    const perLevel = Math.max(1, Math.ceil(count / levels.length));
 
-    const perLevel = Math.max(1, Math.ceil(need / levels.length));
     for (const lvl of levels) {
-      if (pool.length >= opts.count) break;
-      const remaining = opts.count - pool.length;
+      if (created.length >= count) break;
+      const remaining = count - created.length;
       const batch = await generateQuestions({
         level: lvl,
         track: opts.track,
@@ -76,20 +90,45 @@ export async function getQuestionsForQuiz(opts: {
           },
         })),
       );
-      pool = shuffle([...pool, ...docs.map((d) => d.toObject())]);
+
+      created.push(...docs.map((d) => d.toObject() as QuestionLean));
     }
+
+    return created.slice(0, count);
   }
 
-  if (pool.length < opts.count) {
-    await generateIntoPool(opts.count - pool.length);
+  const aiBudgetOk = await canUseAi(Math.max(1, Math.ceil(need / 2)) * 450);
+  const hasBank = existing.length > 0;
+
+  let bankTarget = 0;
+  let aiTarget = 0;
+
+  if (aiBudgetOk && hasBank) {
+    bankTarget = Math.floor(need / 2);
+    aiTarget = need - bankTarget;
+  } else if (aiBudgetOk) {
+    aiTarget = need;
+  } else {
+    bankTarget = need;
   }
 
-  // Unlimited follow ups: prefer generating fresh questions over recycling
-  if (exclude.size > 0 && pool.length < opts.count) {
-    await generateIntoPool(opts.count - pool.length);
-  }
+  const fromBank = existing.slice(0, Math.min(bankTarget, existing.length));
+  const bankShortfall = bankTarget - fromBank.length;
+  const fromAi = await generateFresh(aiTarget + bankShortfall);
 
-  if (pool.length === 0) {
+  const usedIds = new Set(
+    [...fromBank, ...fromAi].map((q) => q._id.toString()),
+  );
+  const leftoverBank = existing.filter((q) => !usedIds.has(q._id.toString()));
+  const shortfall = need - fromBank.length - fromAi.length;
+  const backfill = leftoverBank.slice(0, Math.max(0, shortfall));
+
+  const selected = shuffle([...fromBank, ...fromAi, ...backfill]).slice(
+    0,
+    Math.min(need, fromBank.length + fromAi.length + backfill.length),
+  );
+
+  if (selected.length === 0) {
     return {
       ok: false as const,
       error:
@@ -97,6 +136,5 @@ export async function getQuestionsForQuiz(opts: {
     };
   }
 
-  const selected = shuffle(pool).slice(0, Math.min(opts.count, pool.length));
   return { ok: true as const, questions: selected };
 }

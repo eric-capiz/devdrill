@@ -167,6 +167,8 @@ export function QuizPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, current, pending, extending]);
 
+  const showHeaderGrade = mode === "unlimited";
+
   const progressLabel =
     mode === "unlimited"
       ? phase === "skips" && skipQueue.length > 0
@@ -210,14 +212,16 @@ export function QuizPlayer({
             {progressLabel}
           </h1>
         </div>
-        <button
-          type="button"
-          onClick={onGrade}
-          disabled={pending}
-          className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
-        >
-          Grade my quiz
-        </button>
+        {showHeaderGrade ? (
+          <button
+            type="button"
+            onClick={onGrade}
+            disabled={pending}
+            className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
+          >
+            Grade my quiz
+          </button>
+        ) : null}
       </div>
 
       {message ? (
@@ -331,9 +335,18 @@ export function QuizPlayer({
                   END OF ROUND
                 </p>
                 <p className="mt-2 text-sm text-[var(--muted)]">
-                  Hit Grade my quiz when you are ready. Passes count as
-                  incorrect.
+                  You finished every question. Passes count as incorrect.
                 </p>
+                <div className="mt-6">
+                  <button
+                    type="button"
+                    onClick={onGrade}
+                    disabled={pending}
+                    className="btn btn-gold w-full disabled:opacity-60 sm:w-auto"
+                  >
+                    Grade my quiz
+                  </button>
+                </div>
               </>
             )}
           </motion.div>

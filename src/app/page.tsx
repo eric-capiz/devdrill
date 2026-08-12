@@ -45,7 +45,7 @@ export default async function HomePage() {
             The board
           </p>
           <h2 className="mt-3 font-display text-3xl tracking-wide text-[var(--spot)] sm:text-5xl">
-            FOUR ROUNDS. ONE CROWN.
+            HOW THE BOARD WORKS
           </h2>
         </Reveal>
 
@@ -53,7 +53,7 @@ export default async function HomePage() {
           {[
             ["01", "CHOOSE A LANE", "Junior, Mid, Senior, or All, then lock your track."],
             ["02", "PICK A CATEGORY", "Subjects from HTML to Terraform. Fresh when needed."],
-            ["03", "BUZZ OR PASS", "Skip rotates back after the main pass. Grade anytime."],
+            ["03", "BUZZ OR PASS", "Skip rotates back after the main pass. Grade when you finish."],
             ["04", "FINAL REVIEW", "Correct, incorrect, and explanations under every question."],
           ].map(([value, title, copy], i) => (
             <Reveal key={title} delay={0.08 * i}>
