@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { AuthForm } from "@/components/AuthForm";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Join the cast",
+  description: "Create a Dev Drill account and claim your seat on the board.",
+  alternates: { canonical: "/signup" },
+};
 
 export default async function SignupPage() {
   const session = await getSession();

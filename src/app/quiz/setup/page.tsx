@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { QuizSetupForm } from "@/components/QuizSetupForm";
 import { getSession } from "@/lib/session";
+
+export const metadata: Metadata = {
+  title: "Pre show setup",
+  description: "Choose your level, track, category, and round length.",
+  robots: { index: false, follow: false },
+};
 
 export default async function QuizSetupPage() {
   const session = await getSession();

@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { QuizPlayer } from "@/components/QuizPlayer";
 import { connectDB } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
+
+export const metadata: Metadata = {
+  title: "Live round",
+  robots: { index: false, follow: false },
+};
 
 export default async function QuizPage({
   params,

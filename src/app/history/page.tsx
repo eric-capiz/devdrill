@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { DeleteProfileButton } from "@/components/DeleteProfileButton";
@@ -5,10 +6,17 @@ import { RecapList } from "@/components/RecapList";
 import { getUserHistory } from "@/lib/bests";
 import { getSession } from "@/lib/session";
 
+export const metadata: Metadata = {
+  title: "Show recaps",
+  description: "Your previous Dev Drill quiz results.",
+  robots: { index: false, follow: false },
+};
+
 export default async function HistoryPage() {
   const session = await getSession();
   if (!session) redirect("/login");
   const history = await getUserHistory(session.userId);
+
 
   const items = history.map((item) => ({
     id: item._id.toString(),

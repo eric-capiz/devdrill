@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ConfettiBurst } from "@/components/bits/ConfettiBurst";
@@ -6,6 +7,11 @@ import { connectDB } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
+
+export const metadata: Metadata = {
+  title: "Results",
+  robots: { index: false, follow: false },
+};
 
 export default async function ResultsPage({
   params,

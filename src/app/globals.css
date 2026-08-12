@@ -9,7 +9,6 @@
   --spot: #fff8e7;
   --ink: #071433;
   --muted: #9aa8c7;
-  --panel: rgba(255, 248, 231, 0.96);
   --line: rgba(240, 196, 63, 0.35);
   --buzzer: #ff3b5c;
   --ok: #1f9d63;
@@ -310,14 +309,6 @@ body {
     margin-top: 1.25rem;
     padding: 0.85rem 1.1rem;
   }
-}
-
-.champ-tag {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--buzzer);
 }
 
 .champ-name {

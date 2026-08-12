@@ -4,13 +4,39 @@ import { FlipScore } from "@/components/bits/FlipScore";
 import { Reveal } from "@/components/bits/Reveal";
 import { getGlobalBests } from "@/lib/bests";
 import { getSession } from "@/lib/session";
+import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export default async function HomePage() {
   const session = await getSession();
   const { topFixed, topUnlimited } = await getGlobalBests();
+  const siteUrl = getSiteUrl();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: SITE_NAME,
+    url: siteUrl,
+    description: SITE_DESCRIPTION,
+    applicationCategory: "EducationalApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    author: {
+      "@type": "Person",
+      name: "Eric Capiz",
+      url: "https://www.ericcapiz.com",
+    },
+  };
 
   return (
     <main className="flex-1">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <HomeHero loggedIn={!!session} />
 
       <section className="shell py-12 sm:py-20">
