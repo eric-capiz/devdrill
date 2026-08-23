@@ -4,7 +4,11 @@ import type { Track } from "@/lib/catalog";
 import { isCodeHeavySubject } from "@/lib/codeSubjects";
 import { isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
 import type { StoredLevel } from "@/models/Question";
-import { addTokensUsed, canUseAi } from "@/models/TokenUsage";
+import {
+  addTokensUsed,
+  canUseAi,
+  TOKENS_PER_QUESTION_ESTIMATE,
+} from "@/models/TokenUsage";
 
 const generatedQuestionSchema = z.object({
   prompt: z.string().min(1),
@@ -84,7 +88,7 @@ export async function generateQuestions(opts: {
   subject: string;
   count: number;
 }): Promise<{ questions: GeneratedQuestion[]; tokensUsed: number } | null> {
-  const estimated = opts.count * 520;
+  const estimated = opts.count * TOKENS_PER_QUESTION_ESTIMATE;
   if (!(await canUseAi(estimated))) {
     return null;
   }

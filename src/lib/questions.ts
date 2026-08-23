@@ -4,9 +4,10 @@ import type { Level, Track } from "@/lib/catalog";
 import { generateQuestions } from "@/lib/groq";
 import { isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
 import { Question, type StoredLevel } from "@/models/Question";
-import { canUseAi } from "@/models/TokenUsage";
-
-const TOKENS_PER_QUESTION = 520;
+import {
+  canUseAi,
+  TOKENS_PER_QUESTION_ESTIMATE,
+} from "@/models/TokenUsage";
 
 function expandLevels(level: Level): StoredLevel[] {
   if (level === "All") return ["Junior", "Mid", "Senior"];
@@ -112,7 +113,7 @@ export async function getQuestionsForQuiz(opts: {
 
   async function generateFresh(count: number): Promise<QuestionLean[]> {
     if (count <= 0) return [];
-    if (!(await canUseAi(count * TOKENS_PER_QUESTION))) return [];
+    if (!(await canUseAi(count * TOKENS_PER_QUESTION_ESTIMATE))) return [];
 
     const lvl = levels.includes("Mid") ? "Mid" : levels[0];
     const batch = await generateQuestions({
@@ -141,7 +142,7 @@ export async function getQuestionsForQuiz(opts: {
     return created.slice(0, count);
   }
 
-  if (await canUseAi(need * TOKENS_PER_QUESTION)) {
+  if (await canUseAi(need * TOKENS_PER_QUESTION_ESTIMATE)) {
     selected.push(...(await generateFresh(need)));
   }
 
