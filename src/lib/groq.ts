@@ -24,7 +24,7 @@ function getClient() {
   return new Groq({ apiKey: key });
 }
 
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = process.env.GROQ_MODEL?.trim() || "openai/gpt-oss-20b";
 
 function buildSystemPrompt(codeHeavy: boolean) {
   const codeRules = codeHeavy

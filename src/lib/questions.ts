@@ -5,6 +5,8 @@ import { generateQuestions } from "@/lib/groq";
 import { Question, type StoredLevel } from "@/models/Question";
 import { canUseAi } from "@/models/TokenUsage";
 
+const TOKENS_PER_QUESTION = 520;
+
 function expandLevels(level: Level): StoredLevel[] {
   if (level === "All") return ["Junior", "Mid", "Senior"];
   return [level];
@@ -17,6 +19,10 @@ function shuffle<T>(items: T[]) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+function normalizePrompt(prompt: string) {
+  return prompt.trim().replace(/\s+/g, " ");
 }
 
 type QuestionLean = {
@@ -39,27 +45,74 @@ export async function getQuestionsForQuiz(opts: {
 }) {
   await connectDB();
   const levels = expandLevels(opts.level);
-  const exclude = new Set(opts.excludeIds ?? []);
+  const usedIds = new Set(opts.excludeIds ?? []);
   const need = opts.count;
+  const selected: QuestionLean[] = [];
 
-  const existing = shuffle(
-    await Question.find({
+  async function loadBank() {
+    return shuffle(
+      await Question.find({
+        track: opts.track,
+        subject: opts.subject,
+        level: { $in: levels },
+        ...(usedIds.size
+          ? {
+              _id: {
+                $nin: [...usedIds].map((id) => new mongoose.Types.ObjectId(id)),
+              },
+            }
+          : {}),
+      }).lean(),
+    ) as QuestionLean[];
+  }
+
+  async function saveOrReuse(
+    q: {
+      prompt: string;
+      choices: string[];
+      correctIndex: number;
+      explanation: string;
+    },
+    lvl: StoredLevel,
+    tokenEstimate: number,
+  ): Promise<QuestionLean | null> {
+    const prompt = q.prompt.trim();
+    const existing = await Question.findOne({
       track: opts.track,
       subject: opts.subject,
-      level: { $in: levels },
-      ...(exclude.size
-        ? {
-            _id: {
-              $nin: [...exclude].map((id) => new mongoose.Types.ObjectId(id)),
-            },
-          }
-        : {}),
-    }).lean(),
-  ) as QuestionLean[];
+      level: lvl,
+      prompt,
+    }).lean();
+
+    if (existing) {
+      const id = existing._id.toString();
+      if (usedIds.has(id)) return null;
+      usedIds.add(id);
+      return existing as QuestionLean;
+    }
+
+    const docs = await Question.insertMany([
+      {
+        ...q,
+        prompt,
+        level: lvl,
+        track: opts.track,
+        subject: opts.subject,
+        metadata: {
+          model: process.env.GROQ_MODEL?.trim() || "openai/gpt-oss-20b",
+          generatedAt: new Date(),
+          tokenEstimate,
+        },
+      },
+    ]);
+    const created = docs[0].toObject() as QuestionLean;
+    usedIds.add(created._id.toString());
+    return created;
+  }
 
   async function generateFresh(count: number): Promise<QuestionLean[]> {
     if (count <= 0) return [];
-    if (!(await canUseAi(count * 520))) return [];
+    if (!(await canUseAi(count * TOKENS_PER_QUESTION))) return [];
 
     const created: QuestionLean[] = [];
     const perLevel = Math.max(1, Math.ceil(count / levels.length));
@@ -67,66 +120,43 @@ export async function getQuestionsForQuiz(opts: {
     for (const lvl of levels) {
       if (created.length >= count) break;
       const remaining = count - created.length;
+      const batchCount = Math.min(perLevel, remaining);
+      if (!(await canUseAi(batchCount * TOKENS_PER_QUESTION))) break;
+
       const batch = await generateQuestions({
         level: lvl,
         track: opts.track,
         subject: opts.subject,
-        count: Math.min(perLevel, remaining),
+        count: batchCount,
       });
       if (!batch) break;
 
-      const docs = await Question.insertMany(
-        batch.questions.map((q) => ({
-          ...q,
-          level: lvl,
-          track: opts.track,
-          subject: opts.subject,
-          metadata: {
-            model: "llama-3.3-70b-versatile",
-            generatedAt: new Date(),
-            tokenEstimate: Math.round(
-              batch.tokensUsed / batch.questions.length,
-            ),
-          },
-        })),
+      const tokenEstimate = Math.round(
+        batch.tokensUsed / Math.max(1, batch.questions.length),
       );
 
-      created.push(...docs.map((d) => d.toObject() as QuestionLean));
+      for (const q of batch.questions) {
+        if (created.length >= count) break;
+        const doc = await saveOrReuse(
+          { ...q, prompt: normalizePrompt(q.prompt) },
+          lvl,
+          tokenEstimate,
+        );
+        if (doc) created.push(doc);
+      }
     }
 
     return created.slice(0, count);
   }
 
-  const aiBudgetOk = await canUseAi(Math.max(1, Math.ceil(need / 2)) * 520);
-  const hasBank = existing.length > 0;
-
-  let bankTarget = 0;
-  let aiTarget = 0;
-
-  if (aiBudgetOk && hasBank) {
-    bankTarget = Math.floor(need / 2);
-    aiTarget = need - bankTarget;
-  } else if (aiBudgetOk) {
-    aiTarget = need;
-  } else {
-    bankTarget = need;
+  if (await canUseAi(need * TOKENS_PER_QUESTION)) {
+    selected.push(...(await generateFresh(need)));
   }
 
-  const fromBank = existing.slice(0, Math.min(bankTarget, existing.length));
-  const bankShortfall = bankTarget - fromBank.length;
-  const fromAi = await generateFresh(aiTarget + bankShortfall);
-
-  const usedIds = new Set(
-    [...fromBank, ...fromAi].map((q) => q._id.toString()),
-  );
-  const leftoverBank = existing.filter((q) => !usedIds.has(q._id.toString()));
-  const shortfall = need - fromBank.length - fromAi.length;
-  const backfill = leftoverBank.slice(0, Math.max(0, shortfall));
-
-  const selected = shuffle([...fromBank, ...fromAi, ...backfill]).slice(
-    0,
-    Math.min(need, fromBank.length + fromAi.length + backfill.length),
-  );
+  if (selected.length < need) {
+    const bank = await loadBank();
+    selected.push(...bank.slice(0, need - selected.length));
+  }
 
   if (selected.length === 0) {
     return {
@@ -136,5 +166,8 @@ export async function getQuestionsForQuiz(opts: {
     };
   }
 
-  return { ok: true as const, questions: selected };
+  return {
+    ok: true as const,
+    questions: shuffle(selected).slice(0, Math.min(need, selected.length)),
+  };
 }
