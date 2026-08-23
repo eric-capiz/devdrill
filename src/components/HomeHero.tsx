@@ -6,7 +6,14 @@ import { BrandMark } from "@/components/BrandMark";
 import { Buzzer } from "@/components/bits/Buzzer";
 import { SlamText } from "@/components/bits/SlamText";
 
-export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
+export function HomeHero({
+  loggedIn,
+  bankCount,
+}: {
+  loggedIn: boolean;
+  bankCount: number;
+}) {
+  const bankLine = `${bankCount} stored questions`;
 
   return (
     <section className="relative overflow-hidden">
@@ -81,6 +88,7 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
         <div className="marquee-track text-[var(--spot)]">
           {Array.from({ length: 2 }).flatMap((_, copy) =>
             [
+              bankLine,
               "Frontend",
               "Backend",
               "Fullstack",
@@ -88,11 +96,14 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
               "Junior",
               "Mid",
               "Senior",
+              bankLine,
               "Unlimited mode",
               "Skip and rotate",
-              "AI question bank",
             ].map((item, i) => (
-              <span key={`${copy}-${item}-${i}`}>
+              <span
+                key={`${copy}-${item}-${i}`}
+                className={item === bankLine ? "text-[var(--gold)]" : undefined}
+              >
                 {item} <span className="text-[var(--gold)]">//</span>
               </span>
             )),

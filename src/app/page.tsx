@@ -2,13 +2,16 @@ import Link from "next/link";
 import { HomeHero } from "@/components/HomeHero";
 import { FlipScore } from "@/components/bits/FlipScore";
 import { Reveal } from "@/components/bits/Reveal";
-import { getGlobalBests } from "@/lib/bests";
+import { getGlobalBests, getQuestionBankCount } from "@/lib/bests";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export default async function HomePage() {
   const session = await getSession();
-  const { topFixed, topUnlimited } = await getGlobalBests();
+  const [{ topFixed, topUnlimited }, bankCount] = await Promise.all([
+    getGlobalBests(),
+    getQuestionBankCount(),
+  ]);
   const siteUrl = getSiteUrl();
 
   const jsonLd = {
@@ -37,7 +40,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomeHero loggedIn={!!session} />
+      <HomeHero loggedIn={!!session} bankCount={bankCount} />
 
       <section className="shell py-12 sm:py-20">
         <Reveal>

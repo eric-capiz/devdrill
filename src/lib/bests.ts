@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/db";
+import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
 import { User } from "@/models/User";
 
@@ -27,6 +28,11 @@ function usernameFrom(userId: unknown) {
     return (userId as PopulatedUser).username;
   }
   return undefined;
+}
+
+export async function getQuestionBankCount() {
+  await connectDB();
+  return Question.countDocuments();
 }
 
 export async function getGlobalBests() {
