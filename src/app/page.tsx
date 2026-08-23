@@ -5,14 +5,10 @@ import { Reveal } from "@/components/bits/Reveal";
 import { getGlobalBests } from "@/lib/bests";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
-import { getAiBudget } from "@/models/TokenUsage";
 
 export default async function HomePage() {
   const session = await getSession();
-  const [{ topFixed, topUnlimited }, aiBudget] = await Promise.all([
-    getGlobalBests(),
-    getAiBudget(),
-  ]);
+  const { topFixed, topUnlimited } = await getGlobalBests();
   const siteUrl = getSiteUrl();
 
   const jsonLd = {
@@ -140,30 +136,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="shell pb-4 sm:pb-6">
-        <Reveal>
-          <div className="scoreboard px-5 py-4 sm:px-8 sm:py-5">
-            <p className="text-xs font-extrabold uppercase tracking-[0.24em] text-[var(--gold)]">
-              Daily AI budget
-            </p>
-            <p className="mt-2 text-sm font-semibold leading-relaxed text-[var(--spot)] sm:text-base">
-              {aiBudget.bankMode
-                ? "AI is paused for today. Playing from the stored bank until reset."
-                : `About ${aiBudget.estimatedQuestionsLeft} AI question${
-                    aiBudget.estimatedQuestionsLeft === 1 ? "" : "s"
-                  } left today. After that, rounds use the stored bank until reset.`}
-            </p>
-          </div>
-        </Reveal>
-      </section>
-
       <section className="shell py-12 sm:py-20">
         <Reveal>
           <h2 className="font-display text-3xl tracking-wide sm:text-5xl">
             HOUSE RULES
           </h2>
         </Reveal>
-        <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
+        <div className="mt-6 grid items-stretch gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
           {[
             [
               "AI PRODUCER",
@@ -178,12 +157,12 @@ export default async function HomePage() {
               "Every graded show is saved with answers, explanations, and your result.",
             ],
           ].map(([t, d], i) => (
-            <Reveal key={t} delay={0.08 * i}>
-              <div className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--stage-2)]/80 p-5 sm:p-6">
+            <Reveal key={t} delay={0.08 * i} className="h-full">
+              <div className="flex h-full flex-col rounded-[var(--radius)] border border-[var(--line)] bg-[var(--stage-2)]/80 p-5 sm:p-6">
                 <p className="font-display text-xl tracking-wide text-[var(--gold)] sm:text-2xl">
                   {t}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{d}</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">{d}</p>
               </div>
             </Reveal>
           ))}

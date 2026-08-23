@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
+import { getAiBudget } from "@/models/TokenUsage";
 import "./globals.css";
 
 const archivo = Archivo_Black({
@@ -72,12 +73,21 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const session = await getSession();
+  const [session, aiBudget] = await Promise.all([
+    getSession(),
+    getAiBudget().catch(() => ({
+      bankMode: true,
+      estimatedQuestionsLeft: 0,
+    })),
+  ]);
 
   return (
     <html lang="en" className={`${archivo.variable} ${barlow.variable} h-full`}>
       <body className="flex min-h-full flex-col font-body antialiased">
-        <SiteHeader username={session?.username ?? null} />
+        <SiteHeader
+          username={session?.username ?? null}
+          aiBudget={aiBudget}
+        />
         {children}
         <SiteFooter />
       </body>

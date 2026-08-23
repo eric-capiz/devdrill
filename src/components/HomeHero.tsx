@@ -7,6 +7,7 @@ import { Buzzer } from "@/components/bits/Buzzer";
 import { SlamText } from "@/components/bits/SlamText";
 
 export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
+
   return (
     <section className="relative overflow-hidden">
       <div className="spotlight" aria-hidden />

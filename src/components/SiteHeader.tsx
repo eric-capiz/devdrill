@@ -15,7 +15,47 @@ function navClass(active: boolean) {
   ].join(" ");
 }
 
-export function SiteHeader({ username }: { username: string | null }) {
+function DailyQuestionCounter({
+  bankMode,
+  estimatedQuestionsLeft,
+}: {
+  bankMode: boolean;
+  estimatedQuestionsLeft: number;
+}) {
+  const title = bankMode
+    ? "New questions are paused for today. Rounds use stored questions until reset."
+    : `About ${estimatedQuestionsLeft} new questions can still be written today. After that, rounds use stored questions until reset.`;
+
+  return (
+    <p
+      title={title}
+      className="flex min-w-0 items-baseline justify-center gap-1.5 font-extrabold uppercase tracking-[0.1em]"
+    >
+      {bankMode ? (
+        <span className="truncate text-[0.7rem] text-[var(--buzzer)] sm:text-xs">
+          Stored questions today
+        </span>
+      ) : (
+        <>
+          <span className="font-display text-lg tracking-wide text-[var(--gold)] sm:text-xl">
+            {estimatedQuestionsLeft}
+          </span>
+          <span className="truncate text-[0.65rem] text-[var(--spot)] sm:text-xs">
+            new questions left today
+          </span>
+        </>
+      )}
+    </p>
+  );
+}
+
+export function SiteHeader({
+  username,
+  aiBudget,
+}: {
+  username: string | null;
+  aiBudget: { bankMode: boolean; estimatedQuestionsLeft: number };
+}) {
   const pathname = usePathname();
   const onPlay = pathname.startsWith("/quiz");
   const onRecaps = pathname.startsWith("/history");
@@ -24,7 +64,7 @@ export function SiteHeader({ username }: { username: string | null }) {
 
   return (
     <header className="broadcast-bar sticky top-0 z-40">
-      <div className="shell flex w-full flex-col gap-2 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-3">
+      <div className="shell grid w-full grid-cols-1 gap-2 py-2.5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:gap-4 sm:py-3">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <span className="on-air hidden sm:inline-flex">On air</span>
           <Link
@@ -52,6 +92,12 @@ export function SiteHeader({ username }: { username: string | null }) {
             </span>
           </Link>
         </div>
+
+        <DailyQuestionCounter
+          bankMode={aiBudget.bankMode}
+          estimatedQuestionsLeft={aiBudget.estimatedQuestionsLeft}
+        />
+
         <nav className="flex w-full items-center justify-between text-[0.7rem] font-extrabold uppercase tracking-wide max-sm:border-t max-sm:border-[var(--line)] max-sm:pt-2 sm:w-auto sm:justify-end sm:gap-2 sm:text-sm">
           {username ? (
             <>
