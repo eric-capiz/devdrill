@@ -143,8 +143,31 @@ export function QuizPlayer({
     goNextAfterSkip(current.id);
   }
 
+  function finishesRound() {
+    if (mode !== "fixed") return false;
+    if (phase === "main") {
+      return mainIndex + 1 >= order.length && skipQueue.length === 0;
+    }
+    return skipQueue.length <= 1;
+  }
+
   function onContinue() {
     if (!current || selected === null) return;
+    if (finishesRound()) {
+      const questionId = current.id;
+      const selectedIndex = selected;
+      startTransition(async () => {
+        await saveAnswerAction({
+          attemptId,
+          questionId,
+          selectedIndex,
+          skipped: false,
+        });
+        const res = await gradeQuizAction(attemptId);
+        if (res && !res.ok) setMessage(res.message ?? "Could not grade quiz");
+      });
+      return;
+    }
     goNextAfterAnswer();
   }
 
@@ -281,12 +304,14 @@ export function QuizPlayer({
                 disabled={selected === null || extending}
                 className="btn btn-buzzer w-full disabled:opacity-40 sm:w-auto"
               >
-                {mode === "unlimited" &&
-                phase === "main" &&
-                mainIndex + 1 >= order.length &&
-                skipQueue.length === 0
-                  ? "Next questions"
-                  : "Lock in"}
+                {finishesRound()
+                  ? "View results"
+                  : mode === "unlimited" &&
+                      phase === "main" &&
+                      mainIndex + 1 >= order.length &&
+                      skipQueue.length === 0
+                    ? "Next questions"
+                    : "Lock in"}
               </button>
             </div>
             {mode === "unlimited" ? (
