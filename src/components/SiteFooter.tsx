@@ -16,7 +16,7 @@ export function SiteFooter() {
             href="https://www.ericcapiz.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-extrabold text-[var(--gold)] underline-offset-2 hover:underline"
+            className="text-link font-extrabold"
           >
             Eric Capiz
           </a>

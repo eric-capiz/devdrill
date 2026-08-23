@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { connectDB } from "@/lib/db";
 import type { Level, Track } from "@/lib/catalog";
 import { generateQuestions } from "@/lib/groq";
+import { isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
 import { Question, type StoredLevel } from "@/models/Question";
 import { canUseAi } from "@/models/TokenUsage";
 
@@ -19,10 +20,6 @@ function shuffle<T>(items: T[]) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
-}
-
-function normalizePrompt(prompt: string) {
-  return prompt.trim().replace(/\s+/g, " ");
 }
 
 type QuestionLean = {
@@ -51,18 +48,20 @@ export async function getQuestionsForQuiz(opts: {
 
   async function loadBank() {
     return shuffle(
-      await Question.find({
-        track: opts.track,
-        subject: opts.subject,
-        level: { $in: levels },
-        ...(usedIds.size
-          ? {
-              _id: {
-                $nin: [...usedIds].map((id) => new mongoose.Types.ObjectId(id)),
-              },
-            }
-          : {}),
-      }).lean(),
+      (
+        await Question.find({
+          track: opts.track,
+          subject: opts.subject,
+          level: { $in: levels },
+          ...(usedIds.size
+            ? {
+                _id: {
+                  $nin: [...usedIds].map((id) => new mongoose.Types.ObjectId(id)),
+                },
+              }
+            : {}),
+        }).lean()
+      ).filter((q) => isUsableQuizPrompt(q.prompt ?? "")),
     ) as QuestionLean[];
   }
 
@@ -76,7 +75,8 @@ export async function getQuestionsForQuiz(opts: {
     lvl: StoredLevel,
     tokenEstimate: number,
   ): Promise<QuestionLean | null> {
-    const prompt = q.prompt.trim();
+    const prompt = normalizePrompt(q.prompt);
+    if (!isUsableQuizPrompt(prompt)) return null;
     const existing = await Question.findOne({
       track: opts.track,
       subject: opts.subject,

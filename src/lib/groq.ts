@@ -2,6 +2,7 @@ import Groq from "groq-sdk";
 import { z } from "zod";
 import type { Track } from "@/lib/catalog";
 import { isCodeHeavySubject } from "@/lib/codeSubjects";
+import { isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
 import type { StoredLevel } from "@/models/Question";
 import { addTokensUsed, canUseAi } from "@/models/TokenUsage";
 
@@ -55,13 +56,16 @@ function buildSystemPrompt(codeHeavy: boolean) {
   const codeRules = codeHeavy
     ? `* About half the questions must include a short code snippet in the prompt
 * Put each snippet inside a markdown code fence (triple backticks) with an optional language tag
+* A fence is invalid unless it contains real code. Never emit an empty fence
+* Keep newlines inside the snippet so each line of code is on its own line
 * Keep snippets small (about 3 to 12 lines) so they read well on mobile
-* For snippet questions, ask what is wrong, what the output or result is, which fix is correct, or what the code does
-* The other half can be concept or scenario questions without code
+* For snippet questions, the question text must depend on that code
+* The other half can be concept or scenario questions without any code fence
 * Choices should usually be short plain text; short inline code in a choice is fine`
     : `* Prefer clear concept and scenario questions
 * You may include a short code snippet in at most one question if it truly helps
-* If you include a snippet, put it inside a markdown code fence (triple backticks)`;
+* If you include a snippet, put it inside a markdown code fence (triple backticks)
+* Never emit an empty fence. The fence must contain the actual code`;
 
   return `You are an expert web development quiz author. Return ONLY valid JSON matching this shape:
 {"questions":[{"prompt":"...","choices":["A","B","C","D"],"correctIndex":0,"explanation":"..."}]}
@@ -165,8 +169,17 @@ ${
     return null;
   }
 
+  const questions = parsed.data.questions
+    .map((q) => ({ ...q, prompt: normalizePrompt(q.prompt) }))
+    .filter((q) => isUsableQuizPrompt(q.prompt))
+    .slice(0, opts.count);
+
+  if (questions.length === 0) {
+    return null;
+  }
+
   return {
-    questions: parsed.data.questions.slice(0, opts.count),
+    questions,
     tokensUsed:
       completion.usage?.total_tokens ??
       Math.ceil((system.length + user.length + content.length) / 4),

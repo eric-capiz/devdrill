@@ -97,7 +97,7 @@ export default async function HomePage() {
             ) : (
               <p className="mt-6 text-[var(--muted)]">
                 No scores yet.{" "}
-                <Link href="/quiz/setup" className="text-[var(--gold)] underline">
+                <Link href="/quiz/setup" className="text-link">
                   Play a round
                 </Link>
               </p>
@@ -127,7 +127,7 @@ export default async function HomePage() {
             ) : (
               <p className="mt-6 text-[var(--muted)]">
                 No streaks yet.{" "}
-                <Link href="/quiz/setup" className="text-[var(--gold)] underline">
+                <Link href="/quiz/setup" className="text-link">
                   Start unlimited
                 </Link>
               </p>

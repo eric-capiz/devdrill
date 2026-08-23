@@ -49,7 +49,7 @@ export default async function HistoryPage() {
         {items.length === 0 ? (
           <p className="board-tile mt-8 p-5 text-[var(--muted)] sm:mt-10 sm:p-6">
             No episodes yet.{" "}
-            <Link href="/quiz/setup" className="text-[var(--gold)] underline">
+            <Link href="/quiz/setup" className="text-link">
               Buzz in
             </Link>
           </p>

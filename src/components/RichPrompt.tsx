@@ -1,31 +1,5 @@
 import type { ReactNode } from "react";
-
-type Segment =
-  | { kind: "text"; value: string }
-  | { kind: "code"; value: string; lang?: string };
-
-function parseSegments(input: string): Segment[] {
-  const segments: Segment[] = [];
-  const fence = /```([^\n`]*)\n?([\s\S]*?)```/g;
-  let last = 0;
-  let match: RegExpExecArray | null;
-
-  while ((match = fence.exec(input)) !== null) {
-    if (match.index > last) {
-      segments.push({ kind: "text", value: input.slice(last, match.index) });
-    }
-    const lang = match[1]?.trim() || undefined;
-    const code = match[2].replace(/\n$/, "");
-    segments.push({ kind: "code", value: code, lang });
-    last = match.index + match[0].length;
-  }
-
-  if (last < input.length) {
-    segments.push({ kind: "text", value: input.slice(last) });
-  }
-
-  return segments.length > 0 ? segments : [{ kind: "text", value: input }];
-}
+import { parsePromptSegments } from "@/lib/promptFences";
 
 export function RichPrompt({
   text,
@@ -34,7 +8,7 @@ export function RichPrompt({
   text: string;
   className?: string;
 }) {
-  const segments = parseSegments(text);
+  const segments = parsePromptSegments(text);
 
   const nodes: ReactNode[] = segments.map((segment, i) => {
     if (segment.kind === "code") {

@@ -252,10 +252,10 @@ export function QuizPlayer({
                     <button
                       type="button"
                       onClick={() => onSelect(index)}
-                      className={`w-full rounded-xl border-2 px-3.5 py-3.5 text-left text-sm font-extrabold leading-snug transition sm:px-4 ${
+                      className={`choice-btn w-full rounded-xl border-2 px-3.5 py-3.5 text-left text-sm font-extrabold leading-snug sm:px-4 ${
                         active
-                          ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
-                          : "border-[var(--line)] bg-[var(--stage)]/60 text-[var(--spot)] hover:border-[var(--gold)]"
+                          ? "choice-btn-active border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
+                          : "border-[var(--line)] bg-[var(--stage)]/60 text-[var(--spot)]"
                       }`}
                     >
                       <span className="mr-2 opacity-70">

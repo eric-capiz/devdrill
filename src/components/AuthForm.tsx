@@ -125,7 +125,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-[var(--ink)]/60 transition hover:text-[var(--ink)]"
+            className="icon-btn absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-[var(--ink)]/60"
             aria-label={showPassword ? "Hide password" : "Show password"}
             aria-pressed={showPassword}
           >
@@ -165,7 +165,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
             New contestant?{" "}
             <Link
               href="/signup"
-              className="font-extrabold text-[var(--curtain)] underline"
+              className="text-link font-extrabold !text-[var(--curtain)]"
             >
               Sign up
             </Link>
@@ -175,7 +175,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
             Already booked?{" "}
             <Link
               href="/login"
-              className="font-extrabold text-[var(--stage)] underline"
+              className="text-link font-extrabold !text-[var(--stage)]"
             >
               Log in
             </Link>

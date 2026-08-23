@@ -60,7 +60,7 @@ export function RecapList({ items }: { items: RecapItem[] }) {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
               <Link
                 href={`/quiz/${item.id}/results`}
-                className="min-w-0 flex-1 transition hover:opacity-90"
+                className="recap-link min-w-0 flex-1"
               >
                 <p className="font-display text-xl tracking-wide sm:text-2xl">
                   <span className="break-words">
@@ -84,7 +84,7 @@ export function RecapList({ items }: { items: RecapItem[] }) {
                       label: `${item.track} · ${item.subject}`,
                     })
                   }
-                  className="min-h-10 rounded-lg border border-[var(--buzzer)]/50 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-[var(--buzzer)] transition hover:bg-[var(--buzzer)]/15 disabled:opacity-50"
+                  className="danger-btn min-h-10 rounded-lg border border-[var(--buzzer)]/50 px-3 py-2 text-xs font-extrabold uppercase tracking-wide text-[var(--buzzer)] disabled:opacity-50"
                 >
                   Delete
                 </button>

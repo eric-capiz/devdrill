@@ -8,10 +8,10 @@ import { Buzzer } from "@/components/bits/Buzzer";
 
 function navClass(active: boolean) {
   return [
-    "relative px-2.5 py-2 sm:px-3 transition",
+    "nav-link relative px-2.5 py-2 sm:px-3",
     active
       ? "text-[var(--spot)] after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:rounded-full after:bg-[var(--live)] after:shadow-[0_0_10px_rgba(126,182,255,0.55)] sm:after:inset-x-3"
-      : "text-[var(--muted)] hover:text-[var(--spot)]",
+      : "text-[var(--muted)]",
   ].join(" ");
 }
 
@@ -30,10 +30,10 @@ export function SiteHeader({ username }: { username: string | null }) {
           <Link
             href="/"
             aria-label="Dev Drill home"
-            className={`flex min-w-0 items-center gap-2 sm:gap-2.5 ${
+            className={`brand-link flex min-w-0 items-center gap-2 sm:gap-2.5 ${
               onHome
                 ? "text-[var(--spot)]"
-                : "text-[var(--spot)]/80 hover:text-[var(--spot)]"
+                : "text-[var(--spot)]/80"
             }`}
           >
             <BrandMark
@@ -75,7 +75,7 @@ export function SiteHeader({ username }: { username: string | null }) {
               <form action={logoutAction}>
                 <button
                   type="submit"
-                  className="px-2.5 py-2 text-[var(--muted)] transition hover:text-[var(--buzzer)] sm:px-3"
+                  className="nav-link px-2.5 py-2 text-[var(--muted)] sm:px-3"
                 >
                   Exit
                 </button>

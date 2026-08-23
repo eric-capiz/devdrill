@@ -179,7 +179,14 @@ body {
   text-transform: uppercase;
   padding: 0.85rem 1.25rem;
   min-height: 2.75rem;
-  transition: transform 0.15s ease, filter 0.15s ease;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 @media (min-width: 640px) {
@@ -189,9 +196,27 @@ body {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .btn:hover {
+  .btn:hover:not(:disabled) {
     transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.08);
   }
+
+  .btn-gold:hover:not(:disabled) {
+    box-shadow: 0 14px 32px rgba(240, 196, 63, 0.5);
+  }
+
+  .btn-buzzer:hover:not(:disabled) {
+    box-shadow: 0 14px 32px rgba(255, 59, 92, 0.5);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(255, 248, 231, 0.08);
+    border-color: var(--spot);
+  }
+}
+
+.btn:disabled {
+  cursor: not-allowed;
 }
 
 .btn-gold {
@@ -224,11 +249,23 @@ body {
   min-height: 2.75rem;
   font-size: 1rem;
   outline: none;
+  cursor: text;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+select.field {
+  cursor: pointer;
 }
 
 .field:focus {
   border-color: var(--gold-deep);
   box-shadow: 0 0 0 3px rgba(240, 196, 63, 0.35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .field:hover:not(:focus) {
+    border-color: rgba(7, 20, 51, 0.4);
+  }
 }
 
 .chip {
@@ -245,6 +282,24 @@ body {
   font-size: 0.875rem;
   font-weight: 800;
   -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--stage);
+    box-shadow: 0 8px 18px rgba(7, 20, 51, 0.16);
+  }
+
+  .chip-active:hover {
+    filter: brightness(1.12);
+  }
 }
 
 .chip-active {
@@ -345,6 +400,99 @@ body {
   to {
     background-position: 200% center;
   }
+}
+
+.text-link {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, filter 0.15s ease;
+}
+
+.choice-btn {
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.icon-btn {
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
+}
+
+.nav-link {
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.danger-btn {
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link:hover {
+    color: #ffe082;
+    filter: brightness(1.15);
+  }
+
+  .choice-btn:hover:not(.choice-btn-active) {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+    background: rgba(240, 196, 63, 0.12);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+  }
+
+  .choice-btn-active:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+  }
+
+  .icon-btn:hover {
+    color: var(--ink);
+    transform: scale(1.12);
+  }
+
+  .nav-link:hover {
+    color: var(--gold);
+  }
+
+  button.nav-link:hover {
+    color: var(--buzzer);
+  }
+
+  .danger-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    background: rgba(255, 59, 92, 0.18);
+    border-color: var(--buzzer);
+  }
+
+  .brand-link:hover {
+    filter: brightness(1.12);
+  }
+
+  .brand-link:hover img {
+    transform: scale(1.08);
+  }
+
+  .recap-link:hover {
+    color: var(--gold);
+  }
+
+  .recap-link:hover p:first-child {
+    color: var(--gold);
+  }
+}
+
+.brand-link img {
+  transition: transform 0.2s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
