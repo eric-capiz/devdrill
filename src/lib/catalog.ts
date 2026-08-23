@@ -4,7 +4,7 @@ export type Level = (typeof LEVELS)[number];
 export const TRACKS = ["Frontend", "Backend", "Fullstack", "DevOps"] as const;
 export type Track = (typeof TRACKS)[number];
 
-export const QUIZ_LENGTHS = [10, 20, 30, 40, 50, "Unlimited"] as const;
+export const QUIZ_LENGTHS = [5, 10, 15, 20, 25, "Unlimited"] as const;
 export type QuizLength = (typeof QUIZ_LENGTHS)[number];
 
 export const SUBJECTS = {

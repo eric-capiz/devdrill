@@ -15,7 +15,7 @@ const startSchema = z.object({
   level: z.enum(LEVELS),
   track: z.enum(TRACKS),
   subject: z.string().min(1),
-  length: z.enum(["10", "20", "30", "40", "50", "Unlimited"]),
+  length: z.enum(["5", "10", "15", "20", "25", "Unlimited"]),
 });
 
 export type ActionResult = { ok: boolean; message?: string };
@@ -47,9 +47,8 @@ export async function startQuizAction(
   }
 
   const mode = lengthRaw === "Unlimited" ? "unlimited" : "fixed";
-  const length =
-    lengthRaw === "Unlimited" ? null : (Number(lengthRaw) as 10 | 20 | 30 | 40 | 50);
-  const count = length ?? 10;
+  const length = lengthRaw === "Unlimited" ? null : Number(lengthRaw);
+  const count = length ?? 5;
 
   try {
     const result = await getQuestionsForQuiz({
@@ -141,7 +140,7 @@ export async function extendUnlimitedAction(
     level: attempt.level as (typeof LEVELS)[number],
     track: attempt.track as (typeof TRACKS)[number],
     subject: attempt.subject,
-    count: 10,
+    count: 5,
     excludeIds: attempt.questionIds.map((id) => id.toString()),
   });
 

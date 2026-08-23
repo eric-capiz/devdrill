@@ -19,7 +19,7 @@ export function QuizSetupForm() {
   const [track, setTrack] = useState<Track>("Frontend");
   const subjects = useMemo(() => SUBJECTS[track], [track]);
   const [subject, setSubject] = useState<string>(SUBJECTS.Frontend[0]);
-  const [length, setLength] = useState<string>("10");
+  const [length, setLength] = useState<string>("5");
   const [state, formAction, pending] = useActionState(startQuizAction, initial);
 
   return (
