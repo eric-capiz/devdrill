@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { QuizSetupForm } from "@/components/QuizSetupForm";
 import { getSession } from "@/lib/session";
 
+export const maxDuration = 60;
+
 export const metadata: Metadata = {
   title: "Pre show setup",
   description: "Choose your level, track, category, and round length.",

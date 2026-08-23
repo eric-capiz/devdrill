@@ -1,7 +1,10 @@
 "use server";
 
+export const maxDuration = 60;
+
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { z } from "zod";
 import { LEVELS, SUBJECTS, TRACKS } from "@/lib/catalog";
 import { connectDB } from "@/lib/db";
@@ -50,36 +53,46 @@ export async function startQuizAction(
     lengthRaw === "Unlimited" ? null : (Number(lengthRaw) as 10 | 20 | 30 | 40 | 50);
   const count = length ?? 10;
 
-  const result = await getQuestionsForQuiz({
-    level,
-    track,
-    subject,
-    count,
-  });
+  try {
+    const result = await getQuestionsForQuiz({
+      level,
+      track,
+      subject,
+      count,
+    });
 
-  if (!result.ok) {
-    return { ok: false, message: result.error };
+    if (!result.ok) {
+      return { ok: false, message: result.error };
+    }
+
+    await connectDB();
+    const attempt = await QuizAttempt.create({
+      userId: session.userId,
+      level,
+      track,
+      subject,
+      mode,
+      length: mode === "fixed" ? length : null,
+      questionIds: result.questions.map((q) => q._id),
+      answers: result.questions.map((q) => ({
+        questionId: q._id,
+        selectedIndex: null,
+        skipped: false,
+        isCorrect: null,
+      })),
+      status: "in_progress",
+    });
+
+    redirect(`/quiz/${attempt._id.toString()}`);
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
+    console.error("startQuizAction failed", error);
+    return {
+      ok: false,
+      message:
+        "Could not start this quiz. Try again, or pick another subject.",
+    };
   }
-
-  await connectDB();
-  const attempt = await QuizAttempt.create({
-    userId: session.userId,
-    level,
-    track,
-    subject,
-    mode,
-    length: mode === "fixed" ? length : null,
-    questionIds: result.questions.map((q) => q._id),
-    answers: result.questions.map((q) => ({
-      questionId: q._id,
-      selectedIndex: null,
-      skipped: false,
-      isCorrect: null,
-    })),
-    status: "in_progress",
-  });
-
-  redirect(`/quiz/${attempt._id.toString()}`);
 }
 
 export async function saveAnswerAction(input: {

@@ -26,6 +26,31 @@ function getClient() {
 
 const MODEL = process.env.GROQ_MODEL?.trim() || "openai/gpt-oss-20b";
 
+const quizBatchJsonSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["questions"],
+  properties: {
+    questions: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["prompt", "choices", "correctIndex", "explanation"],
+        properties: {
+          prompt: { type: "string" },
+          choices: {
+            type: "array",
+            items: { type: "string" },
+          },
+          correctIndex: { type: "integer", minimum: 0, maximum: 3 },
+          explanation: { type: "string" },
+        },
+      },
+    },
+  },
+};
+
 function buildSystemPrompt(codeHeavy: boolean) {
   const codeRules = codeHeavy
     ? `* About half the questions must include a short code snippet in the prompt
@@ -61,7 +86,13 @@ export async function generateQuestions(opts: {
   }
 
   const codeHeavy = isCodeHeavySubject(opts.subject);
-  const client = getClient();
+  let client: ReturnType<typeof getClient>;
+  try {
+    client = getClient();
+  } catch (error) {
+    console.error("Groq client is not configured", error);
+    return null;
+  }
   const system = buildSystemPrompt(codeHeavy);
   const user = `Generate ${opts.count} multiple choice questions.
 Level: ${opts.level}
@@ -74,34 +105,70 @@ ${
     : "Keep most questions conceptual unless a tiny snippet clearly helps."
 }`;
 
-  const completion = await client.chat.completions.create({
+  const request = {
     model: MODEL,
     temperature: 0.7,
-    response_format: { type: "json_object" },
+    reasoning_effort: "low" as const,
+    include_reasoning: false,
+    max_completion_tokens: Math.min(8192, Math.max(1200, opts.count * 700)),
     messages: [
-      { role: "system", content: system },
-      { role: "user", content: user },
+      { role: "system" as const, content: system },
+      { role: "user" as const, content: user },
     ],
-  });
+  };
+
+  let completion;
+  try {
+    completion = await client.chat.completions.create({
+      ...request,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: "quiz_questions_batch",
+          strict: true,
+          schema: quizBatchJsonSchema,
+        },
+      },
+    });
+  } catch {
+    try {
+      completion = await client.chat.completions.create({
+        ...request,
+        response_format: { type: "json_object" },
+      });
+    } catch (error) {
+      console.error("Groq question generation failed", error);
+      return null;
+    }
+  }
 
   const content = completion.choices[0]?.message?.content;
   if (!content) {
-    throw new Error("Groq returned an empty response");
+    return null;
   }
 
-  const tokensUsed =
+  let parsedJson: unknown;
+  try {
+    parsedJson = JSON.parse(content);
+  } catch (error) {
+    console.error("Groq returned non JSON content", error);
+    return null;
+  }
+
+  await addTokensUsed(
     completion.usage?.total_tokens ??
-    Math.ceil((system.length + user.length + content.length) / 4);
+      Math.ceil((system.length + user.length + content.length) / 4),
+  );
 
-  await addTokensUsed(tokensUsed);
-
-  const parsed = batchSchema.safeParse(JSON.parse(content));
+  const parsed = batchSchema.safeParse(parsedJson);
   if (!parsed.success) {
-    throw new Error("Groq returned invalid question JSON");
+    return null;
   }
 
   return {
     questions: parsed.data.questions.slice(0, opts.count),
-    tokensUsed,
+    tokensUsed:
+      completion.usage?.total_tokens ??
+      Math.ceil((system.length + user.length + content.length) / 4),
   };
 }

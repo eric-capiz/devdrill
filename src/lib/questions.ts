@@ -114,36 +114,28 @@ export async function getQuestionsForQuiz(opts: {
     if (count <= 0) return [];
     if (!(await canUseAi(count * TOKENS_PER_QUESTION))) return [];
 
+    const lvl = levels.includes("Mid") ? "Mid" : levels[0];
+    const batch = await generateQuestions({
+      level: lvl,
+      track: opts.track,
+      subject: opts.subject,
+      count,
+    });
+    if (!batch) return [];
+
+    const tokenEstimate = Math.round(
+      batch.tokensUsed / Math.max(1, batch.questions.length),
+    );
     const created: QuestionLean[] = [];
-    const perLevel = Math.max(1, Math.ceil(count / levels.length));
 
-    for (const lvl of levels) {
+    for (const q of batch.questions) {
       if (created.length >= count) break;
-      const remaining = count - created.length;
-      const batchCount = Math.min(perLevel, remaining);
-      if (!(await canUseAi(batchCount * TOKENS_PER_QUESTION))) break;
-
-      const batch = await generateQuestions({
-        level: lvl,
-        track: opts.track,
-        subject: opts.subject,
-        count: batchCount,
-      });
-      if (!batch) break;
-
-      const tokenEstimate = Math.round(
-        batch.tokensUsed / Math.max(1, batch.questions.length),
+      const doc = await saveOrReuse(
+        { ...q, prompt: normalizePrompt(q.prompt) },
+        lvl,
+        tokenEstimate,
       );
-
-      for (const q of batch.questions) {
-        if (created.length >= count) break;
-        const doc = await saveOrReuse(
-          { ...q, prompt: normalizePrompt(q.prompt) },
-          lvl,
-          tokenEstimate,
-        );
-        if (doc) created.push(doc);
-      }
+      if (doc) created.push(doc);
     }
 
     return created.slice(0, count);
