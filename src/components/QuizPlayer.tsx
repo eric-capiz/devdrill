@@ -327,8 +327,6 @@ export function QuizPlayer({
         ) : null}
 
         <div className="mx-auto w-full min-w-0 max-w-2xl flex-1">
-      </div>
-
       {message ? (
         <p className="mt-4 rounded-xl border border-[var(--gold)] bg-[var(--stage-2)] px-3 py-2 text-sm text-[var(--gold)]">
           {message}
