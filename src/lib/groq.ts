@@ -186,7 +186,7 @@ ${
     .map((q) => ({
       ...q,
       prompt: normalizePrompt(q.prompt),
-      choices: q.choices.map((c) => c.replace(/\\"/g, '"').trim()),
+      choices: q.choices.map((c) => c.replace(/\\"/g, '"').trim()) as [string, string, string, string],
       explanation: q.explanation.replace(/\\"/g, '"').trim(),
     }))
     .filter(
