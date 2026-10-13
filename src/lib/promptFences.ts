@@ -42,10 +42,49 @@ export function promptHasEmptyFence(prompt: string) {
   return false;
 }
 
+const BLOCK_HTML_TAG_PATTERN =
+  /<\/?(ul|ol|li|p|div|table|tr|td|th|blockquote|h[1-6]|br|pre)[^>]*>/gi;
+
+export function stripHtmlTags(text: string) {
+  return text.replace(BLOCK_HTML_TAG_PATTERN, " ");
+}
+
+const COMPLETE_ENDINGS = new Set([
+  ".",
+  "?",
+  "!",
+  ":",
+  ";",
+  ")",
+  "]",
+  "}",
+  "\"",
+  "'",
+  "`",
+]);
+
+export function textLooksComplete(text: string) {
+  const trimmed = text.trim();
+  if (!trimmed) return false;
+  return COMPLETE_ENDINGS.has(trimmed.slice(-1));
+}
+
+export function promptLooksComplete(prompt: string) {
+  const trimmed = prompt.trim();
+  if (!trimmed) return false;
+  const fenceCount = (trimmed.match(/```/g) ?? []).length;
+  if (fenceCount % 2 !== 0) return false;
+  const lastFence = trimmed.lastIndexOf("```");
+  const tail = lastFence >= 0 ? trimmed.slice(lastFence + 3) : trimmed;
+  if (!tail.trim()) return true;
+  return textLooksComplete(tail);
+}
+
 export function isUsableQuizPrompt(prompt: string) {
   const trimmed = prompt.trim();
   if (!trimmed) return false;
-  return !promptHasEmptyFence(trimmed);
+  if (promptHasEmptyFence(trimmed)) return false;
+  return promptLooksComplete(trimmed);
 }
 
 function collapseOutsideCode(text: string) {
@@ -59,7 +98,7 @@ export function normalizePrompt(prompt: string) {
   let match: RegExpExecArray | null;
 
   while ((match = fence.exec(prompt)) !== null) {
-    out += collapseOutsideCode(prompt.slice(last, match.index));
+    out += collapseOutsideCode(stripHtmlTags(prompt.slice(last, match.index)));
     const lang = (match[1] || "").trim();
     const code = (match[2] ?? "").replace(/^\n+/, "").replace(/\n+$/, "");
     if (!fenceBodyIsEmpty(code)) {
@@ -68,6 +107,6 @@ export function normalizePrompt(prompt: string) {
     last = match.index + match[0].length;
   }
 
-  out += collapseOutsideCode(prompt.slice(last));
-  return out.trim();
+  out += collapseOutsideCode(stripHtmlTags(prompt.slice(last)));
+  return out.replace(/\\"/g, '"').trim();
 }

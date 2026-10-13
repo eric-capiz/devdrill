@@ -2,7 +2,7 @@ import Groq from "groq-sdk";
 import { z } from "zod";
 import type { Track } from "@/lib/catalog";
 import { isCodeHeavySubject } from "@/lib/codeSubjects";
-import { isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
+import { isUsableQuizPrompt, normalizePrompt, textLooksComplete } from "@/lib/promptFences";
 import type { StoredLevel } from "@/models/Question";
 import {
   addTokensUsed,
@@ -56,7 +56,14 @@ const quizBatchJsonSchema = {
   },
 };
 
-function buildSystemPrompt(codeHeavy: boolean) {
+function buildSystemPrompt(codeHeavy: boolean, level: StoredLevel) {
+  const levelGuidance: Record<StoredLevel, string> = {
+    Junior:
+      "* Junior level: fundamentals only. Definitions, basic syntax, what-does-this-do. One concept per question, no trick questions",
+    Mid: "* Mid level: applied knowledge. Debugging scenarios, common pitfalls, how pieces fit together. Multi-step reasoning",
+    Senior:
+      "* Senior level: deep expertise. Architecture trade-offs, edge cases, performance implications, internals, subtle behaviors. Assume years of experience",
+  };
   const codeRules = codeHeavy
     ? `* About half the questions must include a short code snippet in the prompt
 * Put each snippet inside a markdown code fence (triple backticks) with an optional language tag
@@ -77,7 +84,9 @@ Rules:
 * Exactly 4 choices per question
 * correctIndex is 0 to 3
 * Difficulty must match the level
+${levelGuidance[level]}
 * Explanations are brief (1 to 3 sentences) and make the correct answer clear
+* Write every question, choice, and explanation as complete text. Never stop mid-word or mid-sentence, and never cut a code snippet short
 * Do not wrap the whole JSON in markdown fences
 ${codeRules}`;
 }
@@ -101,7 +110,7 @@ export async function generateQuestions(opts: {
     console.error("Groq client is not configured", error);
     return null;
   }
-  const system = buildSystemPrompt(codeHeavy);
+  const system = buildSystemPrompt(codeHeavy, opts.level);
   const user = `Generate ${opts.count} multiple choice questions.
 Level: ${opts.level}
 Track: ${opts.track}
@@ -174,8 +183,15 @@ ${
   }
 
   const questions = parsed.data.questions
-    .map((q) => ({ ...q, prompt: normalizePrompt(q.prompt) }))
-    .filter((q) => isUsableQuizPrompt(q.prompt))
+    .map((q) => ({
+      ...q,
+      prompt: normalizePrompt(q.prompt),
+      choices: q.choices.map((c) => c.replace(/\\"/g, '"').trim()),
+      explanation: q.explanation.replace(/\\"/g, '"').trim(),
+    }))
+    .filter(
+      (q) => isUsableQuizPrompt(q.prompt) && textLooksComplete(q.explanation),
+    )
     .slice(0, opts.count);
 
   if (questions.length === 0) {
