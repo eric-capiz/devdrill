@@ -4,10 +4,13 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   extendUnlimitedAction,
+  fiftyFiftyAction,
   gradeQuizAction,
   saveAnswerAction,
 } from "@/app/actions/quiz";
 import { RichPrompt } from "@/components/RichPrompt";
+
+const SHOT_CLOCK = 30;
 
 export type QuizQuestionView = {
   id: string;
@@ -46,7 +49,13 @@ export function QuizPlayer({
   const [pending, startTransition] = useTransition();
   const [message, setMessage] = useState<string | null>(null);
   const [extending, setExtending] = useState(false);
+  const [eliminated, setEliminated] = useState<number[]>([]);
+  const [fiftyUsed, setFiftyUsed] = useState(false);
+  const [secondsLeft, setSecondsLeft] = useState(SHOT_CLOCK);
   const autoExtendTried = useRef(false);
+  const timedOutFor = useRef<string | null>(null);
+  const onSkipRef = useRef<() => void>(() => {});
+  onSkipRef.current = onSkip;
 
   const currentId =
     phase === "main" ? order[mainIndex] : skipQueue[0] ?? null;
@@ -191,6 +200,40 @@ export function QuizPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, current, pending, extending]);
 
+  // Shot clock: 30 seconds per question, then auto-pass
+  useEffect(() => {
+    if (!currentId) return;
+    timedOutFor.current = null;
+    setEliminated([]);
+    setSecondsLeft(SHOT_CLOCK);
+    const id = setInterval(() => {
+      setSecondsLeft((s) => Math.max(0, s - 1));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [currentId]);
+
+  useEffect(() => {
+    if (secondsLeft === 0 && current && timedOutFor.current !== current.id) {
+      timedOutFor.current = current.id;
+      onSkipRef.current();
+    }
+  }, [secondsLeft, current]);
+
+  function onFiftyFifty() {
+    if (!current || fiftyUsed || pending) return;
+    const questionId = current.id;
+    startTransition(async () => {
+      const res = await fiftyFiftyAction({ attemptId, questionId });
+      if (!res.ok || !res.eliminated) {
+        setMessage(res.message ?? "Could not use 50:50");
+        return;
+      }
+      setFiftyUsed(true);
+      setEliminated(res.eliminated);
+      setMessage(null);
+    });
+  }
+
   const showHeaderGrade = mode === "unlimited";
 
   const progressLabel =
@@ -214,7 +257,8 @@ export function QuizPlayer({
         : 100;
 
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto w-full max-w-2xl">
       {mode === "fixed" ? (
         <div className="mb-5 h-2.5 overflow-hidden rounded-full border-2 border-[var(--gold)] bg-[var(--stage-2)] sm:mb-6 sm:h-3">
           <motion.div
@@ -236,16 +280,53 @@ export function QuizPlayer({
             {progressLabel}
           </h1>
         </div>
-        {showHeaderGrade ? (
-          <button
-            type="button"
-            onClick={onGrade}
-            disabled={pending}
-            className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
+        <div className="flex items-center gap-3">
+          <div
+            className={`shot-clock${secondsLeft <= 10 ? " shot-clock-low" : ""}`}
+            title="Shot clock — answer before it hits zero"
           >
-            Lock in my score
-          </button>
+            <span className="shot-clock-digits">
+              0:{String(secondsLeft).padStart(2, "0")}
+            </span>
+            <span className="shot-clock-bar">
+              <span style={{ width: `${(secondsLeft / SHOT_CLOCK) * 100}%` }} />
+            </span>
+          </div>
+          {showHeaderGrade ? (
+            <button
+              type="button"
+              onClick={onGrade}
+              disabled={pending}
+              className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
+            >
+              Lock in my score
+            </button>
+          ) : null}
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2 flex items-start gap-6">
+        {mode === "fixed" ? (
+          <aside className="ladder sticky top-24 hidden w-44 shrink-0 md:block" aria-label="Prize ladder">
+            {order.map((id, i) => {
+              const answered =
+                answers[id]?.selectedIndex !== null && !answers[id]?.skipped;
+              const isCurrent = phase === "main" && i === mainIndex;
+              return (
+                <div
+                  key={id}
+                  className={`ladder-rung${answered ? " ladder-rung-done" : ""}${isCurrent ? " ladder-rung-current" : ""}`}
+                >
+                  <span className="ladder-rung-num">{i + 1}</span>
+                  <span className="ladder-rung-prize">${(i + 1) * 100}</span>
+                </div>
+              );
+            })}
+          </aside>
         ) : null}
+
+        <div className="mx-auto w-full min-w-0 max-w-2xl flex-1">
       </div>
 
       {message ? (
@@ -269,6 +350,7 @@ export function QuizPlayer({
             />
             <ul className="mt-5 space-y-2.5 sm:mt-6 sm:space-y-3">
               {current.choices.map((choice, index) => {
+                if (eliminated.includes(index)) return null;
                 const active = selected === index;
                 return (
                   <li key={index}>
@@ -297,6 +379,15 @@ export function QuizPlayer({
                 className="btn btn-ghost w-full sm:w-auto"
               >
                 Pass
+              </button>
+              <button
+                type="button"
+                onClick={onFiftyFifty}
+                disabled={fiftyUsed || pending || selected !== null}
+                className="lifeline-btn w-full disabled:opacity-40 sm:w-auto"
+                title="Knock out two wrong answers. One use per round."
+              >
+                {fiftyUsed ? "50:50 used" : "50:50"}
               </button>
               <button
                 type="button"
@@ -379,6 +470,8 @@ export function QuizPlayer({
           </motion.div>
         )}
       </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 }

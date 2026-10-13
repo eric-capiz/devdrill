@@ -43,6 +43,7 @@ const quizAttemptSchema = new Schema(
     points: { type: Number, default: null },
     correctCount: { type: Number, default: null },
     xpEarned: { type: Number, default: null },
+    lifelinesUsed: [{ type: String, default: [] }],
     gradedAt: { type: Date, default: null },
   },
   { timestamps: true },

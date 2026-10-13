@@ -44,7 +44,7 @@ export function QuizSetupForm({
       animate={{ opacity: 1, y: 0 }}
     >
       <fieldset>
-        <legend className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           LEVEL
         </legend>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -58,7 +58,7 @@ export function QuizSetupForm({
       </fieldset>
 
       <fieldset>
-        <legend className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           TRACK
         </legend>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -82,7 +82,7 @@ export function QuizSetupForm({
       </fieldset>
 
       <div>
-        <label htmlFor="subject" className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <label htmlFor="subject" className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           CATEGORY
         </label>
         <select
@@ -101,7 +101,7 @@ export function QuizSetupForm({
       </div>
 
       <fieldset>
-        <legend className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           ROUND LENGTH
         </legend>
         <div className="mt-3 flex flex-wrap gap-2">

@@ -3,70 +3,60 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Buzzer } from "@/components/bits/Buzzer";
-import { Mascot } from "@/components/Mascot";
 
 export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
   return (
     <section className="relative overflow-hidden">
       <div className="spotlight" aria-hidden />
 
-      <div className="shell relative flex flex-col items-center py-12 text-center sm:py-16">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 220, damping: 14 }}
+      <div className="shell relative flex flex-col items-center py-16 text-center sm:py-24">
+        <motion.p
+          className="eyebrow"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
         >
-          <Mascot className="mascot-bounce h-28 w-28 sm:h-36 sm:w-36" />
-        </motion.div>
+          The hot seat is open
+        </motion.p>
 
         <motion.h1
-          className="mt-6 font-display text-[clamp(3rem,15vw,7.5rem)] leading-[0.9] tracking-wide text-[var(--ink)]"
-          initial={{ opacity: 0, y: 24 }}
+          className="mt-5 font-display text-[clamp(3rem,13vw,7.5rem)] leading-[0.9] tracking-wide text-[var(--spot)]"
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 20 }}
         >
-          DEV DRILL
+          TAKE THE
+          <br />
+          <span className="text-[var(--lime)]">HOT SEAT</span>
         </motion.h1>
 
         <motion.p
-          className="mt-3 font-display text-lg tracking-wide text-[var(--grape)] sm:text-2xl"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          The quiz arcade for web developers
-        </motion.p>
-
-        <motion.p
-          className="mt-5 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:text-lg"
+          className="mt-6 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:text-xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.25 }}
         >
-          Play daily, keep your streak burning, and stack XP from{" "}
-          <span className="font-extrabold text-[var(--ink)]">Hello World</span>{" "}
-          all the way to{" "}
-          <span className="font-extrabold text-[var(--ink)]">Stack Overlord</span>.
-          Every round makes you sharper.
+          30 seconds on the clock. One 50:50 lifeline. A ladder of prize
+          rungs to climb. Answer fast, climb high, and don&apos;t freeze
+          under the lights.
         </motion.p>
 
         <motion.div
-          className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
+          className="mt-9 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
           {loggedIn ? (
             <Buzzer className="w-full sm:w-auto">
-              <a href="#big-board" className="btn btn-buzzer w-full sm:w-auto">
-                Play now
+              <a href="#categories" className="btn btn-buzzer w-full sm:w-auto">
+                Take the hot seat
               </a>
             </Buzzer>
           ) : (
             <>
               <Buzzer className="w-full sm:w-auto">
                 <Link href="/signup" className="btn btn-buzzer w-full sm:w-auto">
-                  Start playing free
+                  Claim your seat
                 </Link>
               </Buzzer>
               <Buzzer className="w-full sm:w-auto">
@@ -77,21 +67,38 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
             </>
           )}
         </motion.div>
+
+        <motion.div
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm font-extrabold uppercase tracking-[0.14em] text-[var(--muted)]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55 }}
+        >
+          <span>
+            <span className="text-[var(--lime)]">30s</span> shot clock
+          </span>
+          <span>
+            <span className="text-[var(--lime)]">50:50</span> lifeline
+          </span>
+          <span>
+            <span className="text-[var(--lime)]">XP</span> every round
+          </span>
+        </motion.div>
       </div>
 
       <div className="marquee">
         <div className="marquee-track">
           {Array.from({ length: 2 }).flatMap((_, copy) =>
             [
+              "Beat the clock",
+              "Use your lifeline",
+              "Climb the ladder",
               "Daily streaks",
               "XP ranks",
-              "Fresh questions",
               "Run it back",
-              "No sign-up wall",
-              "Buzz or pass",
             ].map((item, i) => (
               <span key={`${copy}-${i}`}>
-                {item} <span>★</span>
+                {item} <span className="text-[var(--lime)]">★</span>
               </span>
             )),
           )}

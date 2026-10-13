@@ -269,6 +269,44 @@ export async function gradeQuizAction(attemptId: string): Promise<ActionResult> 
   redirect(`/quiz/${attemptId}/results`);
 }
 
+export async function fiftyFiftyAction(input: {
+  attemptId: string;
+  questionId: string;
+}): Promise<{ ok: boolean; eliminated?: number[]; message?: string }> {
+  const session = await requireSession().catch(() => null);
+  if (!session) return { ok: false, message: "Unauthorized" };
+
+  await connectDB();
+  const attempt = await QuizAttempt.findById(input.attemptId);
+  if (!attempt || attempt.userId.toString() !== session.userId) {
+    return { ok: false, message: "Quiz not found" };
+  }
+  if (attempt.status !== "in_progress") {
+    return { ok: false, message: "Round already over" };
+  }
+  if ((attempt.lifelinesUsed ?? []).includes("fifty")) {
+    return { ok: false, message: "50:50 already used this round" };
+  }
+  const inRound = attempt.questionIds.some(
+    (id) => id.toString() === input.questionId,
+  );
+  const q = await Question.findById(input.questionId).lean();
+  if (!q || !inRound) {
+    return { ok: false, message: "Question not in round" };
+  }
+
+  const wrong = [0, 1, 2, 3].filter((i) => i !== q.correctIndex);
+  for (let i = wrong.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [wrong[i], wrong[j]] = [wrong[j], wrong[i]];
+  }
+  const eliminated = wrong.slice(0, 2).sort((a, b) => a - b);
+
+  attempt.lifelinesUsed = [...(attempt.lifelinesUsed ?? []), "fifty"];
+  await attempt.save();
+  return { ok: true, eliminated };
+}
+
 export async function deleteRecapAction(attemptId: string) {
   const session = await requireSession().catch(() => null);
   if (!session) {
