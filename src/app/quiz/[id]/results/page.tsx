@@ -47,7 +47,7 @@ export default async function ResultsPage({
           <p className="mt-3 text-[0.65rem] font-extrabold uppercase leading-relaxed tracking-[0.16em] text-[var(--muted)] sm:text-xs sm:tracking-[0.2em]">
             {attempt.level} · {attempt.track} · {attempt.subject}
           </p>
-          <h1 className="neon-gold mt-3 font-display text-[clamp(2.75rem,14vw,4.5rem)] tracking-wide">
+          <h1 className="mt-3 text-[var(--magenta)] font-display text-[clamp(2.75rem,14vw,4.5rem)] tracking-wide">
             <FlipScore value={headline} />
           </h1>
           <p className="mt-2 font-bold text-[var(--muted)]">

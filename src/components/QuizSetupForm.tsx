@@ -14,11 +14,21 @@ import { Buzzer } from "@/components/bits/Buzzer";
 
 const initial: ActionResult = { ok: false };
 
-export function QuizSetupForm() {
-  const [level, setLevel] = useState<(typeof LEVELS)[number]>("Junior");
-  const [track, setTrack] = useState<Track>("Frontend");
+export function QuizSetupForm({
+  initialTrack,
+  initialLevel,
+}: {
+  initialTrack?: Track;
+  initialLevel?: (typeof LEVELS)[number];
+}) {
+  const [level, setLevel] = useState<(typeof LEVELS)[number]>(
+    initialLevel ?? "Junior",
+  );
+  const [track, setTrack] = useState<Track>(initialTrack ?? "Frontend");
   const subjects = useMemo(() => SUBJECTS[track], [track]);
-  const [subject, setSubject] = useState<string>(SUBJECTS.Frontend[0]);
+  const [subject, setSubject] = useState<string>(
+    SUBJECTS[initialTrack ?? "Frontend"][0],
+  );
   const [length, setLength] = useState<string>("5");
   const [state, formAction, pending] = useActionState(startQuizAction, initial);
 
@@ -104,7 +114,7 @@ export function QuizSetupForm() {
       </fieldset>
 
       {state.message ? (
-        <p className="rounded-xl bg-[var(--stage)] px-3 py-2 text-sm font-bold text-[var(--gold)]">
+        <p className="rounded-xl bg-[#2e1a0e] px-3 py-2 text-sm font-bold text-[var(--gold)]">
           {state.message}
         </p>
       ) : null}

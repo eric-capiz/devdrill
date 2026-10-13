@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { BigBoard } from "@/components/BigBoard";
 import { HomeHero } from "@/components/HomeHero";
 import { FlipScore } from "@/components/bits/FlipScore";
 import { Reveal } from "@/components/bits/Reveal";
-import { getGlobalBests, getQuestionBankCount } from "@/lib/bests";
+import { getBoardCounts, getGlobalBests } from "@/lib/bests";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
@@ -10,9 +11,9 @@ export const revalidate = 60;
 
 export default async function HomePage() {
   const session = await getSession();
-  const [{ topFixed, topUnlimited }, bankCount] = await Promise.all([
+  const [{ topFixed, topUnlimited }, boardCounts] = await Promise.all([
     getGlobalBests(),
-    getQuestionBankCount(),
+    getBoardCounts(),
   ]);
   const siteUrl = getSiteUrl();
 
@@ -42,73 +43,45 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomeHero loggedIn={!!session} bankCount={bankCount} />
+      <HomeHero loggedIn={!!session} />
 
-      <section className="shell py-12 sm:py-20">
+      <section id="big-board" className="shell scroll-mt-24 pb-4 pt-2 sm:pb-6">
         <Reveal>
-          <p className="eyebrow">Tonight&apos;s format</p>
-          <h2 className="mt-3 font-display text-3xl tracking-wide text-[var(--spot)] sm:text-5xl">
-            FOUR ROUNDS. <span className="neon-pink">NO MERCY.</span>
+          <p className="eyebrow text-center">Today&apos;s show</p>
+          <h2 className="mt-3 text-center font-display text-3xl tracking-wide text-[var(--ink)] sm:text-5xl">
+            THE BIG BOARD
           </h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm font-semibold text-[var(--muted)] sm:text-base">
+            Pick a square, any square. Higher rows mean harder questions and
+            bigger bragging rights.
+          </p>
         </Reveal>
-
-        <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
-          {[
-            [
-              "ROUND 1",
-              "PICK YOUR LANE",
-              "Junior, Mid, Senior, or the full gauntlet. Then lock your track: Frontend, Backend, Fullstack, DevOps.",
-              "",
-            ],
-            [
-              "ROUND 2",
-              "CALL YOUR CATEGORY",
-              "Subjects from HTML to Terraform. Fresh questions written nightly, banked forever.",
-              "board-tile-accent-pink",
-            ],
-            [
-              "ROUND 3",
-              "BUZZ OR PASS",
-              "Stuck? Pass it — the question circles back for a second shot. No shame, just strategy.",
-              "board-tile-accent-cyan",
-            ],
-            [
-              "FINAL ROUND",
-              "THE RECAP",
-              "Every answer graded against the key, with explanations under each question. Study the tape.",
-              "",
-            ],
-          ].map(([value, title, copy, accent], i) => (
-            <Reveal key={title} delay={0.08 * i}>
-              <div className={`board-tile ${accent} p-5 sm:p-6`}>
-                <p className="font-display text-2xl tracking-wide text-[var(--magenta)] sm:text-3xl">
-                  {value}
-                </p>
-                <p className="mt-3 font-display text-xl tracking-wide text-[var(--spot)] sm:mt-4 sm:text-2xl">
-                  {title}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                  {copy}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={0.12} className="mt-6 sm:mt-8">
+          <BigBoard counts={boardCounts} />
+        </Reveal>
+        {!session ? (
+          <p className="mt-4 text-center text-sm font-bold text-[var(--muted)]">
+            <Link href="/signup" className="text-link">
+              Join the show
+            </Link>{" "}
+            to play — it takes ten seconds.
+          </p>
+        ) : null}
       </section>
 
-      <section className="shell pb-6 sm:pb-8">
+      <section className="shell py-12 sm:py-16">
         <Reveal>
-          <p className="eyebrow">The legends board</p>
-          <h2 className="mb-8 mt-3 font-display text-3xl tracking-wide text-[var(--spot)] sm:mb-10 sm:text-5xl">
-            HALL OF <span className="neon-gold">FAME</span>
+          <p className="eyebrow">The winners&apos; circle</p>
+          <h2 className="mt-3 font-display text-3xl tracking-wide text-[var(--ink)] sm:text-5xl">
+            HALL OF FAME
           </h2>
         </Reveal>
-        <div className="scoreboard grid gap-0 overflow-hidden lg:grid-cols-2">
-          <Reveal className="border-b-2 border-[var(--gold)] p-5 sm:p-8 lg:border-b-0 lg:border-r-2">
+        <div className="scoreboard mt-6 grid gap-0 overflow-hidden sm:mt-8 lg:grid-cols-2">
+          <Reveal className="border-b-4 border-[var(--gold)] p-5 sm:p-8 lg:border-b-0 lg:border-r-4">
             <p className="text-xs font-extrabold uppercase tracking-[0.24em] text-[var(--gold)]">
-              Fixed length board
+              Daily jackpot
             </p>
-            <h3 className="mt-2 font-display text-2xl tracking-wide sm:text-3xl">
+            <h3 className="mt-2 font-display text-2xl tracking-wide text-[#f6efe0] sm:text-3xl">
               TOP SCORE
             </h3>
             {topFixed ? (
@@ -116,17 +89,17 @@ export default async function HomePage() {
                 <div className="champ-plate">
                   <span className="champ-name">@{topFixed.username ?? "unknown"}</span>
                 </div>
-                <p className="mt-4 font-display text-3xl tracking-wide text-[var(--spot)] sm:mt-5 sm:text-5xl">
+                <p className="mt-4 font-display text-3xl tracking-wide text-[#f6efe0] sm:mt-5 sm:text-5xl">
                   <FlipScore value={`${topFixed.scorePercent}%`} />
                 </p>
-                <p className="mt-2 text-sm font-bold leading-snug text-[var(--muted)]">
+                <p className="mt-2 text-sm font-bold leading-snug text-[#f6efe0]/70">
                   {topFixed.track} · {topFixed.subject} · {topFixed.level}
                 </p>
               </>
             ) : (
-              <p className="mt-6 text-[var(--muted)]">
-                No legends yet.{" "}
-                <Link href="/quiz/setup" className="text-link">
+              <p className="mt-6 text-[#f6efe0]/70">
+                No winners yet.{" "}
+                <Link href="#big-board" className="text-link">
                   Be the first
                 </Link>
               </p>
@@ -135,9 +108,9 @@ export default async function HomePage() {
 
           <Reveal delay={0.1} className="p-5 sm:p-8">
             <p className="text-xs font-extrabold uppercase tracking-[0.24em] text-[var(--magenta)]">
-              Unlimited board
+              Marathon board
             </p>
-            <h3 className="mt-2 font-display text-2xl tracking-wide sm:text-3xl">
+            <h3 className="mt-2 font-display text-2xl tracking-wide text-[#f6efe0] sm:text-3xl">
               POINT STREAK
             </h3>
             {topUnlimited ? (
@@ -145,18 +118,18 @@ export default async function HomePage() {
                 <div className="champ-plate">
                   <span className="champ-name">@{topUnlimited.username ?? "unknown"}</span>
                 </div>
-                <p className="mt-4 font-display text-3xl tracking-wide text-[var(--spot)] sm:mt-5 sm:text-5xl">
+                <p className="mt-4 font-display text-3xl tracking-wide text-[#f6efe0] sm:mt-5 sm:text-5xl">
                   <FlipScore value={`${topUnlimited.points}`} />
-                  <span className="ml-2 text-xl text-[var(--muted)] sm:text-2xl">PTS</span>
+                  <span className="ml-2 text-xl text-[#f6efe0]/70 sm:text-2xl">PTS</span>
                 </p>
-                <p className="mt-2 text-sm font-bold leading-snug text-[var(--muted)]">
+                <p className="mt-2 text-sm font-bold leading-snug text-[#f6efe0]/70">
                   {topUnlimited.track} · {topUnlimited.subject} · {topUnlimited.level}
                 </p>
               </>
             ) : (
-              <p className="mt-6 text-[var(--muted)]">
+              <p className="mt-6 text-[#f6efe0]/70">
                 No streaks yet.{" "}
-                <Link href="/quiz/setup" className="text-link">
+                <Link href="#big-board" className="text-link">
                   Start the run
                 </Link>
               </p>
@@ -165,34 +138,37 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="shell py-12 sm:py-20">
+      <section className="shell py-12 sm:py-16">
         <Reveal>
-          <p className="eyebrow">Read before you buzz</p>
-          <h2 className="mt-3 font-display text-3xl tracking-wide sm:text-5xl">
-            FINE <span className="neon-pink">PRINT</span>
+          <p className="eyebrow">Know before you go</p>
+          <h2 className="mt-3 font-display text-3xl tracking-wide text-[var(--ink)] sm:text-5xl">
+            HOW THE SHOW WORKS
           </h2>
         </Reveal>
-        <div className="mt-6 grid items-stretch gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
+        <div className="mt-6 grid items-stretch gap-4 sm:mt-8 md:grid-cols-3">
           {[
             [
-              "THE PRODUCER",
-              "Questions are written on demand while tonight's AI budget has headroom — code snippets included where they earn it. Everything gets banked. When the budget runs dry, the show goes on with stored questions until reset.",
+              "PICK A SQUARE",
+              "Twelve squares, four tracks, three leagues. The dollar value tells you how spicy it gets. Every square is a fresh round.",
+              "",
             ],
             [
-              "FAIR JUDGING",
-              "Multiple choice is graded against the stored answer key. No AI at score time, no funny business.",
+              "BUZZ OR PASS",
+              "Answer straight away or pass — passed questions circle back for a second shot. Strategy beats speed.",
+              "board-tile-accent-pink",
             ],
             [
-              "STUDY THE TAPE",
-              "Every graded show is saved with your answers, the explanations, and the final score. Champions review film.",
+              "TAKE THE JACKPOT",
+              "Grading is instant and fair, recaps save automatically, and legends go up on the board. Come back tomorrow.",
+              "board-tile-accent-cyan",
             ],
-          ].map(([t, d], i) => (
-            <Reveal key={t} delay={0.08 * i} className="h-full">
-              <div className="flex h-full flex-col rounded-[var(--radius)] border border-[var(--line)] bg-[var(--stage-2)]/80 p-5 sm:p-6">
-                <p className="font-display text-xl tracking-wide text-[var(--gold)] sm:text-2xl">
-                  {t}
+          ].map(([title, copy, accent], i) => (
+            <Reveal key={title} delay={0.08 * i} className="h-full">
+              <div className={`board-tile ${accent} flex h-full flex-col p-5 sm:p-6`}>
+                <p className="font-display text-xl tracking-wide text-[var(--magenta)] sm:text-2xl">
+                  {title}
                 </p>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">{d}</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">{copy}</p>
               </div>
             </Reveal>
           ))}
