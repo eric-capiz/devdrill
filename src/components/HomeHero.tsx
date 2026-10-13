@@ -11,14 +11,14 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
 
       <div className="shell relative flex flex-col items-center py-12 text-center sm:py-16">
         <motion.div
-          className="starburst mb-6"
+          className="starburst starburst-red mb-8"
           initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
-          animate={{ opacity: 1, scale: 1, rotate: -8 }}
-          transition={{ type: "spring", stiffness: 260, damping: 16 }}
+          animate={{ opacity: 1, scale: 1, rotate: 8 }}
+          transition={{ type: "spring", stiffness: 260, damping: 14 }}
         >
-          Pick a
+          Don&apos;t
           <br />
-          square!
+          get zapped!
         </motion.div>
 
         <motion.p
@@ -26,26 +26,29 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          The daytime quiz show for web developers
+          ⚠ The extreme dev challenge ⚠
         </motion.p>
 
         <motion.h1
-          className="mt-4 font-display text-[clamp(3.25rem,16vw,8rem)] leading-[0.9] tracking-wide text-[var(--ink)]"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 20 }}
+          className="comic-title mt-6 text-[clamp(3.5rem,17vw,9rem)] leading-[0.9]"
+          initial={{ opacity: 0, y: 30, rotate: 2 }}
+          animate={{ opacity: 1, y: 0, rotate: -2 }}
+          transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 18 }}
         >
-          DEV DRILL
+          Dev
+          <br />
+          Drill!
         </motion.h1>
 
         <motion.p
-          className="mt-5 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:text-xl"
+          className="mt-8 max-w-2xl text-base font-bold leading-relaxed text-[var(--ink)] sm:text-xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
         >
-          Four tracks. Three leagues. One big board. Choose your square,
-          answer fast, and take home the daily jackpot of pure glory.
+          Twelve panels. Four tracks. Three leagues of pain. Pick your panel,
+          answer fast, and dodge the zap — champions get drawn on the wall
+          in <span className="bg-[var(--yellow)] px-1">permanent marker</span>.
         </motion.p>
 
         <motion.div
@@ -57,24 +60,45 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
           {loggedIn ? (
             <Buzzer className="w-full sm:w-auto">
               <a href="#big-board" className="btn btn-buzzer w-full sm:w-auto">
-                Come on down
+                Enter the gauntlet
               </a>
             </Buzzer>
           ) : (
             <>
               <Buzzer className="w-full sm:w-auto">
                 <Link href="/signup" className="btn btn-buzzer w-full sm:w-auto">
-                  Get in the audience
+                  Become a contestant
                 </Link>
               </Buzzer>
               <Buzzer className="w-full sm:w-auto">
                 <Link href="/login" className="btn btn-ghost w-full sm:w-auto">
-                  Contestant login
+                  I&apos;m a contestant
                 </Link>
               </Buzzer>
             </>
           )}
         </motion.div>
+      </div>
+
+      <div className="marquee">
+        <div className="marquee-track">
+          {Array.from({ length: 2 }).flatMap((_, copy) =>
+            [
+              "Zap!",
+              "Pow!",
+              "Don't blink",
+              "Know your closures",
+              "Wham!",
+              "No lifelines",
+              "Bam!",
+              "Trust your gut",
+            ].map((item, i) => (
+              <span key={`${copy}-${i}`}>
+                {item} <span>★</span>
+              </span>
+            )),
+          )}
+        </div>
       </div>
     </section>
   );
