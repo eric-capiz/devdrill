@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { BrandMark } from "@/components/BrandMark";
 import { Buzzer } from "@/components/bits/Buzzer";
 import { SlamText } from "@/components/bits/SlamText";
 
@@ -13,7 +12,7 @@ export function HomeHero({
   loggedIn: boolean;
   bankCount: number;
 }) {
-  const bankLine = `${bankCount} stored questions`;
+  const bankLine = `${bankCount} questions in the bank`;
 
   return (
     <section className="relative overflow-hidden">
@@ -28,31 +27,45 @@ export function HomeHero({
       />
 
       <div className="shell relative flex min-h-[min(100svh,52rem)] flex-col items-center justify-center py-14 text-center sm:min-h-[calc(100svh-4.25rem)] sm:py-20">
-        <motion.div
-          className="mb-5 sm:mb-6"
-          initial={{ opacity: 0, scale: 0.86, y: 12 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 320, damping: 22 }}
+        <motion.p
+          className="eyebrow mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
         >
-          <BrandMark
-            size={96}
-            priority
-            className="h-16 w-16 sm:h-24 sm:w-24"
-          />
+          <span className="neon-pink">●</span> Prime time · Live from the
+          studio
+        </motion.p>
+
+        <motion.div
+          className="marquee-sign w-full max-w-3xl"
+          initial={{ opacity: 0, scale: 0.94, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
+        >
+          <div className="bulbs bulbs-top" aria-hidden />
+          <h1 className="font-display text-[clamp(3rem,17vw,9rem)] leading-[0.9] tracking-wide">
+            <span className="neon-gold">
+              <SlamText text="DEV" />
+            </span>{" "}
+            <span className="neon-pink">
+              <SlamText text="DRILL" />
+            </span>
+          </h1>
+          <p className="mt-4 text-sm font-extrabold uppercase tracking-[0.3em] text-[var(--muted)] sm:text-base">
+            The championship quiz show for web developers
+          </p>
+          <div className="bulbs bulbs-pink bulbs-bottom" aria-hidden />
         </motion.div>
 
-        <h1 className="max-w-full font-display text-[clamp(2.75rem,15vw,8.5rem)] leading-[0.9] tracking-wide text-[var(--spot)]">
-          <SlamText text="DEV DRILL" />
-        </h1>
-
         <motion.p
-          className="mt-5 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:mt-6 sm:text-xl"
+          className="mt-6 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:mt-8 sm:text-xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          The enterprise quiz championship for web developers. Levels, tracks,
-          subjects, buzzers, and a scoreboard that never forgets.
+          Pick your lane, call your category, and buzz in. Fresh questions
+          every night, a bank that never sleeps, and a hall of fame that
+          never forgets.
         </motion.p>
 
         <motion.div
@@ -64,7 +77,7 @@ export function HomeHero({
           {loggedIn ? (
             <Buzzer className="w-full sm:w-auto">
               <Link href="/quiz/setup" className="btn btn-buzzer w-full sm:w-auto">
-                Buzz in
+                Take the stage
               </Link>
             </Buzzer>
           ) : (
@@ -82,6 +95,23 @@ export function HomeHero({
             </>
           )}
         </motion.div>
+
+        <motion.div
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm font-extrabold uppercase tracking-[0.14em] text-[var(--muted)]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          <span>
+            <span className="neon-gold">{bankCount}</span> questions banked
+          </span>
+          <span>
+            <span className="neon-pink">4</span> tracks
+          </span>
+          <span>
+            <span className="neon-gold">3</span> leagues
+          </span>
+        </motion.div>
       </div>
 
       <div className="marquee">
@@ -98,13 +128,13 @@ export function HomeHero({
               "Senior",
               bankLine,
               "Unlimited mode",
-              "Skip and rotate",
+              "Buzz or pass",
             ].map((item, i) => (
               <span
                 key={`${copy}-${item}-${i}`}
                 className={item === bankLine ? "text-[var(--gold)]" : undefined}
               >
-                {item} <span className="text-[var(--gold)]">//</span>
+                {item} <span className="text-[var(--magenta)]">★</span>
               </span>
             )),
           )}

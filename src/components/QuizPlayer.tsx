@@ -243,7 +243,7 @@ export function QuizPlayer({
             disabled={pending}
             className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
           >
-            Grade my quiz
+            Lock in my score
           </button>
         ) : null}
       </div>
@@ -316,7 +316,7 @@ export function QuizPlayer({
             </div>
             {mode === "unlimited" ? (
               <p className="mt-4 text-xs font-semibold leading-relaxed text-[var(--muted)]">
-                Unlimited keeps going until you hit Grade my quiz. Only answered
+                Unlimited keeps going until you lock in your score. Only answered
                 questions count for points.
               </p>
             ) : null}
@@ -352,7 +352,7 @@ export function QuizPlayer({
                     disabled={pending}
                     className="btn btn-gold w-full disabled:opacity-60 sm:w-auto"
                   >
-                    Grade my quiz
+                    Lock in my score
                   </button>
                 </div>
               </>
@@ -371,7 +371,7 @@ export function QuizPlayer({
                     disabled={pending}
                     className="btn btn-gold w-full disabled:opacity-60 sm:w-auto"
                   >
-                    Grade my quiz
+                    Lock in my score
                   </button>
                 </div>
               </>
