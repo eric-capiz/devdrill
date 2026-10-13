@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { connectDB } from "@/lib/db";
 import type { Level, Track } from "@/lib/catalog";
 import { generateQuestions } from "@/lib/groq";
-import { isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
+import { choicesAreDistinct, isUsableQuizPrompt, normalizePrompt } from "@/lib/promptFences";
 import { Question, type StoredLevel } from "@/models/Question";
 import {
   canUseAi,
@@ -62,7 +62,7 @@ export async function getQuestionsForQuiz(opts: {
               }
             : {}),
         }).lean()
-      ).filter((q) => isUsableQuizPrompt(q.prompt ?? "")),
+      ).filter((q) => isUsableQuizPrompt(q.prompt ?? "") && choicesAreDistinct(q.choices ?? [])),
     ) as QuestionLean[];
   }
 

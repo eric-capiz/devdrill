@@ -2,7 +2,7 @@ import Groq from "groq-sdk";
 import { z } from "zod";
 import type { Track } from "@/lib/catalog";
 import { isCodeHeavySubject } from "@/lib/codeSubjects";
-import { isUsableQuizPrompt, normalizePrompt, textLooksComplete } from "@/lib/promptFences";
+import { choicesAreDistinct, isUsableQuizPrompt, normalizePrompt, textLooksComplete } from "@/lib/promptFences";
 import type { StoredLevel } from "@/models/Question";
 import {
   addTokensUsed,
@@ -190,7 +190,7 @@ ${
       explanation: q.explanation.replace(/\\"/g, '"').trim(),
     }))
     .filter(
-      (q) => isUsableQuizPrompt(q.prompt) && textLooksComplete(q.explanation),
+      (q) => isUsableQuizPrompt(q.prompt) && textLooksComplete(q.explanation) && choicesAreDistinct(q.choices),
     )
     .slice(0, opts.count);
 

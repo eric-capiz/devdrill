@@ -69,7 +69,7 @@ export function textLooksComplete(text: string) {
   return COMPLETE_ENDINGS.has(trimmed.slice(-1));
 }
 
-export function promptLooksComplete(prompt: string) {
+export function choicesAreDistinct(choices: string[]) {\n  if (choices.length === 0) return false;\n  const seen = new Set<string>();\n  for (const choice of choices) {\n    const key = choice.trim().toLowerCase();\n    if (!key || seen.has(key)) return false;\n    seen.add(key);\n  }\n  return true;\n}\nexport function promptLooksComplete(prompt: string) {
   const trimmed = prompt.trim();
   if (!trimmed) return false;
   const fenceCount = (trimmed.match(/```/g) ?? []).length;
