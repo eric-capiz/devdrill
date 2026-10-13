@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { QuizSetupForm } from "@/components/QuizSetupForm";
-import { LEVELS, TRACKS, type Track } from "@/lib/catalog";
+import { LEVELS, QUIZ_LENGTHS, SUBJECTS, TRACKS, type Track } from "@/lib/catalog";
 import { getSession } from "@/lib/session";
 
 export const maxDuration = 60;
@@ -15,7 +15,12 @@ export const metadata: Metadata = {
 export default async function QuizSetupPage({
   searchParams,
 }: {
-  searchParams: Promise<{ track?: string; level?: string }>;
+  searchParams: Promise<{
+    track?: string;
+    level?: string;
+    subject?: string;
+    length?: string;
+  }>;
 }) {
   const session = await getSession();
   if (!session) redirect("/login");
@@ -25,6 +30,15 @@ export default async function QuizSetupPage({
     : undefined;
   const initialLevel = (LEVELS as readonly string[]).includes(params.level ?? "")
     ? (params.level as (typeof LEVELS)[number])
+    : undefined;
+  const trackSubjects = initialTrack ? SUBJECTS[initialTrack] : null;
+  const initialSubject =
+    trackSubjects &&
+    (trackSubjects as readonly string[]).includes(params.subject ?? "")
+      ? params.subject
+      : undefined;
+  const initialLength = QUIZ_LENGTHS.map(String).includes(params.length ?? "")
+    ? params.length
     : undefined;
   return (
     <main className="flex-1 py-10 sm:py-12">
@@ -39,6 +53,8 @@ export default async function QuizSetupPage({
           <QuizSetupForm
             initialTrack={initialTrack}
             initialLevel={initialLevel}
+            initialSubject={initialSubject}
+            initialLength={initialLength}
           />
         </div>
       </div>

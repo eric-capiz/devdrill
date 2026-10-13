@@ -2,9 +2,11 @@ import { Archivo_Black, Barlow } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { connectDB } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 import { getAiBudget } from "@/models/TokenUsage";
+import { User } from "@/models/User";
 import "./globals.css";
 
 const archivo = Archivo_Black({
@@ -81,12 +83,31 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     })),
   ]);
 
+  let player: { xp: number; streakCount: number } | null = null;
+  if (session) {
+    try {
+      await connectDB();
+      const user = await User.findById(session.userId)
+        .select("xp streakCount")
+        .lean();
+      if (user) {
+        player = {
+          xp: user.xp ?? 0,
+          streakCount: user.streakCount ?? 0,
+        };
+      }
+    } catch {
+      player = null;
+    }
+  }
+
   return (
     <html lang="en" className={`${archivo.variable} ${barlow.variable} h-full`}>
       <body className="flex min-h-full flex-col font-body antialiased">
         <SiteHeader
           username={session?.username ?? null}
           aiBudget={aiBudget}
+          player={player}
         />
         {children}
         <SiteFooter />

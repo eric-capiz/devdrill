@@ -8,6 +8,7 @@ import { connectDB } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
+import { User } from "@/models/User";
 
 export const metadata: Metadata = {
   title: "Results",
@@ -38,6 +39,15 @@ export default async function ResultsPage({
       ? (attempt.points ?? 0) > 0
       : (attempt.scorePercent ?? 0) >= 70;
 
+  const player = await User.findById(session.userId)
+    .select("xp streakCount")
+    .lean();
+  const rematchHref =
+    `/quiz/setup?track=${encodeURIComponent(attempt.track)}` +
+    `&level=${encodeURIComponent(attempt.level)}` +
+    `&subject=${encodeURIComponent(attempt.subject)}` +
+    `&length=${attempt.length ?? "Unlimited"}`;
+
   return (
     <main className="flex-1 py-8 sm:py-12">
       <ConfettiBurst fire={celebrate} />
@@ -56,7 +66,23 @@ export default async function ResultsPage({
               ? ` / ${attempt.length ?? attempt.questionIds.length}`
               : " answered"}
           </p>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            {typeof attempt.xpEarned === "number" ? (
+              <span className="xp-badge">+{attempt.xpEarned} XP</span>
+            ) : null}
+            {player && player.streakCount > 0 ? (
+              <span
+                className="streak-pill"
+                title="Play every day to keep your streak burning."
+              >
+                {player.streakCount}-day streak
+              </span>
+            ) : null}
+          </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href={rematchHref} className="btn btn-gold w-full sm:w-auto">
+              Run it back
+            </Link>
             <Link href="/quiz/setup" className="btn btn-buzzer w-full sm:w-auto">
               Next round
             </Link>

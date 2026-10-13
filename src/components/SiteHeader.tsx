@@ -5,6 +5,20 @@ import { usePathname } from "next/navigation";
 import { logoutAction } from "@/app/actions/auth";
 import { BrandMark } from "@/components/BrandMark";
 import { Buzzer } from "@/components/bits/Buzzer";
+import { rankFor } from "@/lib/ranks";
+
+function FlameIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
+      <path d="M12 2C9.5 7 5.5 9.5 5.5 14.5a6.5 6.5 0 0 0 13 0C18.5 9.5 14.5 7 12 2z" />
+      <path
+        d="M12 9c-1.4 2.4-3.2 3.4-3.2 6a3.2 3.2 0 0 0 6.4 0c0-2.6-1.8-3.6-3.2-6z"
+        fill="var(--stage)"
+        opacity="0.85"
+      />
+    </svg>
+  );
+}
 
 function navClass(active: boolean) {
   return [
@@ -52,9 +66,11 @@ function DailyQuestionCounter({
 export function SiteHeader({
   username,
   aiBudget,
+  player,
 }: {
   username: string | null;
   aiBudget: { bankMode: boolean; estimatedQuestionsLeft: number };
+  player: { xp: number; streakCount: number } | null;
 }) {
   const pathname = usePathname();
   const onPlay = pathname.startsWith("/quiz");
@@ -118,6 +134,23 @@ export function SiteHeader({
               <span className="hidden max-w-[9rem] truncate text-[var(--gold)] md:inline">
                 @{username}
               </span>
+              {player ? (
+                <span
+                  className="rank-chip hidden lg:inline-flex"
+                  title={`${player.xp} XP total`}
+                >
+                  {rankFor(player.xp).title}
+                </span>
+              ) : null}
+              {player && player.streakCount > 0 ? (
+                <span
+                  className="streak-pill"
+                  title={`${player.streakCount}-day streak. Play every day to keep it burning.`}
+                >
+                  <FlameIcon />
+                  {player.streakCount}
+                </span>
+              ) : null}
               <form action={logoutAction}>
                 <button
                   type="submit"

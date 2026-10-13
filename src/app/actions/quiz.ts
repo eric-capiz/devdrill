@@ -10,6 +10,7 @@ import { getQuestionsForQuiz } from "@/lib/questions";
 import { requireSession } from "@/lib/session";
 import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
+import { User } from "@/models/User";
 
 const startSchema = z.object({
   level: z.enum(LEVELS),
@@ -229,6 +230,38 @@ export async function gradeQuizAction(attemptId: string): Promise<ActionResult> 
 
   attempt.status = "graded";
   attempt.gradedAt = new Date();
+
+  // Replay loop: XP + daily streak
+  const xpEarned =
+    attempt.mode === "fixed"
+      ? correctCount * 10 + (attempt.scorePercent === 100 ? 50 : 0)
+      : correctCount * 10;
+  attempt.xpEarned = xpEarned;
+
+  const player = await User.findById(session.userId);
+  if (player) {
+    const now = new Date();
+    const startOfToday = Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate(),
+    );
+    const last = player.lastPlayedAt ? new Date(player.lastPlayedAt) : null;
+    const startOfLast = last
+      ? Date.UTC(last.getUTCFullYear(), last.getUTCMonth(), last.getUTCDate())
+      : null;
+    let streak = player.streakCount ?? 0;
+    if (startOfLast === null || startOfLast < startOfToday - 86400000) {
+      streak = 1;
+    } else if (startOfLast === startOfToday - 86400000) {
+      streak += 1;
+    }
+    player.streakCount = streak;
+    player.lastPlayedAt = now;
+    player.xp = (player.xp ?? 0) + xpEarned;
+    await player.save();
+  }
+
   await attempt.save();
 
   revalidatePath("/");

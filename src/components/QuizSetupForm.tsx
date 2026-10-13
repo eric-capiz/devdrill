@@ -17,9 +17,13 @@ const initial: ActionResult = { ok: false };
 export function QuizSetupForm({
   initialTrack,
   initialLevel,
+  initialSubject,
+  initialLength,
 }: {
   initialTrack?: Track;
   initialLevel?: (typeof LEVELS)[number];
+  initialSubject?: string;
+  initialLength?: string;
 }) {
   const [level, setLevel] = useState<(typeof LEVELS)[number]>(
     initialLevel ?? "Junior",
@@ -27,9 +31,9 @@ export function QuizSetupForm({
   const [track, setTrack] = useState<Track>(initialTrack ?? "Frontend");
   const subjects = useMemo(() => SUBJECTS[track], [track]);
   const [subject, setSubject] = useState<string>(
-    SUBJECTS[initialTrack ?? "Frontend"][0],
+    initialSubject ?? SUBJECTS[initialTrack ?? "Frontend"][0],
   );
-  const [length, setLength] = useState<string>("5");
+  const [length, setLength] = useState<string>(initialLength ?? "5");
   const [state, formAction, pending] = useActionState(startQuizAction, initial);
 
   return (

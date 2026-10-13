@@ -42,6 +42,7 @@ const quizAttemptSchema = new Schema(
     scorePercent: { type: Number, default: null },
     points: { type: Number, default: null },
     correctCount: { type: Number, default: null },
+    xpEarned: { type: Number, default: null },
     gradedAt: { type: Date, default: null },
   },
   { timestamps: true },
