@@ -23,6 +23,18 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    xp: {
+      type: Number,
+      default: 0,
+    },
+    streakCount: {
+      type: Number,
+      default: 0,
+    },
+    lastPlayedAt: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true },
 );

@@ -15,7 +15,7 @@ export function RichPrompt({
       return (
         <pre
           key={i}
-          className="my-4 overflow-x-auto rounded-xl border border-[var(--line)] bg-[#040b1d] p-3 text-left text-sm font-semibold leading-relaxed text-[var(--spot)] sm:p-4"
+          className="my-4 overflow-x-auto rounded-xl border-2 border-[var(--ink)] bg-[#2e1a0e] p-3 text-left text-sm font-semibold leading-relaxed text-[#f6efe0] sm:p-4"
         >
           <code className="font-mono whitespace-pre">{segment.value}</code>
         </pre>

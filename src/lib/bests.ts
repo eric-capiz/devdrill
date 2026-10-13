@@ -35,6 +35,25 @@ export async function getQuestionBankCount() {
   return Question.countDocuments();
 }
 
+export async function getBoardCounts() {
+  await connectDB();
+  const rows = await Question.aggregate([
+    { $group: { _id: { track: "$track", level: "$level" }, count: { $sum: 1 } } },
+  ]);
+  const counts: Record<string, Record<string, number>> = {};
+  for (const row of rows as Array<{
+    _id: { track: string; level: string };
+    count: number;
+  }>) {
+    const track = row._id.track;
+    const level = row._id.level;
+    if (!track || !level) continue;
+    counts[track] ??= {};
+    counts[track][level] = row.count;
+  }
+  return counts;
+}
+
 export async function getGlobalBests() {
   await connectDB();
   void User;

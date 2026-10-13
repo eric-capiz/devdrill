@@ -2,70 +2,55 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { BrandMark } from "@/components/BrandMark";
 import { Buzzer } from "@/components/bits/Buzzer";
-import { SlamText } from "@/components/bits/SlamText";
 
-export function HomeHero({
-  loggedIn,
-  bankCount,
-}: {
-  loggedIn: boolean;
-  bankCount: number;
-}) {
-  const bankLine = `${bankCount} stored questions`;
-
+export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
   return (
     <section className="relative overflow-hidden">
       <div className="spotlight" aria-hidden />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-25"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 50% 100%, transparent 20%, rgba(0,0,0,0.55) 100%)",
-        }}
-      />
 
-      <div className="shell relative flex min-h-[min(100svh,52rem)] flex-col items-center justify-center py-14 text-center sm:min-h-[calc(100svh-4.25rem)] sm:py-20">
-        <motion.div
-          className="mb-5 sm:mb-6"
-          initial={{ opacity: 0, scale: 0.86, y: 12 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 320, damping: 22 }}
+      <div className="shell relative flex flex-col items-center py-16 text-center sm:py-24">
+        <motion.p
+          className="eyebrow"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
         >
-          <BrandMark
-            size={96}
-            priority
-            className="h-16 w-16 sm:h-24 sm:w-24"
-          />
-        </motion.div>
+          The hot seat is open
+        </motion.p>
 
-        <h1 className="max-w-full font-display text-[clamp(2.75rem,15vw,8.5rem)] leading-[0.9] tracking-wide text-[var(--spot)]">
-          <SlamText text="DEV DRILL" />
-        </h1>
+        <motion.h1
+          className="mt-5 font-display text-[clamp(3rem,13vw,7.5rem)] leading-[0.9] tracking-wide text-[var(--spot)]"
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 20 }}
+        >
+          TAKE THE
+          <br />
+          <span className="text-[var(--lime)]">HOT SEAT</span>
+        </motion.h1>
 
         <motion.p
-          className="mt-5 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:mt-6 sm:text-xl"
+          className="mt-6 max-w-2xl text-base font-semibold leading-relaxed text-[var(--muted)] sm:text-xl"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+        >
+          30 seconds on the clock. Three lifelines. A ladder of prize
+          rungs with safe havens. Answer fast, climb high, and know
+          when to walk away.
+        </motion.p>
+
+        <motion.div
+          className="mt-9 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          The enterprise quiz championship for web developers. Levels, tracks,
-          subjects, buzzers, and a scoreboard that never forgets.
-        </motion.p>
-
-        <motion.div
-          className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55 }}
-        >
           {loggedIn ? (
             <Buzzer className="w-full sm:w-auto">
-              <Link href="/quiz/setup" className="btn btn-buzzer w-full sm:w-auto">
-                Buzz in
-              </Link>
+              <a href="#categories" className="btn btn-buzzer w-full sm:w-auto">
+                Take the hot seat
+              </a>
             </Buzzer>
           ) : (
             <>
@@ -76,35 +61,44 @@ export function HomeHero({
               </Buzzer>
               <Buzzer className="w-full sm:w-auto">
                 <Link href="/login" className="btn btn-ghost w-full sm:w-auto">
-                  Contestant login
+                  Log in
                 </Link>
               </Buzzer>
             </>
           )}
         </motion.div>
+
+        <motion.div
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm font-extrabold uppercase tracking-[0.14em] text-[var(--muted)]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55 }}
+        >
+          <span>
+            <span className="text-[var(--lime)]">30s</span> shot clock
+          </span>
+          <span>
+            <span className="text-[var(--lime)]">3</span> lifelines
+          </span>
+          <span>
+            <span className="text-[var(--lime)]">XP</span> every round
+          </span>
+        </motion.div>
       </div>
 
       <div className="marquee">
-        <div className="marquee-track text-[var(--spot)]">
+        <div className="marquee-track">
           {Array.from({ length: 2 }).flatMap((_, copy) =>
             [
-              bankLine,
-              "Frontend",
-              "Backend",
-              "Fullstack",
-              "DevOps",
-              "Junior",
-              "Mid",
-              "Senior",
-              bankLine,
-              "Unlimited mode",
-              "Skip and rotate",
+              "Beat the clock",
+              "Use your lifeline",
+              "Climb the ladder",
+              "Daily streaks",
+              "XP ranks",
+              "Run it back",
             ].map((item, i) => (
-              <span
-                key={`${copy}-${item}-${i}`}
-                className={item === bankLine ? "text-[var(--gold)]" : undefined}
-              >
-                {item} <span className="text-[var(--gold)]">//</span>
+              <span key={`${copy}-${i}`}>
+                {item} <span className="text-[var(--lime)]">★</span>
               </span>
             )),
           )}

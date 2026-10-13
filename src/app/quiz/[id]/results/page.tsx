@@ -5,9 +5,11 @@ import { ConfettiBurst } from "@/components/bits/ConfettiBurst";
 import { FlipScore } from "@/components/bits/FlipScore";
 import { RichPrompt } from "@/components/RichPrompt";
 import { connectDB } from "@/lib/db";
+import { formatMoney } from "@/lib/ladder";
 import { getSession } from "@/lib/session";
 import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
+import { User } from "@/models/User";
 
 export const metadata: Metadata = {
   title: "Results",
@@ -38,15 +40,25 @@ export default async function ResultsPage({
       ? (attempt.points ?? 0) > 0
       : (attempt.scorePercent ?? 0) >= 70;
 
+  const player = await User.findById(session.userId)
+    .select("xp streakCount")
+    .lean();
+  const rematchHref =
+    `/quiz/setup?track=${encodeURIComponent(attempt.track)}` +
+    `&level=${encodeURIComponent(attempt.level)}` +
+    `&subject=${encodeURIComponent(attempt.subject)}` +
+    `&length=${attempt.length ?? "Unlimited"}`;
+
   return (
     <main className="flex-1 py-8 sm:py-12">
       <ConfettiBurst fire={celebrate} />
       <div className="shell max-w-2xl">
         <div className="scoreboard p-5 sm:p-8">
-          <p className="text-[0.65rem] font-extrabold uppercase leading-relaxed tracking-[0.16em] text-[var(--gold)] sm:text-xs sm:tracking-[0.2em]">
+          <p className="eyebrow">Final score</p>
+          <p className="mt-3 text-[0.65rem] font-extrabold uppercase leading-relaxed tracking-[0.16em] text-[var(--muted)] sm:text-xs sm:tracking-[0.2em]">
             {attempt.level} · {attempt.track} · {attempt.subject}
           </p>
-          <h1 className="mt-3 font-display text-[clamp(2.75rem,14vw,4.5rem)] tracking-wide text-[var(--gold)]">
+          <h1 className="mt-3 text-[var(--magenta)] font-display text-[clamp(2.75rem,14vw,4.5rem)] tracking-wide">
             <FlipScore value={headline} />
           </h1>
           <p className="mt-2 font-bold text-[var(--muted)]">
@@ -55,7 +67,30 @@ export default async function ResultsPage({
               ? ` / ${attempt.length ?? attempt.questionIds.length}`
               : " answered"}
           </p>
+          {attempt.mode === "fixed" &&
+          typeof attempt.winnings === "number" ? (
+            <p className="winnings-line">
+              You walk away with{" "}
+              <span>{formatMoney(attempt.winnings)}</span>
+            </p>
+          ) : null}
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            {typeof attempt.xpEarned === "number" ? (
+              <span className="xp-badge">+{attempt.xpEarned} XP</span>
+            ) : null}
+            {player && player.streakCount > 0 ? (
+              <span
+                className="streak-pill"
+                title="Play every day to keep your streak burning."
+              >
+                {player.streakCount}-day streak
+              </span>
+            ) : null}
+          </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href={rematchHref} className="btn btn-gold w-full sm:w-auto">
+              Run it back
+            </Link>
             <Link href="/quiz/setup" className="btn btn-buzzer w-full sm:w-auto">
               Next round
             </Link>

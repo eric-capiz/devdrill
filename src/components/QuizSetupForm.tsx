@@ -14,12 +14,26 @@ import { Buzzer } from "@/components/bits/Buzzer";
 
 const initial: ActionResult = { ok: false };
 
-export function QuizSetupForm() {
-  const [level, setLevel] = useState<(typeof LEVELS)[number]>("Junior");
-  const [track, setTrack] = useState<Track>("Frontend");
+export function QuizSetupForm({
+  initialTrack,
+  initialLevel,
+  initialSubject,
+  initialLength,
+}: {
+  initialTrack?: Track;
+  initialLevel?: (typeof LEVELS)[number];
+  initialSubject?: string;
+  initialLength?: string;
+}) {
+  const [level, setLevel] = useState<(typeof LEVELS)[number]>(
+    initialLevel ?? "Junior",
+  );
+  const [track, setTrack] = useState<Track>(initialTrack ?? "Frontend");
   const subjects = useMemo(() => SUBJECTS[track], [track]);
-  const [subject, setSubject] = useState<string>(SUBJECTS.Frontend[0]);
-  const [length, setLength] = useState<string>("5");
+  const [subject, setSubject] = useState<string>(
+    initialSubject ?? SUBJECTS[initialTrack ?? "Frontend"][0],
+  );
+  const [length, setLength] = useState<string>(initialLength ?? "5");
   const [state, formAction, pending] = useActionState(startQuizAction, initial);
 
   return (
@@ -30,7 +44,7 @@ export function QuizSetupForm() {
       animate={{ opacity: 1, y: 0 }}
     >
       <fieldset>
-        <legend className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           LEVEL
         </legend>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -44,7 +58,7 @@ export function QuizSetupForm() {
       </fieldset>
 
       <fieldset>
-        <legend className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           TRACK
         </legend>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -68,7 +82,7 @@ export function QuizSetupForm() {
       </fieldset>
 
       <div>
-        <label htmlFor="subject" className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <label htmlFor="subject" className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           CATEGORY
         </label>
         <select
@@ -87,7 +101,7 @@ export function QuizSetupForm() {
       </div>
 
       <fieldset>
-        <legend className="font-display text-xl tracking-wide text-[var(--ink)] sm:text-2xl">
+        <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
           ROUND LENGTH
         </legend>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -104,7 +118,7 @@ export function QuizSetupForm() {
       </fieldset>
 
       {state.message ? (
-        <p className="rounded-xl bg-[var(--stage)] px-3 py-2 text-sm font-bold text-[var(--gold)]">
+        <p className="rounded-xl bg-[#2e1a0e] px-3 py-2 text-sm font-bold text-[var(--gold)]">
           {state.message}
         </p>
       ) : null}
