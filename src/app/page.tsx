@@ -102,19 +102,19 @@ export default async function HomePage() {
             [
               "01",
               "BEAT THE CLOCK",
-              "Every question gets 30 seconds. Hesitate too long and the round passes it for you. Fast fingers, faster brain.",
+              "Every question gets 30 seconds. Let it hit zero and it counts as a miss. Fast fingers, faster brain.",
               "",
             ],
             [
               "02",
-              "USE YOUR LIFELINE",
-              "One 50:50 per round — it knocks out two wrong answers when you're stuck between choices. Spend it wisely.",
+              "THREE LIFELINES",
+              "50:50 knocks out two wrong answers. The audience votes. A friend takes your call. One use each, per round — spend them wisely.",
               "board-tile-accent-pink",
             ],
             [
               "03",
-              "CLIMB THE LADDER",
-              "Every question is a prize rung. Answer, lock in, and climb — the lights get brighter the higher you go.",
+              "KNOW WHEN TO WALK",
+              "A wrong answer ends the run — you keep your last safe haven ($1K, $32K). Or walk away anytime and bank what you've climbed.",
               "board-tile-accent-cyan",
             ],
           ].map(([num, title, copy, accent], i) => (

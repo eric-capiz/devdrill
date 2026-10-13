@@ -5,6 +5,7 @@ import { ConfettiBurst } from "@/components/bits/ConfettiBurst";
 import { FlipScore } from "@/components/bits/FlipScore";
 import { RichPrompt } from "@/components/RichPrompt";
 import { connectDB } from "@/lib/db";
+import { formatMoney } from "@/lib/ladder";
 import { getSession } from "@/lib/session";
 import { Question } from "@/models/Question";
 import { QuizAttempt } from "@/models/QuizAttempt";
@@ -66,6 +67,13 @@ export default async function ResultsPage({
               ? ` / ${attempt.length ?? attempt.questionIds.length}`
               : " answered"}
           </p>
+          {attempt.mode === "fixed" &&
+          typeof attempt.winnings === "number" ? (
+            <p className="winnings-line">
+              You walk away with{" "}
+              <span>{formatMoney(attempt.winnings)}</span>
+            </p>
+          ) : null}
           <div className="mt-4 flex flex-wrap items-center gap-2">
             {typeof attempt.xpEarned === "number" ? (
               <span className="xp-badge">+{attempt.xpEarned} XP</span>

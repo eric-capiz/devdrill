@@ -35,9 +35,9 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
         >
-          30 seconds on the clock. One 50:50 lifeline. A ladder of prize
-          rungs to climb. Answer fast, climb high, and don&apos;t freeze
-          under the lights.
+          30 seconds on the clock. Three lifelines. A ladder of prize
+          rungs with safe havens. Answer fast, climb high, and know
+          when to walk away.
         </motion.p>
 
         <motion.div
@@ -78,7 +78,7 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
             <span className="text-[var(--lime)]">30s</span> shot clock
           </span>
           <span>
-            <span className="text-[var(--lime)]">50:50</span> lifeline
+            <span className="text-[var(--lime)]">3</span> lifelines
           </span>
           <span>
             <span className="text-[var(--lime)]">XP</span> every round
