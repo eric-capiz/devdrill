@@ -6,6 +6,8 @@ import { getGlobalBests, getQuestionBankCount } from "@/lib/bests";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const session = await getSession();
   const [{ topFixed, topUnlimited }, bankCount] = await Promise.all([
