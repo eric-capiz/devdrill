@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { connectDB } from "@/lib/db";
 import { getSession } from "@/lib/session";
 import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
-import { getAiBudget } from "@/models/TokenUsage";
 import { User } from "@/models/User";
 import "./globals.css";
 
@@ -35,8 +34,7 @@ export const metadata: Metadata = {
     "Dev Drill",
     "web development quiz",
     "frontend quiz",
-    "backend quiz",
-    "devops quiz",
+    "CompTIA A+ quiz",
     "javascript quiz",
     "react quiz",
     "coding quiz",
@@ -75,13 +73,7 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const [session, aiBudget] = await Promise.all([
-    getSession(),
-    getAiBudget().catch(() => ({
-      bankMode: true,
-      estimatedQuestionsLeft: 0,
-    })),
-  ]);
+  const session = await getSession();
 
   let player: { xp: number; streakCount: number } | null = null;
   if (session) {
@@ -106,7 +98,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-body antialiased">
         <SiteHeader
           username={session?.username ?? null}
-          aiBudget={aiBudget}
           player={player}
         />
         {children}

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { QuizSetupForm } from "@/components/QuizSetupForm";
-import { LEVELS, QUIZ_LENGTHS, SUBJECTS, TRACKS, type Track } from "@/lib/catalog";
+import { LEVELS, QUIZ_LENGTHS, TRACKS, type Track } from "@/lib/catalog";
 import { getSession } from "@/lib/session";
 
 export const maxDuration = 60;
 
 export const metadata: Metadata = {
   title: "Pre show setup",
-  description: "Choose your level, track, category, and round length.",
+  description: "Choose your level, topic, and round length.",
   robots: { index: false, follow: false },
 };
 
@@ -31,12 +31,6 @@ export default async function QuizSetupPage({
   const initialLevel = (LEVELS as readonly string[]).includes(params.level ?? "")
     ? (params.level as (typeof LEVELS)[number])
     : undefined;
-  const trackSubjects = initialTrack ? SUBJECTS[initialTrack] : null;
-  const initialSubject =
-    trackSubjects &&
-    (trackSubjects as readonly string[]).includes(params.subject ?? "")
-      ? params.subject
-      : undefined;
   const initialLength = QUIZ_LENGTHS.map(String).includes(params.length ?? "")
     ? params.length
     : undefined;
@@ -47,13 +41,12 @@ export default async function QuizSetupPage({
           PRE SHOW SETUP
         </h1>
         <p className="mt-2 text-sm text-[var(--muted)] sm:text-base">
-          Level, track, category, round length.
+          Level, topic, round length.
         </p>
         <div className="mt-8 sm:mt-10">
           <QuizSetupForm
             initialTrack={initialTrack}
             initialLevel={initialLevel}
-            initialSubject={initialSubject}
             initialLength={initialLength}
           />
         </div>

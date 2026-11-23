@@ -1,0 +1,4370 @@
+[
+  {
+    "choices": [
+      "It sets the page language to English.",
+      "It imports the HTML5 library from a CDN.",
+      "It enables JavaScript on the page.",
+      "It tells the browser to render the page in standards mode using the HTML5 specification."
+    ],
+    "correctIndex": 3,
+    "explanation": "The doctype is not an HTML tag; it instructs the browser which rendering mode to use. Without it browsers may fall back to quirks mode with inconsistent legacy behavior.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does the <!DOCTYPE html> declaration do?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "<section>",
+      "<span>",
+      "<div>",
+      "<nav>"
+    ],
+    "correctIndex": 3,
+    "explanation": "The <nav> element semantically marks a section of navigation links, which helps screen readers and search engines understand the page structure.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which HTML element is the semantic choice for a block of main navigation links?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "validate",
+      "checked",
+      "required",
+      "mandatory"
+    ],
+    "correctIndex": 2,
+    "explanation": "The required boolean attribute triggers built-in browser validation, blocking submission until the field has a value.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which attribute makes a form input mandatory before the form can be submitted?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It provides alternative text shown if the image fails to load and read by screen readers.",
+      "It lazy-loads the image.",
+      "It sets the image width in pixels.",
+      "It adds a caption below the image."
+    ],
+    "correctIndex": 0,
+    "explanation": "Alt text describes the image for users who cannot see it, including screen reader users, and displays when the image cannot load.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the purpose of the alt attribute on an <img> element?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "<a>",
+      "<href>",
+      "<url>",
+      "<link>"
+    ],
+    "correctIndex": 0,
+    "explanation": "The anchor element <a> with an href attribute creates a link; <link> is for linking external resources like stylesheets in the head.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which tag creates a hyperlink to another page?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "<div> can only contain text and <span> can contain any element.",
+      "There is no difference; they are interchangeable.",
+      "<span> creates a new line and <div> does not.",
+      "<div> is a block-level element and <span> is an inline element."
+    ],
+    "correctIndex": 3,
+    "explanation": "A div is block-level, so it starts on a new line and takes full available width, while a span is inline and flows within surrounding text.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the key difference between a <div> and a <span>?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "type=\"mail\"",
+      "type=\"email\"",
+      "type=\"text\"",
+      "type=\"address\""
+    ],
+    "correctIndex": 1,
+    "explanation": "type=\"email\" validates the value looks like an email address on submit and shows an email-optimized keyboard on mobile devices.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which input type gives the browser built-in email format validation?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A normal script blocks HTML parsing until it downloads and executes; defer downloads in parallel and executes in order after parsing finishes.",
+      "There is no difference in modern browsers.",
+      "defer runs the script before the HTML is parsed.",
+      "defer runs the script only after the user clicks something."
+    ],
+    "correctIndex": 0,
+    "explanation": "A classic script pauses the parser, while defer fetches in parallel and runs after the document is parsed, preserving execution order between deferred scripts.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between a normal <script> tag and one with the defer attribute?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "CSS in the head avoids a flash of unstyled content, and scripts at the end avoid blocking page rendering.",
+      "Scripts in the body run faster because they skip parsing.",
+      "Browsers refuse to load CSS placed anywhere else.",
+      "It is only a style convention with no performance effect."
+    ],
+    "correctIndex": 0,
+    "explanation": "CSS is render-blocking, so loading it early prevents unstyled content flashing in; classic scripts block parsing, so placing them late lets content render first.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Why is it generally recommended to put CSS <link> tags in the <head> and JS <script> tags just before </body>?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They define CSS variables for the element.",
+      "They are a replacement for the id attribute.",
+      "They store custom data on an element that JavaScript can read via the dataset API.",
+      "They pass data to the server on every request."
+    ],
+    "correctIndex": 2,
+    "explanation": "Custom data attributes let you embed extra information in markup, readable in JS as element.dataset.camelCaseName, without abusing class or id.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What are data-* attributes good for?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Both elements are returned by getElementById as an array.",
+      "The HTML is invalid and document.getElementById returns only the first matching element.",
+      "The browser automatically renames the second one.",
+      "The page fails to load."
+    ],
+    "correctIndex": 1,
+    "explanation": "IDs must be unique per document. Duplicates are invalid HTML, and getElementById returns the first match, so scripts and label associations can target the wrong element.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What happens if two elements on the same page share the same id value?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "There is no difference; browsers treat them identically.",
+      "POST data appears in the browser history but GET data does not.",
+      "GET is faster because it skips the server.",
+      "GET sends data in the URL query string and should not change server state; POST sends data in the request body."
+    ],
+    "correctIndex": 3,
+    "explanation": "GET appends form data to the URL, making it bookmarkable but visible and length-limited, while POST puts data in the body, which suits submissions that change state.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between GET and POST as form methods?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It creates a reusable CSS theme.",
+      "It holds inert markup that is not rendered until JavaScript clones its content into the document.",
+      "It defines a page layout that the browser renders immediately.",
+      "It imports an external HTML file."
+    ],
+    "correctIndex": 1,
+    "explanation": "Template contents are parsed but inert: no rendering, no script execution, no resource loading until cloned via JS, which makes it ideal for repeated markup like list rows.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does the <template> element do?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "<meta charset=\"utf-8\">",
+      "<meta name=\"responsive\" content=\"yes\">",
+      "<meta name=\"mobile\" content=\"true\">",
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+    ],
+    "correctIndex": 3,
+    "explanation": "The viewport meta tag with width=device-width makes the layout viewport match the device width, which is the foundation of responsive design.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Which meta tag tells mobile browsers how to scale the page viewport?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Using semantic HTML5 elements.",
+      "A missing, malformed, or very old doctype.",
+      "Using JavaScript modules.",
+      "Including more than one stylesheet."
+    ],
+    "correctIndex": 1,
+    "explanation": "Browsers switch to quirks mode, emulating legacy layout bugs, when the doctype is absent or an outdated one is used.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What triggers quirks mode instead of standards mode in a browser?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Add a translate attribute to the <body> tag.",
+      "Use the lang attribute on <html> and on elements in other languages, plus hreflang links for alternate language versions.",
+      "Set the charset to UTF-16.",
+      "Duplicate the page with a different doctype per language."
+    ],
+    "correctIndex": 1,
+    "explanation": "lang tells browsers, screen readers, and search engines which language text is in, while hreflang links declare alternate-language versions of the page.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do you correctly serve a page with content in multiple languages?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They are three names for the same hint.",
+      "preconnect downloads the resource and preload only opens a connection.",
+      "preload works only for images and prefetch only for scripts.",
+      "preload fetches a critical resource for the current page, prefetch fetches a resource likely needed for a future navigation, and preconnect sets up an early connection to an origin."
+    ],
+    "correctIndex": 3,
+    "explanation": "Preload prioritizes a current-page resource, prefetch is low-priority for likely next navigation, and preconnect warms up DNS, TCP, and TLS to a third-party origin.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the difference between preload, prefetch, and preconnect resource hints?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Encapsulated DOM and styles that are scoped to a component and isolated from the main document.",
+      "A faster way to query the DOM by id.",
+      "A way to hide elements from search engines.",
+      "A server-side rendering mode for custom elements."
+    ],
+    "correctIndex": 0,
+    "explanation": "Attaching a shadow root creates a separate DOM subtree whose styles and markup do not leak in or out, which is how custom elements stay self-contained.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the Shadow DOM provide in web components?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "To prevent the resource from being cached.",
+      "To allow the resource to access cookies.",
+      "To fetch the resource with CORS so the browser can report full error details and apply integrity checks instead of opaque errors.",
+      "To make the resource load faster."
+    ],
+    "correctIndex": 2,
+    "explanation": "Without crossorigin, cross-origin script errors are reported only as the opaque 'Script error.' With it, the fetch uses CORS and real error details and SRI checks become available.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why would you add a crossorigin attribute to a <script> or <link> tag?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Rendering a page in stages so content appears as quickly as possible, for example by loading CSS early and deferring scripts.",
+      "Rendering a page only after all images have loaded.",
+      "A technique that disables JavaScript until the page is fully painted.",
+      "Server-side rendering of one page at a time."
+    ],
+    "correctIndex": 0,
+    "explanation": "Progressive rendering prioritizes getting usable content on screen fast, using techniques like early CSS, deferred scripts, and lazy loading of below-the-fold content.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is progressive rendering?",
+    "source": "interview",
+    "subject": "HTML",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Computer Styled Sections",
+      "Creative Style System",
+      "Colorful Style Sheets",
+      "Cascading Style Sheets"
+    ],
+    "correctIndex": 3,
+    "explanation": "CSS stands for Cascading Style Sheets; the cascade is the set of rules that decides which styles win when several rules target the same element.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does CSS stand for?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Margin, border, padding, content.",
+      "Padding, content, margin, border.",
+      "Content, margin, border, padding.",
+      "Content, padding, border, margin."
+    ],
+    "correctIndex": 3,
+    "explanation": "Every element is a box: content at the center, then padding, then border, then margin on the outside.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What are the four layers of the CSS box model, from innermost to outermost?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "text-color",
+      "background-color",
+      "color",
+      "font-color"
+    ],
+    "correctIndex": 2,
+    "explanation": "The color property sets the foreground text color; background-color sets the background behind it.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which CSS property changes the color of text?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "IDs style text and classes style layout.",
+      "There is no difference in behavior.",
+      "A class can be reused on many elements while an ID should be unique to one element, and IDs have higher specificity.",
+      "A class can only be used once and an ID can be reused."
+    ],
+    "correctIndex": 2,
+    "explanation": "Classes are reusable and IDs must be unique; an ID selector also outranks a class selector in specificity.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between a class selector and an ID selector?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It makes the element transparent.",
+      "It makes the element invisible but keeps its space in the layout.",
+      "It removes the element from the layout entirely, so it takes up no space.",
+      "It hides the element only from screen readers."
+    ],
+    "correctIndex": 2,
+    "explanation": "display: none removes the element from the render tree, so it occupies no space; visibility: hidden keeps the space while hiding the content.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does display: none do to an element?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "display: flex;",
+      "layout: flexbox;",
+      "position: flex;",
+      "flex: container;"
+    ],
+    "correctIndex": 0,
+    "explanation": "display: flex makes the element a flex container, and its direct children become flex items laid out along the main axis.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which declaration turns an element into a flex container?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "vw",
+      "px",
+      "rem",
+      "em"
+    ],
+    "correctIndex": 2,
+    "explanation": "rem is relative to the font size of the root html element, while em is relative to the parent element's font size.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which CSS unit is relative to the root element's font size?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It styles an element when it is clicked.",
+      "It styles an element when it receives keyboard focus.",
+      "It styles an element when the mouse pointer is over it.",
+      "It styles the first child of an element."
+    ],
+    "correctIndex": 2,
+    "explanation": ":hover matches when a pointing device is over the element; :active is for the click moment and :focus is for keyboard or programmatic focus.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does the :hover pseudo-class do?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "ID, inline style, element, class.",
+      "Inline style, ID, class/attribute/pseudo-class, element/pseudo-element.",
+      "Element, class, ID, inline style.",
+      "Class, ID, inline style, element."
+    ],
+    "correctIndex": 1,
+    "explanation": "Specificity ranks inline styles first, then IDs, then classes, attributes, and pseudo-classes, then elements and pseudo-elements.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "In what order does specificity rank these selectors, from highest to lowest?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Relative to the viewport, always.",
+      "Relative to its nearest positioned ancestor, or the initial containing block if there is none.",
+      "Relative to its normal position in the flow.",
+      "Relative to the document body only."
+    ],
+    "correctIndex": 1,
+    "explanation": "An absolutely positioned element is placed relative to its closest ancestor with a non-static position; without one it uses the initial containing block.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How is position: absolute positioned?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It removes the border from the box model.",
+      "It adds the border width to the element's total width.",
+      "It makes the box size itself to its content only.",
+      "It makes width and height include padding and border, so a 200px box stays 200px wide."
+    ],
+    "correctIndex": 3,
+    "explanation": "With border-box, the declared width covers content plus padding plus border, which makes sizing predictable; the default content-box adds padding and border on top.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does box-sizing: border-box do?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "justify-content aligns items along the main axis and align-items aligns them along the cross axis.",
+      "They are aliases for the same property.",
+      "justify-content works only in Grid and align-items only in Flexbox.",
+      "justify-content aligns items along the cross axis and align-items along the main axis."
+    ],
+    "correctIndex": 0,
+    "explanation": "justify-content distributes items along the main axis (horizontal in a row), while align-items aligns them along the cross axis.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "In Flexbox, what is the difference between justify-content and align-items?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Setting opacity to 0.99 on an element.",
+      "Setting color to red.",
+      "Setting display to block.",
+      "Setting font-weight to bold."
+    ],
+    "correctIndex": 0,
+    "explanation": "Opacity below 1, transforms, filters, and several other properties create a new stacking context, so the element's z-index competes only within its parent context.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Which of these creates a new stacking context?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "display: none keeps the space and visibility: hidden removes it.",
+      "They behave identically in all browsers.",
+      "visibility: hidden keeps the element's space in the layout while display: none removes it entirely.",
+      "visibility: hidden removes the element from the DOM."
+    ],
+    "correctIndex": 2,
+    "explanation": "visibility: hidden hides the rendering but preserves layout space, while display: none takes the element out of layout completely.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between visibility: hidden and display: none?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "flex-grow: 1; flex-shrink: 1; flex-basis: 0%;",
+      "flex-grow: 1; flex-shrink: 0; flex-basis: 100%;",
+      "flex-grow: 0; flex-shrink: 1; flex-basis: auto;",
+      "flex-grow: 1; flex-shrink: 1; flex-basis: auto;"
+    ],
+    "correctIndex": 0,
+    "explanation": "The single-value flex shorthand sets flex-grow to that number, flex-shrink to 1, and flex-basis to 0%, so flex: 1 items share free space equally.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does flex: 1 expand to?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "@mixin only works with variables and @extend only works with colors.",
+      "@extend copies declarations and @mixin groups selectors.",
+      "They are identical; @extend is the older name.",
+      "@mixin copies a reusable block of declarations where it is included, while @extend makes a selector inherit another selector's styles by grouping them."
+    ],
+    "correctIndex": 3,
+    "explanation": "A mixin is included with @include and can take arguments, duplicating its declarations at each use; @extend shares styles by combining selectors, which keeps output smaller but couples selectors.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "In Sass/SCSS, what is the difference between a @mixin and a @extend?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They can be handled by the compositor without triggering layout or paint, so only compositing work is needed.",
+      "They skip the style calculation step entirely.",
+      "They are processed by JavaScript instead of CSS.",
+      "They force the browser to use the GPU for all rendering."
+    ],
+    "correctIndex": 0,
+    "explanation": "Changing layout properties like width triggers layout and paint, but transform and opacity changes can be composited directly, which is why they stay smooth at 60fps.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why are transform and opacity the cheapest properties to animate?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The blue rule wins because it has two classes.",
+      "The blue rule wins because it appears later in the stylesheet.",
+      "The red rule wins because an ID selector outranks any number of classes in this comparison.",
+      "Neither wins; the browser picks randomly."
+    ],
+    "correctIndex": 2,
+    "explanation": "Specificity is counted as (IDs, classes, elements): #nav .link is (1,1,0) while .link.active is (0,2,0), so the ID rule wins regardless of source order.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Which selector wins when these two rules conflict?\n```css\n#nav .link { color: red; }\n.link.active { color: blue; }\n```",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Check whether a browser supports a CSS feature.",
+      "Style an element based on its descendants or following siblings, acting like a parent selector.",
+      "Apply styles only when the user hovers.",
+      "Select elements that have no children."
+    ],
+    "correctIndex": 1,
+    "explanation": ":has() is a relational pseudo-class, so article:has(img) styles an article only when it contains an image, which was impossible in CSS before.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the CSS :has() pseudo-class let you do?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Media queries are deprecated in favor of container queries.",
+      "Container queries respond to the viewport and media queries to the container.",
+      "Container queries only work for fonts.",
+      "Container queries respond to the size of a parent container, while media queries respond to the viewport size."
+    ],
+    "correctIndex": 3,
+    "explanation": "Media queries adapt to the viewport, but container queries let a component adapt to the space its container gives it, so the same component works in a sidebar or full width.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the key difference between container queries and media queries?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Less supports mixins and Sass does not.",
+      "Less uses $ for variables and Sass uses @.",
+      "Sass uses $ for variables and has two syntaxes (SCSS and indented), while Less uses @ for variables and is written in JavaScript.",
+      "Sass runs in the browser and Less only at build time."
+    ],
+    "correctIndex": 2,
+    "explanation": "Sass variables start with $ and it offers the SCSS and indented syntaxes; Less variables start with @ and its compiler is JavaScript-based, so it can even run in the browser.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a key difference between Sass and Less?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It controls whether text can be selected.",
+      "It lets the browser skip rendering off-screen content until it is needed, improving initial load performance.",
+      "It hides content from screen readers.",
+      "It lazy-loads images."
+    ],
+    "correctIndex": 1,
+    "explanation": "content-visibility: auto tells the browser it may skip layout and paint for off-screen subtrees, which speeds up long pages; the content still renders when scrolled into view.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the CSS content-visibility property do?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It replaces the need for media queries.",
+      "It gives class names a predictable structure that avoids specificity wars and makes styles modular and reusable.",
+      "It is required for Flexbox to work.",
+      "It makes CSS load faster."
+    ],
+    "correctIndex": 1,
+    "explanation": "BEM names classes like .card__title--large, keeping specificity flat and low so styles stay predictable and components do not accidentally override each other.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the main benefit of a naming convention like BEM (Block Element Modifier) in CSS?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Changing an element's transform.",
+      "Changing an element's width.",
+      "Changing an element's opacity.",
+      "Changing an element's background color."
+    ],
+    "correctIndex": 1,
+    "explanation": "Width affects geometry, so the browser must recalculate layout (reflow); background color only repaints, and opacity and transform can often be composited without either.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Which change triggers a reflow (layout) rather than just a repaint?",
+    "source": "interview",
+    "subject": "CSS / Less / Sass",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "var and let are identical; const is function-scoped.",
+      "var is function-scoped, let and const are block-scoped, and const cannot be reassigned.",
+      "All three are block-scoped, but var allows redeclaration.",
+      "var is block-scoped, let is function-scoped."
+    ],
+    "correctIndex": 1,
+    "explanation": "var is scoped to the enclosing function and can be redeclared, while let and const are block-scoped; const additionally forbids reassignment of the binding.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between var, let, and const?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A function that runs immediately when defined.",
+      "A function that returns another function.",
+      "A function with no parameters.",
+      "A function that remembers the variables from the scope where it was defined, even after that scope has finished."
+    ],
+    "correctIndex": 3,
+    "explanation": "A closure is a function bundled with its lexical environment, so it can still access outer variables after the outer function has returned.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a closure in JavaScript?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "false false",
+      "false true",
+      "true true",
+      "true false"
+    ],
+    "correctIndex": 3,
+    "explanation": "Loose equality == coerces types, so 1 == '1' is true, while strict equality === compares type and value, so 1 === '1' is false.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this code log?\n```js\nconsole.log(1 == '1', 1 === '1');\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "'object'",
+      "'undefined'",
+      "'null'",
+      "'string'"
+    ],
+    "correctIndex": 0,
+    "explanation": "typeof null returns 'object', a long-standing quirk from the language's first implementation; null is its own primitive value, not an object.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this code log?\n```js\nconsole.log(typeof null);\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They are identical.",
+      "map returns a new array with transformed items; forEach returns undefined and is used for side effects.",
+      "map changes the original array and forEach returns a new one.",
+      "map can only be used on numbers and forEach only on strings."
+    ],
+    "correctIndex": 1,
+    "explanation": "map builds a new array by applying a function to each element, while forEach runs a function for side effects and returns undefined.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between Array.prototype.map and Array.prototype.forEach?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "[1, 2, 3]",
+      "[2, 4, 6] and the original array is now [2, 4, 6]",
+      "undefined",
+      "[2, 4, 6]"
+    ],
+    "correctIndex": 3,
+    "explanation": "map returns a new array with each element doubled and leaves the original array unchanged.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this code log?\n```js\nconst nums = [1, 2, 3];\nconsole.log(nums.map(n => n * 2));\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A boolean false.",
+      "A special null value.",
+      "An error object.",
+      "A string representing an invalid number; typeof NaN is 'number'."
+    ],
+    "correctIndex": 3,
+    "explanation": "NaN stands for Not-a-Number and is the result of invalid numeric operations like 0/0, yet its type is 'number'.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is NaN in JavaScript?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "[1, 3]",
+      "[]",
+      "[1, 2, 3, 4]",
+      "[2, 4]"
+    ],
+    "correctIndex": 3,
+    "explanation": "filter keeps only elements for which the callback returns true, so only the even numbers remain.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this code log?\n```js\nconsole.log([1, 2, 3, 4].filter(n => n % 2 === 0));\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Function declarations and var declarations are moved to the top of their scope before code runs.",
+      "Functions are only available after they are defined.",
+      "Code runs from the bottom of the file upward.",
+      "Variables are deleted after use."
+    ],
+    "correctIndex": 0,
+    "explanation": "Hoisting means declarations are registered before execution: function declarations are fully usable early, while var is initialized to undefined until its line runs.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is hoisting in JavaScript?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It parses a JSON string into a value.",
+      "It validates that a value is an object.",
+      "It fetches JSON from a URL.",
+      "It converts a JavaScript value into a JSON string."
+    ],
+    "correctIndex": 3,
+    "explanation": "JSON.stringify serializes a value to JSON text, while JSON.parse does the reverse; functions, undefined, and symbols are dropped or become null in the output.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does JSON.stringify do?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Arrow functions do not support this at all and throw an error.",
+      "Arrow functions have their own this based on how they are called.",
+      "Arrow functions always have this set to the global object.",
+      "Arrow functions inherit this from the surrounding lexical scope and cannot be rebound."
+    ],
+    "correctIndex": 3,
+    "explanation": "Arrow functions capture this from where they are written, so call, apply, and bind cannot change it; regular functions get this from the call site.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "How does this work inside an arrow function?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "[1, 2, 3]",
+      "It throws an error because arrays cannot be spread.",
+      "[1, 2, 3, 4, 5]",
+      "[3, 4, 5]"
+    ],
+    "correctIndex": 2,
+    "explanation": "The spread syntax expands an iterable into individual elements, so [...a, 4, 5] creates a new array containing all of a plus 4 and 5.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this code log?\n```js\nconst a = [1, 2, 3];\nconsole.log([...a, 4, 5]);\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A value that will be available now or in the future, with pending, fulfilled, and rejected states.",
+      "A function that runs synchronously and returns a value.",
+      "A special type of array.",
+      "A way to store data in localStorage."
+    ],
+    "correctIndex": 0,
+    "explanation": "A promise represents an asynchronous operation: it starts pending, then settles once as fulfilled with a value or rejected with a reason.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a Promise in JavaScript?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It schedules 'hi' to log after at least 1000ms without blocking the rest of the code.",
+      "It logs 'hi' immediately and then waits 1000ms.",
+      "It repeats 'hi' every 1000ms forever.",
+      "It pauses the whole program for 1000ms, then logs 'hi'."
+    ],
+    "correctIndex": 0,
+    "explanation": "setTimeout schedules a callback on the macrotask queue after the delay; the main thread keeps running and the callback executes once the stack is clear.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does setTimeout(() => console.log('hi'), 1000) do?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "null is assigned automatically and undefined must be assigned manually.",
+      "undefined is an object and null is a number.",
+      "undefined means a variable was declared but never assigned, while null is an explicit assignment meaning 'no value'.",
+      "They are identical; both mean an empty value."
+    ],
+    "correctIndex": 2,
+    "explanation": "Accessing an unassigned variable gives undefined, while null is a deliberate value a developer assigns to mean intentionally empty.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between null and undefined?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It checks whether an array is empty.",
+      "It checks whether a value is an object.",
+      "It converts a value to an array.",
+      "It returns true only if the value is an array."
+    ],
+    "correctIndex": 3,
+    "explanation": "Array.isArray is the reliable way to test for arrays, because typeof [] returns 'object', just like plain objects.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does Array.isArray(value) do?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "'Hello, undefined!'",
+      "'Hello, ${name}!'",
+      "It throws a syntax error.",
+      "'Hello, Ada!'"
+    ],
+    "correctIndex": 3,
+    "explanation": "Template literals use backticks and ${} to interpolate expressions into the string, so the name is substituted at runtime.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this code log?\n```js\nconst name = 'Ada';\nconsole.log(`Hello, ${name}!`);\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "1, 3, 2, 4",
+      "1, 4, 2, 3",
+      "1, 2, 3, 4",
+      "1, 4, 3, 2"
+    ],
+    "correctIndex": 3,
+    "explanation": "Synchronous logs run first (1, 4), then the microtask queue drains before the next macrotask, so the promise callback (3) runs before the setTimeout callback (2).",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "In what order do the numbers log?\n```js\nconsole.log('1');\nsetTimeout(() => console.log('2'), 0);\nPromise.resolve().then(() => console.log('3'));\nconsole.log('4');\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "3 3 3",
+      "It throws a ReferenceError.",
+      "0 1 2",
+      "0 1 2 3"
+    ],
+    "correctIndex": 0,
+    "explanation": "var is function-scoped, so all three callbacks share the same i, which is 3 by the time the timers run; let would create a fresh binding per iteration and log 0 1 2.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this classic loop code log?\n```js\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "'Hi Ada'",
+      "'Hi undefined'",
+      "It throws a TypeError.",
+      "'Hi ' plus the global name"
+    ],
+    "correctIndex": 0,
+    "explanation": "Function.prototype.call invokes the function with an explicit this value, so this.name reads 'Ada' from the passed object.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this code log?\n```js\nfunction greet() { return 'Hi ' + this.name; }\nconst person = { name: 'Ada' };\nconsole.log(greet.call(person));\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Debounce limits how often a function runs and throttle waits until calls stop.",
+      "Debounce runs a function once after calls stop for a delay; throttle runs it at most once per interval while calls keep coming.",
+      "They are the same technique with different names.",
+      "Debounce runs a function immediately and throttle delays it."
+    ],
+    "correctIndex": 1,
+    "explanation": "Debounce resets a timer on each call and fires only after silence, which suits search input; throttle allows one execution per interval, which suits scroll handlers.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between debounce and throttle?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Promise.all runs promises one at a time and allSettled runs them in parallel.",
+      "Promise.all never rejects and Promise.allSettled rejects on the first failure.",
+      "Promise.all waits for every promise to fulfill and rejects fast on the first rejection; Promise.allSettled waits for all to settle and never rejects.",
+      "They behave identically."
+    ],
+    "correctIndex": 2,
+    "explanation": "Promise.all is fail-fast and gives an array of values, while allSettled always resolves with a status object per promise, so you can see which succeeded and which failed.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between Promise.all and Promise.allSettled?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Attaching a listener to every child element individually.",
+      "Preventing an event from bubbling up.",
+      "Attaching one listener to a parent element and using event.target to handle events from its children.",
+      "Creating custom events with dispatchEvent."
+    ],
+    "correctIndex": 2,
+    "explanation": "Events bubble up, so a single parent listener can handle clicks on many children, including ones added later, which is more efficient than one listener per child.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is event delegation?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It throws a TypeError because b is read-only.",
+      "2",
+      "undefined",
+      "1"
+    ],
+    "correctIndex": 1,
+    "explanation": "Spread copies only the top level, so a.x and b.x reference the same nested object; mutating b.x.y is visible through a.x.y.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this code log?\n```js\nconst a = { x: { y: 1 } };\nconst b = { ...a };\nb.x.y = 2;\nconsole.log(a.x.y);\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It calls the function immediately.",
+      "It creates a copy of the function that runs asynchronously.",
+      "It returns a new function with this permanently bound to the given value.",
+      "It changes the this of the original function for all future calls."
+    ],
+    "correctIndex": 2,
+    "explanation": "bind returns a new function whose this is fixed to the supplied value; the original function is unchanged and is not invoked by bind itself.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does Function.prototype.bind do?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "undefined, because let is hoisted like var.",
+      "A ReferenceError, because x is in the temporal dead zone until its declaration executes.",
+      "5, because declarations are fully hoisted.",
+      "null, because let defaults to null."
+    ],
+    "correctIndex": 1,
+    "explanation": "let and const are hoisted but uninitialized until their declaration line runs; reading them earlier throws a ReferenceError from the temporal dead zone.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this code do?\n```js\nconsole.log(x);\nlet x = 5;\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "24",
+      "6",
+      "[1, 2, 3, 4]",
+      "10"
+    ],
+    "correctIndex": 3,
+    "explanation": "reduce folds the array into a single value by running the callback on each element, accumulating the sum starting from 0.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this code log?\n```js\nconsole.log([1, 2, 3, 4].reduce((sum, n) => sum + n, 0));\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A Promise that resolves to the return value.",
+      "undefined, always.",
+      "The resolved value directly.",
+      "The function result, unless it throws."
+    ],
+    "correctIndex": 0,
+    "explanation": "An async function always returns a promise; returning a value fulfills it, and throwing rejects it, which is why callers use await or .then.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does an async function always return?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The error is silently ignored.",
+      "The error is caught only if the promise rejects synchronously.",
+      "The error is caught and 'caught' logs.",
+      "The error crashes the program because await cannot be used in try/catch."
+    ],
+    "correctIndex": 2,
+    "explanation": "await inside a try block pauses until the promise settles, and a rejection throws at that point, so the catch block handles it like synchronous code.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What happens here?\n```js\nasync function run() {\n  try {\n    await Promise.reject(new Error('boom'));\n  } catch (e) {\n    console.log('caught');\n  }\n}\nrun();\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "=== compares by value but == compares by reference.",
+      "They compare by reference, so two different objects are never equal even with identical contents.",
+      "They are equal only if both objects have the same keys.",
+      "They compare by value, so identical contents are equal."
+    ],
+    "correctIndex": 1,
+    "explanation": "Objects are compared by identity: {} === {} is false because they are two distinct objects in memory, even though their contents match.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How does === compare two objects?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Inheritance in JavaScript requires the extends keyword.",
+      "Objects inherit properties and methods directly from other objects through a prototype chain.",
+      "Classes copy all parent methods into each child at creation.",
+      "Objects can only inherit from classes, never from other objects."
+    ],
+    "correctIndex": 1,
+    "explanation": "Every object has a prototype; when a property is not found on the object itself, JavaScript walks up the prototype chain until it finds it or reaches null.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is prototypal inheritance?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "'undefined 2'",
+      "It throws a TypeError.",
+      "'1 undefined'",
+      "'1 2'"
+    ],
+    "correctIndex": 3,
+    "explanation": "Destructuring pulls named properties from the object, and the default value 2 applies because b is undefined in the source object.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this code log?\n```js\nconst { a, b = 2 } = { a: 1 };\nconsole.log(a, b);\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "null",
+      "It throws a TypeError.",
+      "undefined",
+      "'guest'"
+    ],
+    "correctIndex": 3,
+    "explanation": "Optional chaining short-circuits to undefined when profile is null, and ?? then substitutes 'guest' because the left side is null or undefined.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does this code log?\n```js\nconst user = { profile: null };\nconsole.log(user.profile?.name ?? 'guest');\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "a, c, b",
+      "b, a, c",
+      "c, a, b",
+      "a, b, c"
+    ],
+    "correctIndex": 0,
+    "explanation": "The async function runs synchronously until its first await, then yields; the synchronous log 'c' runs next, and the continuation after await is a microtask that logs 'b' last.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "In what order do the letters log?\n```js\nconsole.log('a');\n(async () => {\n  await Promise.resolve();\n  console.log('b');\n})();\nconsole.log('c');\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A syntax error that stops the script.",
+      "Using too many variables in one function.",
+      "A closure or forgotten listener keeping objects alive so the garbage collector cannot free them.",
+      "A loop that runs too many times."
+    ],
+    "correctIndex": 2,
+    "explanation": "Memory leaks happen when references are retained unintentionally, such as listeners never removed or closures holding large objects, so memory grows over time.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a common cause of a memory leak in JavaScript?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Promise.race waits for all promises and Promise.any waits for one.",
+      "Promise.race settles with the first promise to settle, while Promise.any fulfills with the first fulfilled promise and only rejects if all reject.",
+      "They are identical.",
+      "Promise.race never rejects and Promise.any rejects on the first failure."
+    ],
+    "correctIndex": 1,
+    "explanation": "race mirrors the first settled promise, rejection included, while any ignores rejections until every promise has rejected, in which case it rejects with an AggregateError.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the difference between Promise.race and Promise.any?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "[NaN, NaN, NaN]",
+      "[1, NaN, NaN]",
+      "[1, 2, NaN]",
+      "[1, 2, 3]"
+    ],
+    "correctIndex": 1,
+    "explanation": "map passes (value, index, array) to parseInt, so the index becomes the radix: parseInt(1, 0) is 1, parseInt(2, 1) is NaN, and parseInt(3, 2) is NaN.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does this classic interview snippet log?\n```js\nconsole.log([1, 2, 3].map(parseInt));\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "true",
+      "It throws a TypeError.",
+      "false",
+      "NaN"
+    ],
+    "correctIndex": 2,
+    "explanation": "0.1 and 0.2 cannot be represented exactly in binary floating point, so their sum is 0.30000000000000004, not exactly 0.3.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does this code log?\n```js\nconsole.log(0.1 + 0.2 === 0.3);\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It deep-freezes the object and all nested objects.",
+      "It deletes all methods from the object.",
+      "It prevents adding, removing, or reassigning top-level properties, but nested objects can still be mutated.",
+      "It makes the object read-only for JSON.stringify only."
+    ],
+    "correctIndex": 2,
+    "explanation": "Object.freeze is shallow: top-level properties become non-writable and non-configurable, but nested objects remain mutable unless frozen separately.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does Object.freeze do?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A Map with a fixed maximum size.",
+      "A Map that automatically sorts its keys.",
+      "A Map whose keys are held weakly, so entries disappear when the key object is garbage collected.",
+      "A Map that cannot store objects as keys."
+    ],
+    "correctIndex": 2,
+    "explanation": "WeakMap keys must be objects and are not counted as references by the garbage collector, which prevents memory leaks when attaching metadata to objects you do not own.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a WeakMap and when would you use one?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It registers the function as a class.",
+      "It clones the function and runs it in a new thread.",
+      "It creates a new object, sets its prototype, binds this to it, runs the constructor, and returns the object unless the constructor returns its own object.",
+      "It calls the function without creating an object."
+    ],
+    "correctIndex": 2,
+    "explanation": "new allocates an object linked to the function's prototype, runs the function with this pointing at it, and returns that object (or an object the constructor explicitly returns).",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the new operator do when calling a function?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Microtasks run after every macrotask, one at a time.",
+      "They are two names for the same queue.",
+      "Microtasks are promise callbacks and code after await; macrotasks are timers, I/O, and UI events. The microtask queue fully drains before the next macrotask runs.",
+      "Macrotasks run before microtasks."
+    ],
+    "correctIndex": 2,
+    "explanation": "After each macrotask, the event loop drains the entire microtask queue before taking the next macrotask, which is why promise callbacks always run before a zero-delay timer.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the difference between a microtask and a macrotask?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It runs immediately, before the current code finishes.",
+      "It runs after the current synchronous code and before any macrotask.",
+      "It runs only after all timers have fired.",
+      "It runs on a separate thread in parallel."
+    ],
+    "correctIndex": 1,
+    "explanation": "queueMicrotask schedules a callback on the microtask queue, so it runs once the current stack empties, ahead of setTimeout callbacks.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "When does a callback passed to queueMicrotask run?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Long tasks only slow down network requests.",
+      "Only tasks over 10 seconds block rendering.",
+      "Rendering happens on a separate thread, so long tasks never affect it.",
+      "A long synchronous task blocks the main thread, so rendering, input, and timers all wait until it finishes."
+    ],
+    "correctIndex": 3,
+    "explanation": "JavaScript and rendering share the main thread, so a long task delays paint and makes the page feel frozen; splitting work or using a worker avoids it.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why does a long-running synchronous task freeze the page?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It creates an infinite loop.",
+      "It is a faster way to write a for loop.",
+      "It returns an object with next() that yields values one at a time, pausing at each yield.",
+      "It runs all values in parallel and returns an array."
+    ],
+    "correctIndex": 2,
+    "explanation": "A generator function returns a lazy iterator; each next() call resumes execution until the next yield, which makes it ideal for custom iteration and lazy sequences.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does a generator function (function*) return?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The promise is automatically caught by the nearest try/catch.",
+      "An unhandled rejection logs an error and, in browsers, fires an unhandledrejection event; in Node it can crash the process.",
+      "Nothing happens; rejected promises are ignored.",
+      "The promise silently retries until it succeeds."
+    ],
+    "correctIndex": 1,
+    "explanation": "A promise rejected with no .catch or await handler is an unhandled rejection, which browsers report as an error event and Node may treat as fatal.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What happens when a promise rejects and nothing handles it?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It blocks the main thread while waiting.",
+      "It pauses execution until the promise settles and the surrounding function must be async.",
+      "It can be used anywhere, including top-level synchronous code.",
+      "It converts the promise into a synchronous value."
+    ],
+    "correctIndex": 1,
+    "explanation": "await pauses only the async function's execution, letting the event loop continue, and resumes with the fulfilled value or throws the rejection reason.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the await keyword do inside an async function?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "'method'",
+      "'undefined'",
+      "'object'",
+      "'function'"
+    ],
+    "correctIndex": 3,
+    "explanation": "Functions are objects in JavaScript, but typeof reports 'function' for them, which is the only callable type with its own typeof result.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does this code log?\n```js\nconsole.log(typeof function() {});\n```",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Mutation only matters for class components.",
+      "Mutating state is faster and always safe.",
+      "Mutating state keeps the same reference, so React and other libraries that compare by reference cannot detect the change and may skip re-rendering.",
+      "Direct mutation triggers an extra render."
+    ],
+    "correctIndex": 2,
+    "explanation": "State updates are detected by reference comparison; mutating an object in place produces the same reference, so the UI can show stale data even though the object changed.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why is directly mutating state a bug in React and similar libraries?",
+    "source": "interview",
+    "subject": "JavaScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A superset of JavaScript that adds static typing and compiles to plain JavaScript.",
+      "A JavaScript framework like React.",
+      "A runtime that replaces Node.js.",
+      "A different language that runs directly in browsers."
+    ],
+    "correctIndex": 0,
+    "explanation": "TypeScript adds a type system on top of JavaScript; the compiler checks types and then erases them, emitting ordinary JavaScript.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is TypeScript?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "any disables type checking entirely, while unknown forces you to narrow the type before using it.",
+      "any is only for numbers and unknown only for objects.",
+      "They are identical aliases.",
+      "unknown disables type checking and any forces narrowing."
+    ],
+    "correctIndex": 0,
+    "explanation": "Assigning anything to any lets you do anything with it unchecked, while unknown requires a type guard or assertion first, which makes it the safe choice for untrusted data.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between any and unknown?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Type aliases are only for primitive types.",
+      "Interfaces can be declaration-merged and extended, while type aliases can express unions, tuples, and mapped types.",
+      "Interfaces can express unions and type aliases cannot.",
+      "There is no difference at all."
+    ],
+    "correctIndex": 1,
+    "explanation": "Both describe object shapes, but only interfaces can be reopened and merged, and only type aliases can name unions and other non-object types.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a practical difference between an interface and a type alias?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The value is a string that contains a number.",
+      "It is a syntax error.",
+      "The value can be either a string or a number.",
+      "The value must be both a string and a number."
+    ],
+    "correctIndex": 2,
+    "explanation": "A union type allows a value to be one of several listed types, and the compiler narrows it once you check which one it is.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does the type string | number mean?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A loop that runs over an array.",
+      "A function that returns a promise.",
+      "A type that only allows null.",
+      "A way to define a set of named constant values."
+    ],
+    "correctIndex": 3,
+    "explanation": "Enums group related named constants under one type, such as Direction.Up, Direction.Down, so the compiler can check that only valid members are used.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is an enum in TypeScript?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It is only documentation and has no effect.",
+      "It annotates the variable so the compiler enforces that it holds a string.",
+      "It casts the value to a string at runtime.",
+      "It converts any assigned value to a string automatically."
+    ],
+    "correctIndex": 1,
+    "explanation": "A type annotation tells the compiler the expected type; assigning a non-string is a compile error, but the annotation itself is erased and changes nothing at runtime.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does the annotation in const name: string = 'Ada' do?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Inferred types are always any.",
+      "TypeScript requires every variable to be annotated.",
+      "Inference only works for function return types.",
+      "TypeScript guesses the type from the assigned value, so const n = 1 is inferred as number."
+    ],
+    "correctIndex": 3,
+    "explanation": "Type inference lets the compiler deduce types from initializers and return expressions, so explicit annotations are often unnecessary.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is type inference in TypeScript?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "add(1, 2, 3)",
+      "add(1, '2')",
+      "add(1, 2)",
+      "add(1)"
+    ],
+    "correctIndex": 1,
+    "explanation": "add expects two numbers, so passing the string '2' is a type error; the other calls either match the signature or fail only on arity, and the string call is the clear type mismatch.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Given function add(a: number, b: number): number { return a + b; }, which call is a type error?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "number[]",
+      "number | undefined",
+      "T",
+      "any"
+    ],
+    "correctIndex": 1,
+    "explanation": "The generic preserves the caller's element type: first([1, 2, 3]) returns number | undefined because the array might be empty.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the return type of first([1, 2, 3]) here?\n```ts\nfunction first<T>(items: T[]): T | undefined {\n  return items[0];\n}\n```",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Partial removes properties, Pick makes them optional, Omit makes them required, and Record creates an array.",
+      "Partial makes all properties optional, Pick selects listed keys, Omit removes listed keys, and Record builds an object type from keys to values.",
+      "They are used only for arrays.",
+      "They all make properties readonly."
+    ],
+    "correctIndex": 1,
+    "explanation": "These utility types reshape object types without rewriting them: Partial<User> for PATCH bodies, Pick<User, 'id' | 'name'> for summaries, Omit<User, 'id'> for creation payloads, and Record<string, User> for lookup tables.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What do the utility types Partial, Pick, Omit, and Record do?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A type that can never be assigned.",
+      "A union of object types sharing a common literal field, letting a switch narrow the type and a never check prove exhaustiveness.",
+      "An interface with optional fields.",
+      "A union of primitive types only."
+    ],
+    "correctIndex": 1,
+    "explanation": "Each member carries a discriminant like status: 'loading' | 'error' | 'success'; narrowing on it lets the compiler verify every case is handled, with never catching a missing one.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a discriminated union?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It converts the value to a string.",
+      "It throws an error if the value is not a string.",
+      "It is only useful for numbers.",
+      "It checks the runtime type and narrows the variable's type inside the branch."
+    ],
+    "correctIndex": 3,
+    "explanation": "typeof narrowing lets the compiler treat x as string inside if (typeof x === 'string'), so string methods become available there and are errors elsewhere.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How does type narrowing with typeof work?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It makes the type nullable.",
+      "It makes a literal type readonly and as narrow as possible, so ['a', 'b'] becomes a readonly tuple of literals instead of string[].",
+      "It casts a value to any.",
+      "It freezes the value at runtime."
+    ],
+    "correctIndex": 1,
+    "explanation": "as const tells the compiler to infer the narrowest literal types and mark properties readonly, which is useful for constant config objects and discriminants.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does as const do in TypeScript?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A list of methods on a type.",
+      "The number of properties in a type.",
+      "A union of the property names of a type.",
+      "The value type of the first property."
+    ],
+    "correctIndex": 2,
+    "explanation": "keyof User produces 'id' | 'name' | 'email', and combined with a generic constraint it enables type-safe property access like getProperty(user, 'name').",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does keyof T produce?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A function that casts any value to the target type.",
+      "A function whose return type predicate (x is string) tells the compiler the value is narrowed after a true result.",
+      "A function that throws if the type is wrong.",
+      "A function that only accepts strings."
+    ],
+    "correctIndex": 1,
+    "explanation": "Type predicates let custom checks narrow types: if (isString(value)) narrows value to string inside the branch, just like a built-in typeof check.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a type guard function?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The property is a method.",
+      "The property is required but may be null.",
+      "The property is private.",
+      "The property may be absent, and reading it gives the type plus undefined."
+    ],
+    "correctIndex": 3,
+    "explanation": "An optional property like avatar?: string can be omitted, and with strict mode its type includes undefined, so code must handle the missing case.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does avatar?: string mean in an interface?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A ternary expression for values at runtime.",
+      "A type that only works with arrays.",
+      "T extends U ? X : Y, where infer inside the extends clause captures part of the matched type into a new variable.",
+      "A way to define a class hierarchy."
+    ],
+    "correctIndex": 2,
+    "explanation": "Conditional types choose a type based on a check, and infer extracts pieces, such as ReturnType<T> = T extends (...args: any[]) => infer R ? R : never.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a conditional type, and what does infer do in it?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A type that only works with string keys.",
+      "A type that maps over an array at runtime.",
+      "A type that builds a new type by transforming each property of another type, such as making all properties optional or readonly.",
+      "A type that converts a class to an interface."
+    ],
+    "correctIndex": 2,
+    "explanation": "Mapped types iterate over keys with [K in keyof T], which is how utility types like Partial and Readonly are implemented.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a mapped type?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "TypeScript checks shape, not names, so an object with the required properties is assignable even if it was not declared as that type.",
+      "Structural typing applies only to primitive types.",
+      "Only objects created from the same class are assignable.",
+      "TypeScript requires a class to declare that it implements an interface."
+    ],
+    "correctIndex": 0,
+    "explanation": "TypeScript uses structural typing: if an object has at least the shape a type requires, it is assignable, which is why extra properties on a variable are allowed.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does structural typing mean in TypeScript?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It casts a value to the given type.",
+      "It checks that an expression satisfies a type without widening or changing its inferred type.",
+      "It is a replacement for the as keyword with no differences.",
+      "It validates the type at runtime."
+    ],
+    "correctIndex": 1,
+    "explanation": "satisfies verifies the value matches the type while keeping its precise inferred type, so you get both checking and the narrow literal types for later use.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the satisfies operator do?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Two interfaces with the same name cause a duplicate declaration error.",
+      "Interfaces can only be merged if they are in the same file.",
+      "Merging only works for type aliases.",
+      "Two interface declarations with the same name merge into one, combining their members."
+    ],
+    "correctIndex": 3,
+    "explanation": "Declaration merging lets an interface be reopened and extended, which libraries use to augment global types like Window; type aliases cannot be merged this way.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is declaration merging for interfaces?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "never means the value is null.",
+      "never is assignable to every type and every type is assignable to never.",
+      "never is the same as unknown.",
+      "never is the bottom type: no value can ever be assigned to it, and it is used for functions that never return and exhaustive checks."
+    ],
+    "correctIndex": 3,
+    "explanation": "never has no possible values, so it marks impossible cases and functions that always throw or loop forever; every type is assignable to never only in the sense that never is assignable to everything.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the never type?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A type for formatting strings at runtime.",
+      "A type that only matches strings containing backticks.",
+      "A type built from a template string, such as `on${Capitalize<string>}`, that produces string literal unions.",
+      "A way to concatenate types with the + operator."
+    ],
+    "correctIndex": 2,
+    "explanation": "Template literal types compose string literal types, so `on${'click' | 'hover'}` becomes 'onclick' | 'onhover', which is useful for typed event names and CSS properties.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a template literal type?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "TypeScript keeps interfaces in the emitted JavaScript as metadata.",
+      "Interfaces are types, and types are erased at compile time, so there is nothing to check against at runtime.",
+      "Interfaces exist at runtime but instanceof only works on classes.",
+      "instanceof works on interfaces when they are exported."
+    ],
+    "correctIndex": 1,
+    "explanation": "TypeScript types, including interfaces, are compile-time only and erased from the output, so runtime checks like instanceof or typeof cannot see them; use a type guard instead.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why can you not use instanceof with an interface at runtime?",
+    "source": "interview",
+    "subject": "TypeScript",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A templating language that compiles to HTML strings.",
+      "A replacement for the DOM API.",
+      "A syntax extension that lets you write HTML-like markup inside JavaScript.",
+      "A CSS-in-JS library."
+    ],
+    "correctIndex": 2,
+    "explanation": "JSX is syntactic sugar for React.createElement calls; it looks like HTML but compiles to JavaScript objects describing elements.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is JSX in React?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A global variable that holds state.",
+      "A special HTML tag built into the browser.",
+      "A CSS class for styling.",
+      "A reusable, independent piece of UI, usually a function that returns JSX."
+    ],
+    "correctIndex": 3,
+    "explanation": "Components are the building blocks of a React app: functions (or classes) that accept props and return elements describing what should render.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a React component?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It throws an error because useState needs an object.",
+      "undefined",
+      "0",
+      "1"
+    ],
+    "correctIndex": 2,
+    "explanation": "useState returns the current state and a setter; the initial value passed in is the state on the first render.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is count on the first render?\n```jsx\nconst [count, setCount] = useState(0);\n```",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Props can only pass strings.",
+      "Props are read-only inputs passed from a parent to a child component.",
+      "Props are the same as state.",
+      "Props are mutable global variables."
+    ],
+    "correctIndex": 1,
+    "explanation": "Props flow down from parent to child and must not be mutated by the child; when a parent re-renders with new props, the child re-renders too.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What are props in React?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Keys help React identify which items changed, were added, or were removed when re-rendering a list.",
+      "Keys are required for every component, not just lists.",
+      "Keys make list items clickable.",
+      "Keys are used to style list items."
+    ],
+    "correctIndex": 0,
+    "explanation": "Keys give each list item a stable identity across renders, so React can reuse DOM nodes efficiently instead of rebuilding the whole list.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Why do list items in React need a key prop?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "To run side effects after render, such as fetching data, subscribing, or updating the DOM.",
+      "To fetch data from an API only.",
+      "To create new state variables.",
+      "To memoize a component."
+    ],
+    "correctIndex": 0,
+    "explanation": "useEffect runs after the component renders and is for synchronizing with systems outside React, like network requests, timers, and subscriptions.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is useEffect used for?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A controlled input cannot be typed into.",
+      "There is no difference in React 19.",
+      "A controlled input's value is driven by React state, while an uncontrolled input manages its own value via the DOM.",
+      "An uncontrolled input requires useEffect."
+    ],
+    "correctIndex": 2,
+    "explanation": "In a controlled input, value comes from state and onChange updates it, so React is the source of truth; uncontrolled inputs use defaultValue and refs to read the DOM value.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between a controlled and an uncontrolled input?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It memoizes a function.",
+      "It creates a new state variable.",
+      "It creates a mutable container whose .current value persists across renders without triggering a re-render.",
+      "It fetches a DOM element by id."
+    ],
+    "correctIndex": 2,
+    "explanation": "useRef returns an object with a .current property that survives re-renders; changing it does not re-render, which suits DOM access and holding timers or previous values.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does useRef do?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "<button onClick=\"handleClick\">Save</button>",
+      "<button click={handleClick}>Save</button>",
+      "<button onClick={handleClick}>Save</button>",
+      "<button onClick={handleClick()}>Save</button>"
+    ],
+    "correctIndex": 2,
+    "explanation": "Event handlers take a function reference; handleClick() would call the function during render instead of on click, and the string form is plain HTML, not React.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which code correctly passes a click handler to a button?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It throws because name is not state.",
+      "<h1>Hello Ada</h1>",
+      "<h1>Hello name</h1>",
+      "<h1>Hello {props}</h1>"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Greet component receives name as a prop and interpolates it into the heading, so rendering <Greet name=\"Ada\" /> produces Hello Ada.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What renders when you use <Greet name=\"Ada\" /> with this component?\n```jsx\nfunction Greet({ name }) {\n  return <h1>Hello {name}</h1>;\n}\n```",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It renders the string 'false' when logged out.",
+      "It throws an error when isLoggedIn is false.",
+      "It renders the list only when isLoggedIn is true, and renders nothing (false) otherwise.",
+      "It always renders the list."
+    ],
+    "correctIndex": 2,
+    "explanation": "The && operator short-circuits: when the left side is falsy, React renders that falsy value, and false renders nothing.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does this conditional rendering do?\n```jsx\n{isLoggedIn && <UserList />}\n```",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The actual DOM tree in the browser.",
+      "A copy of the DOM stored on the server.",
+      "An in-memory lightweight representation of the UI that React diffs to decide the minimal real DOM updates.",
+      "The browser's accessibility tree."
+    ],
+    "correctIndex": 2,
+    "explanation": "React builds a virtual DOM tree, compares it with the previous one during reconciliation, and applies only the changed parts to the real DOM.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the virtual DOM?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A component that only renders once.",
+      "A way to create a new HTML element.",
+      "A shorthand for grouping multiple elements without adding an extra DOM node.",
+      "A component that renders nothing."
+    ],
+    "correctIndex": 2,
+    "explanation": "Fragments let you return several siblings from a component without wrapping them in a div, keeping the DOM clean.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does a React fragment (<>...</>) do?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Hooks must be called at the top level of a component or custom hook, never inside conditions, loops, or nested functions.",
+      "Hooks can be called anywhere, including inside event handlers.",
+      "Hooks must be called inside useEffect.",
+      "Hooks are only for class components."
+    ],
+    "correctIndex": 0,
+    "explanation": "React tracks hooks by call order, so calling one conditionally would shift the order between renders and mix up state; that is why the Rules of Hooks exist.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the first Rule of Hooks?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It replaces useState entirely.",
+      "It creates a new state variable shared across all components.",
+      "It fetches data from an API.",
+      "It lets a component read a value from the nearest matching Context provider without prop drilling."
+    ],
+    "correctIndex": 3,
+    "explanation": "useContext subscribes a component to a context value, so deeply nested components can read theme or auth data without passing props through every level.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does useContext do?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Move shared state to the closest common parent and pass it down as props.",
+      "Use a global variable.",
+      "Duplicate the state in both children.",
+      "Store state in localStorage."
+    ],
+    "correctIndex": 0,
+    "explanation": "Lifting state up means the common ancestor owns the state and passes values and setters down, so siblings stay in sync from one source of truth.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does lifting state up mean?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The effect has two dependencies.",
+      "StrictMode double-invokes effects in development to surface side effects that are not idempotent; effects should clean up after themselves.",
+      "The component mounts twice in production too.",
+      "It is a bug in React 19."
+    ],
+    "correctIndex": 1,
+    "explanation": "In development, StrictMode mounts, unmounts, and remounts components so setup and cleanup run twice; an effect that leaks a subscription or timer on the second run is buggy.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Why does a useEffect sometimes run twice in development?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The interval callback closes over the count value from the render when the effect ran, so it always sees the old value.",
+      "setInterval cannot read state at all.",
+      "React batches all interval updates into one.",
+      "The state variable is reset every second."
+    ],
+    "correctIndex": 0,
+    "explanation": "A stale closure captures variables from the render that created it; an interval set up once keeps calling the old function, so the fix is a functional updater like setCount(c => c + 1).",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a stale closure in React, and why does this interval log the same count forever?\n```jsx\nuseEffect(() => {\n  const id = setInterval(() => console.log(count), 1000);\n  return () => clearInterval(id);\n}, []);\n```",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "useMemo memoizes functions and useCallback memoizes values.",
+      "useMemo memoizes a computed value, while useCallback memoizes a function reference.",
+      "useMemo is for effects and useCallback is for state.",
+      "They are the same hook with different names."
+    ],
+    "correctIndex": 1,
+    "explanation": "useMemo caches the result of an expensive calculation between renders, while useCallback returns the same function identity so memoized children do not re-render.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between useMemo and useCallback?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "When you need to fetch data from an API.",
+      "When the value can be computed from existing props or state during render.",
+      "When you need to subscribe to an external store.",
+      "When you need to update the DOM directly."
+    ],
+    "correctIndex": 1,
+    "explanation": "Derived values should be computed during render, and logic triggered by user actions belongs in event handlers; effects are for synchronizing with external systems like sockets and timers.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "When should you NOT use useEffect?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It is required for lists with more than 10 items.",
+      "It can cause state and DOM nodes to be reused for the wrong item when the list reorders, inserts, or filters.",
+      "It is always safe because keys are only for React's internal use.",
+      "It makes the list render slower."
+    ],
+    "correctIndex": 1,
+    "explanation": "Index keys tie identity to position, so reordering a list can attach the wrong state or input value to the wrong row; stable IDs from the data are the correct keys.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Why is using the array index as a key risky in a list?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "useReducer is only for global state and useState only for local state.",
+      "They are identical; useReducer is the older name.",
+      "useReducer replaces useEffect.",
+      "useReducer manages state transitions through a reducer function and actions, which suits complex state with related fields; useState suits simple independent values."
+    ],
+    "correctIndex": 3,
+    "explanation": "A reducer centralizes update logic in one function that takes state and an action and returns new state, making complex state changes predictable and testable.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "When would you choose useReducer over useState?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A class component method.",
+      "A JavaScript function whose name starts with use that encapsulates reusable stateful logic built from other hooks.",
+      "A component that can only be used once.",
+      "A built-in hook that ships with React."
+    ],
+    "correctIndex": 1,
+    "explanation": "Custom hooks extract component logic, such as a useFetch or useLocalStorage hook, into a reusable function while following the same Rules of Hooks.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a custom hook?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Passing props through many intermediate components that do not use them, just to reach a deeply nested child.",
+      "A performance technique for memoizing props.",
+      "Passing state up to a parent.",
+      "A way to validate props with PropTypes."
+    ],
+    "correctIndex": 0,
+    "explanation": "Prop drilling clutters intermediate components with props they ignore; Context or component composition with children can deliver the data directly where it is needed.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is prop drilling, and how can you avoid it?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They run at exactly the same time.",
+      "useLayoutEffect runs before the component renders.",
+      "useEffect is synchronous and useLayoutEffect is asynchronous.",
+      "useLayoutEffect runs synchronously after DOM mutations but before the browser paints, while useEffect runs after paint."
+    ],
+    "correctIndex": 3,
+    "explanation": "Because useLayoutEffect blocks paint, it suits measurements and DOM mutations that would otherwise flicker; most effects should use useEffect to avoid blocking the paint.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between useEffect and useLayoutEffect?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Wrap components in React.memo, stabilize props with useMemo and useCallback, and keep state as low as possible.",
+      "Call setState more often.",
+      "Use class components instead of function components.",
+      "Remove all keys from lists."
+    ],
+    "correctIndex": 0,
+    "explanation": "A component re-renders when its parent re-renders or its state changes; memo skips rendering when props are unchanged, and stable references prevent memo from being defeated.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How do you prevent unnecessary re-renders in React?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A class component that catches JavaScript errors in its child tree during rendering and shows a fallback UI.",
+      "A component that validates props.",
+      "A try/catch block inside useEffect.",
+      "A hook that catches promise rejections."
+    ],
+    "correctIndex": 0,
+    "explanation": "Error boundaries implement getDerivedStateFromError or componentDidCatch and render a fallback instead of crashing the whole tree; they do not catch event handler or async errors.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is an error boundary?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "0",
+      "It throws an error because setCount cannot be called twice.",
+      "1",
+      "2"
+    ],
+    "correctIndex": 2,
+    "explanation": "Both setCount calls use the count value captured from the same render (0), so the second overwrites the first and the result is 1; a functional updater setCount(c => c + 1) would give 2.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "After one click, what is count?\n```jsx\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  function handleClick() {\n    setCount(count + 1);\n    setCount(count + 1);\n  }\n  return <button onClick={handleClick}>{count}</button>;\n}\n```",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It memoizes a component forever, so it never re-renders.",
+      "It memoizes a component so it re-renders only when its props change (by shallow comparison).",
+      "It caches the component's output on the server.",
+      "It prevents the component from receiving new props."
+    ],
+    "correctIndex": 1,
+    "explanation": "React.memo wraps a component and skips re-rendering when its props are shallowly equal to the previous render, which helps when a parent re-renders often.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does React.memo do?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Because React requires defaultValue instead of value.",
+      "Because the input is read-only without an onChange handler to update its state.",
+      "Because value is a reserved prop for uncontrolled inputs only.",
+      "Because the input needs a key prop."
+    ],
+    "correctIndex": 1,
+    "explanation": "Setting value without onChange makes React warn that the field is read-only; a controlled input must update its state in onChange for typing to work.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Why does React warn that an input with a value prop but no onChange is read-only?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "There is no difference; they are two names for the same thing.",
+      "State is local data a component owns and changes over time; props are read-only inputs passed in from a parent.",
+      "Props change over time and state never changes.",
+      "State is passed from parent to child and props are local."
+    ],
+    "correctIndex": 1,
+    "explanation": "State lives inside a component and is updated with its setter, while props arrive from the parent and the child must treat them as immutable.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between state and props?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "React diffs the new virtual DOM tree against the previous one and updates only the changed real DOM nodes.",
+      "React rebuilds the entire DOM on every render.",
+      "React updates the DOM before rendering.",
+      "React skips rendering when props change."
+    ],
+    "correctIndex": 0,
+    "explanation": "Reconciliation compares the old and new element trees and applies the minimal set of DOM mutations, which is what makes React updates efficient.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is reconciliation in React?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Server Components run only on the server, can access databases and secrets, and ship no JavaScript; Client Components run in the browser and are the only place hooks and event handlers work.",
+      "Server Components are the same as SSR pages.",
+      "Server Components run in the browser and Client Components run on the server.",
+      "Client Components cannot receive props."
+    ],
+    "correctIndex": 0,
+    "explanation": "In the App Router, components are Server Components by default; adding 'use client' opts a file into the client bundle, where state, effects, and browser APIs are allowed.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the fundamental difference between Server Components and Client Components?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It reads a promise or context value during render, suspends until a promise resolves, and unlike other hooks it can be called inside conditions and loops.",
+      "It can only read context, not promises.",
+      "It fetches data without Suspense.",
+      "It replaces useState for all state."
+    ],
+    "correctIndex": 0,
+    "explanation": "use(promise) suspends the component until the promise resolves, and use(context) reads context conditionally; promises should be created by a Server Component or cached, not recreated on every render.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the use() hook do in React 19?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Actions are event handlers with a different name.",
+      "Async functions run inside transitions; React tracks pending state, handles errors via error boundaries, and supports optimistic updates with useOptimistic.",
+      "Actions run only on the client and cannot touch the server.",
+      "Actions are a replacement for useEffect."
+    ],
+    "correctIndex": 1,
+    "explanation": "An Action is passed to <form action> or startTransition, and React manages its lifecycle; Server Actions are Actions marked 'use server' that execute on the server.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What are Actions in React 19?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "useActionState wraps an action and returns its latest result state and a pending flag; useState would require hand-written loading and error state.",
+      "useActionState replaces useState for all values.",
+      "They are identical.",
+      "useActionState can only be used in Server Components."
+    ],
+    "correctIndex": 0,
+    "explanation": "useActionState(action, initialState) returns [state, dispatch, isPending], where the action receives the previous state and the form data, removing manual isSubmitting bookkeeping.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How does useActionState differ from useState for form submissions?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It disables the form until the action completes.",
+      "It permanently updates state before the server responds.",
+      "It caches the action result forever.",
+      "It shows a temporary optimistic value immediately while the action runs, then React swaps in the real result or reverts if the action fails."
+    ],
+    "correctIndex": 3,
+    "explanation": "useOptimistic(state, update) returns a value that reflects the expected outcome during the pending transition and automatically rolls back to the real state on failure.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does useOptimistic do, and how does it roll back on failure?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A tool that removes the need for keys in lists.",
+      "A compiler that converts React to plain HTML.",
+      "A build-time tool that automatically memoizes components and values, so hand-written useMemo, useCallback, and memo are rarely needed.",
+      "A runtime profiler for slow components."
+    ],
+    "correctIndex": 2,
+    "explanation": "The React Compiler analyzes components at build time and inserts memoization automatically, which changes the mental model from manual memoization to writing straightforward code.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the React Compiler, and how does it change memoization?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Refs were removed in React 19.",
+      "Refs can now only be used in class components.",
+      "forwardRef is now required for every component.",
+      "In React 19, ref is a regular prop for function components, so forwardRef is no longer needed."
+    ],
+    "correctIndex": 3,
+    "explanation": "React 19 passes ref as a normal prop to function components, simplifying component APIs that previously needed forwardRef wrapping.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How did React 19 change how ref works for function components?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It replaces useEffect entirely.",
+      "It lets an effect read the latest props and state without re-running when they change, by defining logic that is not reactive.",
+      "It runs an effect on every render.",
+      "It is a way to call effects conditionally."
+    ],
+    "correctIndex": 1,
+    "explanation": "useEffectEvent creates a stable function that always sees the latest values, so an effect can depend on it without resubscribing when the values change, fixing stale closures.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What problem does useEffectEvent solve in React 19.2?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It is a replacement for error boundaries.",
+      "It lets a component suspend while data or code loads, showing a fallback UI until the content is ready.",
+      "It pauses JavaScript execution on the main thread.",
+      "It only works with class components."
+    ],
+    "correctIndex": 1,
+    "explanation": "Suspense boundaries catch promises thrown during render, such as lazy-loaded components or data fetched with use(), and render a fallback until the promise resolves.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is Suspense in React?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It marks a state update as non-urgent so React can keep the UI responsive and interrupt it for more important updates.",
+      "It prevents the component from re-rendering.",
+      "It makes the update run synchronously.",
+      "It is only used for animations."
+    ],
+    "correctIndex": 0,
+    "explanation": "useTransition returns isPending and startTransition; updates inside the transition are interruptible, so typing in an input stays responsive while a heavy list re-renders.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does useTransition do in concurrent React?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A CSS file that fails to load.",
+      "A missing key prop.",
+      "The server-rendered HTML does not match what React renders on the client, often caused by browser-only values like dates, random IDs, or window size.",
+      "A network error during hydration."
+    ],
+    "correctIndex": 2,
+    "explanation": "Hydration expects identical markup; values that differ between server and client, such as new Date() or Math.random(), produce a mismatch warning and React re-renders the client content.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a hydration mismatch?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Remove all keys from lists.",
+      "Increase the number of re-renders so each one is smaller.",
+      "Add more useEffect calls.",
+      "Use the React Profiler to find slow renders, split work with transitions, memoize expensive children, and virtualize long lists."
+    ],
+    "correctIndex": 3,
+    "explanation": "Profiling shows which components render and why; the fixes are usually fewer renders, cheaper renders, or deferring non-urgent work with useTransition or useDeferredValue.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do you find and fix a slow interaction in a React app?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It subscribes a component to an external store and re-renders when the store's snapshot changes, with tearing protection during concurrent rendering.",
+      "It only works with Redux.",
+      "It is a way to fetch data from an API.",
+      "It replaces useState for all local state."
+    ],
+    "correctIndex": 0,
+    "explanation": "useSyncExternalStore takes subscribe and getSnapshot functions so React can safely read mutable external state, such as a browser API or a store, without tearing.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is useSyncExternalStore for?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It deletes the component and its state.",
+      "It only works in Server Components.",
+      "It is a loading spinner component.",
+      "It hides content while preserving its state, so it can be shown again without remounting or losing input."
+    ],
+    "correctIndex": 3,
+    "explanation": "The Activity component in React 19.2 lets you hide a subtree, keeping its state and DOM, and reveal it later without the cost of remounting.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does the <Activity /> component do in React 19.2?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The action prop only works with GET requests.",
+      "Form actions cannot be async.",
+      "Forms must still use onSubmit and preventDefault in React 19.",
+      "Passing a function to a form's action prop runs it inside a transition, and React handles pending state and resets uncontrolled fields after success."
+    ],
+    "correctIndex": 3,
+    "explanation": "React 19 gives forms first-class support: action functions run as Actions, pending state is automatic, and useFormStatus lets a child button read the submitting state.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do React 19 form actions work?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Every consumer re-renders when any value in the context changes, so splitting contexts or memoizing values keeps updates scoped.",
+      "Context updates are always free.",
+      "Context can only hold strings.",
+      "Consumers never re-render when context changes."
+    ],
+    "correctIndex": 0,
+    "explanation": "Context has no selectors, so one big context object makes all consumers re-render on any change; separate contexts per concern or a state library with selectors avoids that.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the main performance trade-off of putting all app state in a single React context?",
+    "source": "interview",
+    "subject": "React",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A React framework that adds file-based routing, server rendering, data fetching, caching, and image optimization.",
+      "A replacement for JavaScript.",
+      "A database for React apps.",
+      "A CSS framework."
+    ],
+    "correctIndex": 0,
+    "explanation": "Next.js builds on React with routing, SSR, SSG, ISR, Server Components, Route Handlers, and built-in optimizations, so you do not assemble those pieces yourself.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is Next.js and why use it over plain React?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "/slug/blog",
+      "/blog/slug",
+      "/blog/:slug",
+      "/blog/[slug]/page"
+    ],
+    "correctIndex": 2,
+    "explanation": "In the App Router, folders become URL segments and [slug] is a dynamic segment, so app/blog/[slug]/page.tsx serves /blog/any-slug.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which URL does app/blog/[slug]/page.tsx handle?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It tells Next.js to skip building that file.",
+      "It marks the file and everything it imports as a Client Component that runs in the browser too.",
+      "It enables server-side rendering for that file.",
+      "It makes the component run only on the server."
+    ],
+    "correctIndex": 1,
+    "explanation": "'use client' creates a boundary: the module and its imports are included in the client bundle, which is required for state, effects, event handlers, and browser APIs.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does the 'use client' directive do?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It automatically resizes, optimizes, and lazy-loads images, serving modern formats like AVIF and WebP.",
+      "It only adds a border to images.",
+      "It is a replacement for the <img> tag with no extra features.",
+      "It converts images to base64 strings."
+    ],
+    "correctIndex": 0,
+    "explanation": "next/image optimizes images on demand, prevents layout shift with sized placeholders, and lazy-loads off-screen images, which directly improves LCP.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does the next/image component give you?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The Pages Router uses pages/ with getServerSideProps, while the App Router uses app/ with Server Components by default and async/await data fetching.",
+      "The App Router cannot do server rendering.",
+      "The Pages Router is newer than the App Router.",
+      "They are the same router with different folder names."
+    ],
+    "correctIndex": 0,
+    "explanation": "The App Router is built on React Server Components with nested layouts and streaming, while the Pages Router renders pages as client components with special data functions.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between the App Router and the Pages Router?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A file that defines API routes.",
+      "A component that only renders on the first visit.",
+      "A replacement for the <head> tag.",
+      "A shared UI shell that wraps pages, preserves state across navigation, and does not remount when moving between pages."
+    ],
+    "correctIndex": 3,
+    "explanation": "Layouts nest and persist across navigation, so shared UI like a sidebar keeps its state while only the page segment changes.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is layout.tsx in the App Router?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It creates an error boundary for the page.",
+      "It defines the 404 page.",
+      "It sets the page metadata.",
+      "It provides the instant Suspense fallback UI shown while a page segment loads."
+    ],
+    "correctIndex": 3,
+    "explanation": "loading.tsx wraps the segment in a Suspense boundary, so users see a skeleton or spinner immediately while the server streams the real content.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the purpose of loading.tsx?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "SSG and SSR are the same thing.",
+      "SSG renders at build time, SSR renders on every request, and ISR renders statically then regenerates in the background after a set time.",
+      "SSG is only for client components.",
+      "ISR renders on every request and SSR renders at build time."
+    ],
+    "correctIndex": 1,
+    "explanation": "SSG suits stable content like blogs, SSR suits personalized or always-fresh pages, and ISR gives static speed with periodic background updates.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between SSG, SSR, and ISR?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "cache: 'no-store' enables static generation.",
+      "revalidate: 60 means the page rebuilds every 60ms.",
+      "fetch(url) caches by default, cache: 'no-store' fetches fresh every request, and next: { revalidate: 60 } revalidates after 60 seconds.",
+      "All fetch calls are uncached by default."
+    ],
+    "correctIndex": 2,
+    "explanation": "Next.js extends fetch with caching options: the default is force-cache for static rendering, no-store forces dynamic rendering, and revalidate enables ISR.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What do the fetch caching options mean in Next.js?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "API routes defined in the pages folder.",
+      "Async functions marked with 'use server' that run on the server but can be called directly from components.",
+      "Client-side functions that run in the browser.",
+      "Database queries written in SQL."
+    ],
+    "correctIndex": 1,
+    "explanation": "Server Actions let a form or component call server code without a separate API route, and React handles pending state and optimistic updates around them.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What are Server Actions in Next.js?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They restart the Next.js server.",
+      "They clear the browser cache.",
+      "They trigger on-demand revalidation of cached data by path or by cache tag.",
+      "They delete the route from the router."
+    ],
+    "correctIndex": 2,
+    "explanation": "After a mutation, revalidatePath('/products') or revalidateTag('products') marks cached entries stale so the next request fetches fresh data.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What do revalidatePath and revalidateTag do?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Only serializable values: strings, numbers, booleans, null, arrays, plain objects, Dates, and Promises.",
+      "DOM elements.",
+      "Functions and class instances.",
+      "Anything, including non-serializable objects."
+    ],
+    "correctIndex": 0,
+    "explanation": "Props cross the server-client boundary as serialized data, so functions, class instances, and Symbols cannot be passed; Server Actions are the exception.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What can be passed from a Server Component to a Client Component as props?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A file that defines a page layout.",
+      "A file that redirects users to another page.",
+      "A file that defines an API endpoint using HTTP method handlers like GET and POST.",
+      "A file that configures the build."
+    ],
+    "correctIndex": 2,
+    "explanation": "route.ts exports handlers for HTTP methods and runs on the server, making it the App Router equivalent of an API route.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a Route Handler (route.ts) in Next.js?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They are identical; template is the older name.",
+      "A layout preserves state across navigation, while a template remounts on every navigation.",
+      "A template preserves state and a layout remounts.",
+      "A layout is for pages and a template is for API routes."
+    ],
+    "correctIndex": 1,
+    "explanation": "Layouts keep state and do not re-render on navigation, while templates create a fresh instance each time, which suits things like enter animations or resetting state.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between layout.tsx and template.tsx?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Server Components only work with SSR disabled.",
+      "They are the same: both render HTML on the server.",
+      "SSR renders client components to HTML on the server and still ships their JavaScript for hydration, while Server Components never ship their JavaScript at all.",
+      "SSR is a Next.js feature and Server Components are a React feature that never runs on the server."
+    ],
+    "correctIndex": 2,
+    "explanation": "SSR produces HTML plus the component's JavaScript so the page hydrates; Server Components produce a serialized payload with no component JavaScript, so their code stays on the server.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Server Components vs SSR: what is the key difference?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It renders a static shell at build time and streams dynamic holes into it at request time, combining static speed with fresh data.",
+      "It renders the page twice on every request.",
+      "It pre-renders every page fully at build time.",
+      "It disables caching for the whole route."
+    ],
+    "correctIndex": 0,
+    "explanation": "Partial Prerendering splits a route into a static shell and dynamic parts wrapped in Suspense, so the shell is instant and the dynamic content streams in.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is Partial Prerendering (PPR)?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Fetch data only in useEffect.",
+      "Fetch data in parallel with Promise.all and preload data in layouts so child components do not wait in sequence.",
+      "Fetch each piece of data in a separate component, one after another.",
+      "Disable caching for all fetches."
+    ],
+    "correctIndex": 1,
+    "explanation": "Sequential awaits in nested Server Components create request waterfalls; parallel fetches and preloading let all data load at once, cutting time to first byte.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do you avoid data-fetching waterfalls in Server Components?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Next.js has no caching; every request is fresh.",
+      "There is only one cache: the browser cache.",
+      "The Data Cache for fetch results, the Full Route Cache for rendered HTML, the Router Cache for client navigation, and the Client Cache for browser storage.",
+      "The Data Cache and the Router Cache are the same thing."
+    ],
+    "correctIndex": 2,
+    "explanation": "Next.js caches at several layers: server fetch results, rendered routes, client-side navigation payloads, and browser storage, each with its own invalidation rules.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What are the four caching layers in Next.js?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "redirect() only works in Client Components.",
+      "redirect() runs on the server and throws to interrupt rendering, while router.push() navigates on the client without a full reload.",
+      "They are identical and interchangeable.",
+      "router.push() only works on the server."
+    ],
+    "correctIndex": 1,
+    "explanation": "redirect() is for Server Components, Route Handlers, and Server Actions, while useRouter().push() is the client-side navigation API from next/navigation.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the difference between redirect() and router.push() in Next.js?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Code that runs before a request completes, on the Edge runtime, commonly for auth checks, redirects, and rewrites.",
+      "A client-side hook for navigation.",
+      "A build plugin that optimizes images.",
+      "A replacement for Server Actions."
+    ],
+    "correctIndex": 0,
+    "explanation": "Middleware inspects requests early, so it can protect routes, redirect based on cookies or geography, and add headers before the page renders.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is middleware in Next.js?",
+    "source": "interview",
+    "subject": "Next.js",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A database query language.",
+      "An architectural style where resources are nouns addressed by URLs and manipulated with standard HTTP methods.",
+      "A JavaScript library for HTTP requests.",
+      "A protocol for real-time messaging."
+    ],
+    "correctIndex": 1,
+    "explanation": "REST uses URLs like /users/123, methods like GET and POST to express actions, and status codes to report outcomes, with stateless requests.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a REST API?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "PUT and PATCH are identical in every API.",
+      "DELETE returns the deleted resource's full history.",
+      "GET creates data and POST reads it.",
+      "GET reads data, POST creates a resource, PUT replaces a resource, PATCH partially updates it, and DELETE removes it."
+    ],
+    "correctIndex": 3,
+    "explanation": "Each method has a conventional role: GET is safe and read-only, POST creates, PUT replaces the whole resource, PATCH applies partial changes, and DELETE removes it.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What do the HTTP methods GET, POST, PUT, PATCH, and DELETE conventionally do?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A promise that resolves only after the full body is downloaded.",
+      "The parsed JSON body directly.",
+      "A synchronous Response object.",
+      "A promise that resolves to a Response object as soon as the response headers arrive."
+    ],
+    "correctIndex": 3,
+    "explanation": "fetch resolves early, when headers are available; reading the body with response.json() or response.text() returns a second promise.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does fetch() return?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Yes, but only for 404, not for 500.",
+      "No, it rejects only on network failures; a 404 or 500 still resolves, so you must check response.ok or response.status.",
+      "No, fetch never rejects for any reason.",
+      "Yes, any status outside 200-299 rejects the promise."
+    ],
+    "correctIndex": 1,
+    "explanation": "fetch rejects only when the request could not complete at all, such as a network failure or CORS block; HTTP error statuses are successful exchanges that resolve.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Does fetch() reject its promise on a 404 or 500 response?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A database query language.",
+      "A binary format for images.",
+      "A JavaScript object literal, which is exactly the same thing.",
+      "A text format for structured data with double-quoted keys and strings, no functions, comments, or trailing commas."
+    ],
+    "correctIndex": 3,
+    "explanation": "JSON is a strict text format based on JavaScript syntax; it supports objects, arrays, strings, numbers, booleans, and null, but not functions, undefined, or comments.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is JSON, and how is it different from a JavaScript object literal?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Use JSON.parse on the object before sending.",
+      "Pass the object directly as the body; fetch stringifies it automatically.",
+      "Set method to POST, set the Content-Type header to application/json, and pass JSON.stringify(data) as the body.",
+      "Set method to GET and append the object to the URL."
+    ],
+    "correctIndex": 2,
+    "explanation": "fetch does not serialize objects for you, and without the Content-Type header many servers will not parse the body as JSON.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "How do you send JSON data with a POST request using fetch?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "201 Created",
+      "302 Found",
+      "200 OK",
+      "204 No Content"
+    ],
+    "correctIndex": 0,
+    "explanation": "201 means a new resource was created by the request, which is the conventional response to a successful POST that creates something.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Which HTTP status code means a resource was successfully created?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The browser blocks cross-origin requests unless the server allows the origin with CORS headers; Postman is not a browser and does not enforce CORS.",
+      "CORS only applies to POST requests, not GET.",
+      "The API is down, but Postman caches old responses.",
+      "The browser needs an API key that Postman does not."
+    ],
+    "correctIndex": 0,
+    "explanation": "CORS is a browser security policy: the server must send Access-Control-Allow-Origin for the frontend's origin, and credentialed requests need matching credentials settings on both sides.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "An API works in Postman but fails in the browser with a CORS error. Why?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They are synonyms for the same error.",
+      "401 is a client error and 403 is a server error.",
+      "401 means forbidden and 403 means unauthorized.",
+      "401 means unauthenticated (missing or invalid credentials) and 403 means authenticated but not allowed to access the resource."
+    ],
+    "correctIndex": 3,
+    "explanation": "A 401 should prompt a login or token refresh, while a 403 means the logged-in user lacks permission, so retrying with the same credentials will not help.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between a 401 and a 403 response?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "POST is idempotent and PUT is not.",
+      "Idempotent methods never return a response body.",
+      "A method is idempotent if it can only be called once.",
+      "A method is idempotent if repeating the request has the same effect as doing it once, like GET, PUT, and DELETE."
+    ],
+    "correctIndex": 3,
+    "explanation": "Idempotency makes retries safe: repeating a PUT or DELETE does not create duplicates, while repeating a POST may create a second resource, which is why payments need idempotency keys.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does it mean for an HTTP method to be idempotent?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Call fetch.cancel() on the response.",
+      "AbortController only works with XMLHttpRequest.",
+      "Set a timeout option in the fetch call.",
+      "Create an AbortController, pass its signal to fetch, and call controller.abort() when the request is stale or the component unmounts."
+    ],
+    "correctIndex": 3,
+    "explanation": "AbortController gives fetch a cancellation signal; an aborted fetch rejects with an AbortError, which the app should treat differently from a real failure.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How do you cancel a fetch request?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Show only a spinner and hide everything else.",
+      "Show an error message for every state.",
+      "Loading states are unnecessary because fetch is fast.",
+      "Show a loading state while fetching, an error state with retry on failure, an empty state when there are no results, and the data on success."
+    ],
+    "correctIndex": 3,
+    "explanation": "A robust UI distinguishes idle, loading, error, empty, and success states so users always know what is happening and what to do next.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Which UI states should you handle when loading data from an API?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The browser can only send one request at a time.",
+      "The API returns results in random order.",
+      "Search requests cannot be cancelled.",
+      "A slower earlier request can resolve after a newer one and overwrite fresh results with stale data."
+    ],
+    "correctIndex": 3,
+    "explanation": "When a user types quickly, responses can arrive out of order; aborting the previous request or ignoring results that are no longer current prevents stale data from flashing in.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a race condition in a search-as-you-type feature?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A promise that resolves to the raw Response object.",
+      "The JSON string, unchanged.",
+      "A promise that resolves to the parsed JSON value; the body stream can only be read once.",
+      "The parsed JSON value synchronously."
+    ],
+    "correctIndex": 2,
+    "explanation": "response.json() reads and parses the body stream asynchronously, and once consumed the body cannot be read again unless it was cloned first.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does response.json() return, and what is the catch with reading a response body?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Store tokens in localStorage because it is encrypted by the browser.",
+      "Put the token in the URL query string.",
+      "Store tokens in a global JavaScript variable.",
+      "Store tokens in httpOnly cookies set by the server, because localStorage is readable by any script and vulnerable to XSS theft."
+    ],
+    "correctIndex": 3,
+    "explanation": "Any script running on the page can read localStorage, so an XSS flaw leaks the token; httpOnly cookies are not readable from JavaScript, though they need CSRF protection.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the safest way to store an authentication token in a browser app?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "REST exposes fixed endpoints per resource, while GraphQL has a single endpoint where the client asks for exactly the fields it needs.",
+      "GraphQL is a database and REST is a protocol.",
+      "REST always over-fetches and GraphQL always under-fetches.",
+      "They are the same architecture with different names."
+    ],
+    "correctIndex": 0,
+    "explanation": "REST can over-fetch or require multiple round trips, while GraphQL avoids that by letting the client shape the response, at the cost of more complex caching and server work.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the difference between REST and GraphQL?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Offset pagination is always faster than cursor pagination.",
+      "They are identical; cursor is just the newer name.",
+      "Cursor pagination uses an opaque pointer to the last item, which stays stable as data changes; offset pagination skips N rows and can skip or duplicate items when rows shift.",
+      "Cursor pagination cannot be used with sorted lists."
+    ],
+    "correctIndex": 2,
+    "explanation": "Offset breaks when rows are inserted or deleted between pages, while a cursor anchors to a specific item, which is why feeds and large lists prefer cursors.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the trade-off between cursor pagination and offset pagination?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Only check for network errors, since HTTP errors are rare.",
+      "Check response.ok and throw on HTTP errors, parse the error body for details, classify network errors versus HTTP errors, and never let a failed JSON parse mask the real error.",
+      "Throw on any response that is not exactly 200.",
+      "Return the raw Response and let every caller handle errors differently."
+    ],
+    "correctIndex": 1,
+    "explanation": "A honest wrapper turns HTTP errors into thrown errors with status and body details, separates network failures from server errors, and handles empty or non-JSON bodies safely.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What should a well-designed fetch wrapper do about errors?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Optimistic updates only work with GET requests.",
+      "Update the UI and never revert, even on failure.",
+      "Wait for the server before updating the UI.",
+      "Update the UI immediately as if the request succeeded, then revert the change if the server rejects it."
+    ],
+    "correctIndex": 3,
+    "explanation": "Optimistic updates make the UI feel instant by assuming success, but the app must keep the previous value around to roll back and show an error when the mutation fails.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do optimistic updates work, and what must happen when the request fails?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The server always sends the full body and the client ignores it.",
+      "The client sends If-None-Match with the ETag, and the server replies 304 Not Modified when the resource is unchanged, so no body is downloaded.",
+      "ETags are only used for authentication.",
+      "Cache-Control: no-store forces the server to send a 304."
+    ],
+    "correctIndex": 1,
+    "explanation": "ETags are hashes of a resource version; conditional requests let the client reuse its cached copy when the server confirms nothing changed, saving bandwidth.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do ETags and conditional requests save bandwidth?",
+    "source": "interview",
+    "subject": "APIs & Fetch",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The browser's network cache.",
+      "The CSS stylesheet object model.",
+      "A database stored in the browser.",
+      "A tree-structured representation of the HTML document that JavaScript can read and modify."
+    ],
+    "correctIndex": 3,
+    "explanation": "The DOM is the browser's live in-memory model of the page: elements, attributes, and text as nodes that scripts can query, create, and change.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the DOM?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Both return the same NodeList.",
+      "document.querySelector only works with IDs.",
+      "getElementById returns an array of elements.",
+      "document.querySelector('.card') selects the first element matching a CSS selector; getElementById('id') selects by ID."
+    ],
+    "correctIndex": 3,
+    "explanation": "querySelector takes any CSS selector and returns the first match, while getElementById looks up a single element by its unique id.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "How do you select an element from the DOM with JavaScript?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "sessionStorage persists forever and localStorage clears on tab close.",
+      "They are the same storage with different names.",
+      "localStorage is only for strings and sessionStorage only for objects.",
+      "localStorage persists until cleared, while sessionStorage is cleared when the tab closes."
+    ],
+    "correctIndex": 3,
+    "explanation": "Both store key-value strings with a roughly 5MB limit, but localStorage survives browser restarts while sessionStorage is scoped to the tab session.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between localStorage and sessionStorage?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "addEventListener can attach multiple listeners to the same event, while assigning onclick replaces any previous handler.",
+      "onclick can attach multiple listeners and addEventListener only one.",
+      "onclick works only for click events and addEventListener only for keyboard events.",
+      "They behave identically."
+    ],
+    "correctIndex": 0,
+    "explanation": "addEventListener stacks handlers and supports options like once and capture, while the onclick property holds a single function that gets overwritten.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between addEventListener and the onclick property?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It deletes an element from the page.",
+      "It inserts an element into the page immediately.",
+      "It creates a new element node that is not yet in the document until you append it.",
+      "It selects an existing element by tag name."
+    ],
+    "correctIndex": 2,
+    "explanation": "document.createElement('div') builds a detached node; it only appears on the page once appended with appendChild or append.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does document.createElement('div') do?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Events only bubble; there is no capturing phase.",
+      "Capturing and bubbling are the same phase.",
+      "Bubbling goes down and capturing goes up.",
+      "Capturing goes from the window down to the target, and bubbling goes from the target back up to the window."
+    ],
+    "correctIndex": 3,
+    "explanation": "An event travels in three phases: capture down the tree, target, then bubble back up; addEventListener's capture option lets you listen during the downward phase.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between event capturing and event bubbling?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "innerHTML is read-only.",
+      "They are identical; textContent is the older name.",
+      "textContent parses HTML and innerHTML escapes it.",
+      "innerHTML parses a string as HTML, which can execute injected scripts, while textContent sets plain text safely."
+    ],
+    "correctIndex": 3,
+    "explanation": "Setting innerHTML with user data enables cross-site scripting, because markup in the string becomes live elements; textContent treats the value as literal text.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between innerHTML and textContent, and which is safer with user data?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Download all images first, then parse the HTML.",
+      "Parse HTML into the DOM and CSS into the CSSOM, combine them into a render tree, compute layout, then paint pixels to the screen.",
+      "Paint the page, then parse the HTML.",
+      "Layout happens before the DOM is built."
+    ],
+    "correctIndex": 1,
+    "explanation": "The browser builds the DOM and CSSOM in parallel, merges them into a render tree of visible elements, calculates geometry in layout, and finally paints.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How does the browser render a web page?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It replaces setTimeout for network requests.",
+      "It runs a callback after 16 milliseconds exactly.",
+      "It schedules a callback to run before the next repaint, which is ideal for smooth animations.",
+      "It forces an immediate repaint."
+    ],
+    "correctIndex": 2,
+    "explanation": "requestAnimationFrame fires before the browser paints, typically 60 times per second, and pauses when the tab is hidden, so animations stay smooth and efficient.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is requestAnimationFrame used for?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They run JavaScript on a background thread so heavy work does not block the main thread and freeze the UI.",
+      "They replace the event loop.",
+      "They are threads that share memory with the main thread.",
+      "They can directly access the DOM."
+    ],
+    "correctIndex": 0,
+    "explanation": "Web Workers have no DOM access and communicate with the main thread via messages, which makes them ideal for parsing, image processing, and other heavy computation.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What are web workers?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It observes changes to an element's attributes only.",
+      "It asynchronously observes when an element enters or leaves the viewport, which suits lazy loading images and infinite scroll.",
+      "It measures the exact pixel size of an element.",
+      "It detects when the user resizes the window."
+    ],
+    "correctIndex": 1,
+    "explanation": "IntersectionObserver fires a callback with visibility ratios, so you can load content just before it scrolls into view without expensive scroll handlers.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is IntersectionObserver used for?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Using transform for animations.",
+      "Reading a layout property once.",
+      "Writing too much CSS.",
+      "Alternating DOM reads and writes in a loop, forcing the browser to recalculate layout on every iteration."
+    ],
+    "correctIndex": 3,
+    "explanation": "Reading a layout property like offsetHeight after a write forces a synchronous reflow; batching all reads before all writes lets the browser do layout once.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is layout thrashing, and how do you avoid it?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Cookies are small, expire, and are sent with every request; localStorage and sessionStorage are larger and never sent automatically; IndexedDB is a large async database for structured data.",
+      "localStorage has the largest capacity and IndexedDB the smallest.",
+      "Cookies are the only storage that JavaScript can read.",
+      "They are all sent with every HTTP request."
+    ],
+    "correctIndex": 0,
+    "explanation": "Cookies hold about 4KB and travel with requests, web storage holds around 5MB of strings per origin, and IndexedDB stores megabytes of structured data asynchronously.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do cookies, localStorage, sessionStorage, and IndexedDB differ?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The browser skips the network if the page was visited before.",
+      "The browser renders the page first and then resolves DNS.",
+      "DNS lookup, TCP/TLS connection, HTTP request and response, HTML parsing, resource fetching, and rendering.",
+      "DNS is only needed for HTTPS sites."
+    ],
+    "correctIndex": 2,
+    "explanation": "Navigation resolves the domain to an IP, establishes a secure connection, fetches the HTML, then parses and renders it while fetching subresources like CSS and images.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What happens when you type a URL and press Enter?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Passive listeners only work for click events.",
+      "Passive listeners make scrolling slower.",
+      "Passive listeners promise never to call preventDefault, so the browser can scroll immediately without waiting for the handler.",
+      "Passive listeners cannot be removed."
+    ],
+    "correctIndex": 2,
+    "explanation": "Touch and wheel listeners default to passive in many browsers because a handler that might preventDefault forces the browser to wait; declaring passive: true keeps scrolling smooth.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why are passive event listeners important for scroll performance?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "history.pushState changes the URL and history entry without reloading the page, letting single-page apps handle navigation in JavaScript.",
+      "It only works for external links.",
+      "It stores data in localStorage.",
+      "It reloads the page with a new URL."
+    ],
+    "correctIndex": 0,
+    "explanation": "The History API lets SPAs update the address bar and back-button behavior while rendering the new view client-side, with popstate events for back and forward navigation.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What does history.pushState do, and why do single-page apps use it?",
+    "source": "interview",
+    "subject": "Browser APIs / DOM",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Using meaningful HTML elements like <nav>, <main>, and <button> so browsers, search engines, and screen readers understand the structure.",
+      "Using the latest HTML version.",
+      "Using divs for everything with CSS classes.",
+      "Adding ARIA roles to every element."
+    ],
+    "correctIndex": 0,
+    "explanation": "Semantic elements convey meaning that divs and spans do not, which gives screen reader users landmarks and headings to navigate by and improves SEO.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is semantic HTML, and why does it matter for accessibility?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It sets the image file size.",
+      "It adds a tooltip on hover.",
+      "It improves image loading speed.",
+      "It describes the image for screen reader users and displays when the image cannot load."
+    ],
+    "correctIndex": 3,
+    "explanation": "Alt text is the text alternative for an image; decorative images should have an empty alt so screen readers skip them.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the purpose of alt text on images?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It makes the input required.",
+      "It styles the input's border.",
+      "It sets the input's placeholder text.",
+      "It associates a text label with a form control, so clicking the label focuses the control and screen readers announce it."
+    ],
+    "correctIndex": 3,
+    "explanation": "A label linked by for and id, or by wrapping the input, gives the control an accessible name and a larger click target.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does a <label> element do for a form input?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It hides an element from screen readers.",
+      "It gives an accessible name to an element that has no visible text, such as an icon-only button.",
+      "It sets the element's tooltip text.",
+      "It changes the element's font size."
+    ],
+    "correctIndex": 1,
+    "explanation": "aria-label provides the name a screen reader announces; without it, an icon-only button would be announced as just 'button' with no purpose.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does aria-label do?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "4.5:1",
+      "2:1",
+      "3:1",
+      "7:1"
+    ],
+    "correctIndex": 0,
+    "explanation": "WCAG 2.1 level AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text, so text stays readable for low-vision users.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What minimum color contrast ratio does WCAG AA require for normal-sized text?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Keyboard users can only use the Tab key, not Enter or Space.",
+      "Focus order does not matter as long as everything is clickable.",
+      "Interactive elements follow a logical tab order, show a visible focus indicator, and are all reachable and operable by keyboard alone.",
+      "Keyboard navigation only applies to form fields."
+    ],
+    "correctIndex": 2,
+    "explanation": "Many users navigate without a mouse, so every action must be reachable by Tab, operable with Enter, Space, or arrow keys, and show where focus is.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does good keyboard navigation require?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A link that is hidden from all users.",
+      "A link that skips loading the page's CSS.",
+      "A link at the top of the page that jumps focus to the main content, letting keyboard users skip repeated navigation.",
+      "A shortcut that closes the page."
+    ],
+    "correctIndex": 2,
+    "explanation": "Skip links appear on focus and let keyboard and screen reader users bypass header navigation on every page, which is a WCAG requirement.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a skip link?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Only when no native HTML element provides the semantics you need; native elements come first.",
+      "ARIA should never be used.",
+      "Only on div elements.",
+      "On every element, to be safe."
+    ],
+    "correctIndex": 0,
+    "explanation": "The first rule of ARIA is to use a native element when one exists, because native elements bring keyboard behavior and semantics for free while ARIA only adds labels.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "When should you use ARIA attributes?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "aria-hidden removes the element from the accessibility tree but keeps it visible, while display: none hides it both visually and from assistive technology.",
+      "They do the same thing.",
+      "aria-hidden hides the element visually.",
+      "display: none only hides it from screen readers."
+    ],
+    "correctIndex": 0,
+    "explanation": "aria-hidden is for visual content that should not be announced, like a duplicate icon, while display: none removes the element from both the visual page and the accessibility tree.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between aria-hidden and display: none?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It needs a tabindex to be focusable, keyboard handling for Enter and Space, and an accessible name.",
+      "It automatically gets keyboard support like a native button.",
+      "It only needs a click handler.",
+      "It cannot be made accessible; you must use a real <button>."
+    ],
+    "correctIndex": 0,
+    "explanation": "A div with role='button' announces as a button but has no built-in keyboard behavior, so you must add focusability and key handling yourself, which is why a native button is preferred.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What does a <div role=\"button\"> need to behave like a real button?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Perceivable, Operable, Understandable, and Robust.",
+      "Practical, Organized, Usable, and Reliable.",
+      "Public, Open, Universal, and Responsive.",
+      "Visible, Audible, Touchable, and Compatible."
+    ],
+    "correctIndex": 0,
+    "explanation": "POUR is the foundation of WCAG: content must be perceivable, the interface operable, the content understandable, and the markup robust enough for assistive technology.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What are the four principles of WCAG, known as POUR?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Trap focus inside it, support Escape to close, return focus to the trigger, and label it with aria-modal and an accessible name.",
+      "Modals do not need special accessibility handling.",
+      "Only add a close button.",
+      "Hide it with display: none when closed."
+    ],
+    "correctIndex": 0,
+    "explanation": "A modal must keep keyboard focus inside while open, announce itself as a dialog, and restore focus when dismissed, or keyboard and screen reader users get lost.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What makes a custom modal dialog accessible?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A region that updates only on page reload.",
+      "A CSS class for live video.",
+      "A region that announces dynamic content changes to screen readers, such as a toast or a status message.",
+      "A region of the page that is hidden from all users."
+    ],
+    "correctIndex": 2,
+    "explanation": "An aria-live region lets screen readers announce updates like form errors or new chat messages without moving focus, using polite or assertive priority.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a live region (aria-live)?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Automated tools alone are sufficient.",
+      "Accessibility cannot be tested; it must be reviewed by reading the code.",
+      "Run automated checks like axe or Lighthouse, then test by keyboard and with a screen reader, because automation catches only a fraction of issues.",
+      "Manual testing alone is sufficient."
+    ],
+    "correctIndex": 2,
+    "explanation": "Automated checkers find issues like missing alt text and contrast, but keyboard traps, focus order, and meaningful announcements only surface through manual testing.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How should you test a page for accessibility?",
+    "source": "interview",
+    "subject": "Accessibility",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "HTML, CSS, and JavaScript.",
+      "First Byte, First Paint, and First Input.",
+      "Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift.",
+      "Load, Idle, and Paint."
+    ],
+    "correctIndex": 2,
+    "explanation": "Core Web Vitals are Google's three user-experience metrics: LCP for loading, INP for responsiveness, and CLS for visual stability.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What are the three Core Web Vitals?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "2.5 seconds or less.",
+      "10 seconds or less.",
+      "0.1 seconds or less.",
+      "500 milliseconds or less."
+    ],
+    "correctIndex": 0,
+    "explanation": "LCP measures when the largest visible content element renders; Google rates 2.5 seconds or less as good.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a good Largest Contentful Paint (LCP) time?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Disabling images on mobile devices.",
+      "Loading everything as fast as possible.",
+      "Preloading every resource on the page.",
+      "Loading images or components only when they are about to enter the viewport, instead of all at once."
+    ],
+    "correctIndex": 3,
+    "explanation": "Lazy loading defers below-the-fold work, so the initial page loads faster and uses less data; native loading='lazy' does this for images and iframes.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is lazy loading?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Optimizing images only helps SEO, not speed.",
+      "Images are often the largest bytes on a page, so right-sized, modern-format, compressed images cut load time.",
+      "Image optimization only matters for thumbnails.",
+      "Images do not affect performance at all."
+    ],
+    "correctIndex": 1,
+    "explanation": "Serving responsive sizes with srcset, modern formats like AVIF or WebP, and compression can remove most of a page's weight.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "Why is image optimization important for performance?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Splitting CSS into multiple files.",
+      "A technique for splitting database queries.",
+      "Splitting JavaScript into smaller chunks loaded on demand, so the initial bundle is smaller.",
+      "Dividing the HTML into separate pages."
+    ],
+    "correctIndex": 2,
+    "explanation": "Code splitting with dynamic import() or React.lazy means users download only the code for the current route, which shortens the initial load.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is code splitting?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Slow JavaScript execution.",
+      "Too many HTTP requests.",
+      "Unexpected movement of visible content, often caused by images without dimensions, injected ads, or web fonts swapping in.",
+      "A large bundle size."
+    ],
+    "correctIndex": 2,
+    "explanation": "CLS measures visual stability; reserving space with width and height attributes or aspect-ratio, and avoiding late-injected content, keeps it under the 0.1 good threshold.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is Cumulative Layout Shift (CLS), and what commonly causes it?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "2.5 seconds or less.",
+      "200 milliseconds or less.",
+      "500 milliseconds or less.",
+      "0.1 or less."
+    ],
+    "correctIndex": 1,
+    "explanation": "INP measures responsiveness from interaction to the next paint; 200ms or less is good, and long tasks on the main thread are the usual cause of poor scores.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a good Interaction to Next Paint (INP) time?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Add more dependencies to spread the load.",
+      "Inline all JavaScript into the HTML.",
+      "Remove unused dependencies, tree-shake dead code, code-split routes, and compress output.",
+      "Disable caching."
+    ],
+    "correctIndex": 2,
+    "explanation": "Bundle size is cut by shipping only what is used: tree shaking drops unused exports, code splitting defers routes, and minification plus gzip or Brotli compression shrinks the rest.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How do you reduce a JavaScript bundle size?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "CSS and synchronous JavaScript in the head block the browser from painting until they are downloaded and processed.",
+      "JavaScript never blocks rendering.",
+      "Only images block rendering.",
+      "Render-blocking resources only affect SEO, not users."
+    ],
+    "correctIndex": 0,
+    "explanation": "The browser cannot paint until it has the CSS for the render tree and any parser-blocking scripts have run, so deferring non-critical scripts and inlining critical CSS speeds up first paint.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a render-blocking resource?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It caches the results in localStorage.",
+      "It waits until the user stops typing before sending a request, so fewer API calls are made.",
+      "It makes each keystroke send a request faster.",
+      "It disables the search input while typing."
+    ],
+    "correctIndex": 1,
+    "explanation": "Debouncing a search input collapses rapid keystrokes into one request after a pause, which reduces server load and avoids flashing stale results.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "How does debouncing a search input help performance?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "PageSpeed Insights is the only valid tool.",
+      "Real-user metrics cannot be measured.",
+      "Only run Lighthouse once in development.",
+      "Use the web-vitals library to collect real-user metrics and compare with lab tools like Lighthouse and field data from CrUX."
+    ],
+    "correctIndex": 3,
+    "explanation": "Lab tests are consistent but synthetic, while real-user monitoring captures actual devices and networks; the two together explain whether a lab regression affects real users.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do you measure real-user performance versus lab performance?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "The order in which images load.",
+      "The path a network request takes through a CDN.",
+      "The JavaScript call stack during rendering.",
+      "The sequence of steps the browser takes to render the first pixels: parse HTML, build the DOM and CSSOM, run blocking scripts, then layout and paint."
+    ],
+    "correctIndex": 3,
+    "explanation": "Optimizing the critical rendering path means shrinking what blocks first paint: fewer bytes, fewer round trips, deferred non-critical scripts, and inlined critical CSS.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the critical rendering path?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Long tasks only affect network requests.",
+      "The browser automatically splits long tasks.",
+      "A task over about 50ms blocks input and rendering, so splitting work into chunks or moving it to a worker keeps the page responsive.",
+      "Long tasks are only a problem on mobile devices."
+    ],
+    "correctIndex": 2,
+    "explanation": "The main thread handles input, rendering, and JavaScript, so a long task delays all of them; yielding with scheduler APIs or setTimeout breaks work into chunks the browser can interleave.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "Why is a long task bad for performance, and how do you fix it?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Client rendering has no SEO impact.",
+      "They perform identically in all cases.",
+      "Client-side rendering delays first paint and hurts SEO because content arrives after JavaScript runs, while server rendering paints faster but adds server cost per request.",
+      "Server rendering is always slower than client rendering."
+    ],
+    "correctIndex": 2,
+    "explanation": "SSR and SSG send rendered HTML so the page is usable sooner and crawlable, while pure CSR ships an empty shell and waits on JavaScript, which trades server cost for client work.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the performance and SEO trade-off between client-side rendering and server rendering?",
+    "source": "interview",
+    "subject": "Performance",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A test that runs the whole app in a browser.",
+      "A test that checks the database.",
+      "A manual test performed by a QA engineer.",
+      "A test that checks one small unit of code, like a function, in isolation."
+    ],
+    "correctIndex": 3,
+    "explanation": "Unit tests verify a single function or module with known inputs and outputs, which makes failures easy to locate and the suite fast to run.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a unit test?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "They are three names for the same kind of test.",
+      "Unit tests check single pieces, integration tests check pieces working together, and end-to-end tests check whole user flows in a real browser.",
+      "Unit tests run in the browser and E2E tests run in Node.",
+      "Integration tests check only the database."
+    ],
+    "correctIndex": 1,
+    "explanation": "The levels form a pyramid: many fast unit tests, fewer integration tests for combined behavior, and a small number of slow E2E tests for critical user journeys.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between unit, integration, and end-to-end tests?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "JavaScript test runners that execute tests, provide assertions, and report results; Vitest is the Vite-native, faster alternative to Jest.",
+      "Jest is a linter and Vitest is a bundler.",
+      "They are both browsers for running tests.",
+      "They are CSS testing tools."
+    ],
+    "correctIndex": 0,
+    "explanation": "Jest and Vitest run test files, mock modules, and report failures; Vitest shares Vite's transform pipeline, so it starts fast and understands ESM and TypeScript natively.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What are Jest and Vitest?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Query elements the way a user would, by role, label, or text, and assert on visible behavior.",
+      "Query by CSS class names and component internals.",
+      "Snapshot every component on every change.",
+      "Test private functions directly."
+    ],
+    "correctIndex": 0,
+    "explanation": "Testing Library encourages accessible queries like getByRole('button', { name: 'Save' }), which makes tests reflect the user experience and survive refactors.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does React Testing Library encourage you to test?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Implementation details are easier to test.",
+      "Tests that assert on behavior keep passing when internals change, while tests tied to implementation break on every refactor.",
+      "There is no difference; both are equally maintainable.",
+      "Behavior tests are slower to write."
+    ],
+    "correctIndex": 1,
+    "explanation": "Testing what the user sees, such as text and interactions, lets you refactor freely; testing state variables or internal functions couples the test to code that should be free to change.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "Why should tests assert on behavior rather than implementation details?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A copy of the production database.",
+      "A test that runs twice as fast.",
+      "A snapshot of the component tree.",
+      "A fake replacement for a module or function that lets you control its behavior and verify how it was called."
+    ],
+    "correctIndex": 3,
+    "explanation": "Mocks isolate the code under test by replacing network calls, timers, or dependencies with predictable fakes, so failures point at the code being tested.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is a mock in testing?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "fireEvent is realistic and userEvent is low-level.",
+      "userEvent simulates realistic user interactions with proper event sequences, while fireEvent dispatches single low-level events.",
+      "fireEvent only works for clicks.",
+      "They are identical."
+    ],
+    "correctIndex": 1,
+    "explanation": "userEvent.click triggers the full sequence of pointer, mouse, and focus events a real user produces, while fireEvent dispatches just the one event you name.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is the difference between fireEvent and userEvent in Testing Library?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It is a way to mock API responses.",
+      "It tests the database schema.",
+      "It saves a rendered output snapshot and fails when the output changes, which catches regressions but can produce noisy failures on intentional changes.",
+      "It takes a screenshot of the page."
+    ],
+    "correctIndex": 2,
+    "explanation": "Snapshot tests are cheap to write but brittle: any intentional markup change fails the test, so they are best for stable output and should be reviewed, not blindly updated.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is snapshot testing, and what is its main downside?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Equal numbers of each test type.",
+      "Only end-to-end tests, because they cover everything.",
+      "Only unit tests, because they are fastest.",
+      "Many fast unit tests, fewer integration tests, and a small number of end-to-end tests for critical flows."
+    ],
+    "correctIndex": 3,
+    "explanation": "The testing pyramid balances speed and confidence: unit tests give fast feedback on logic, integration tests cover combined behavior, and E2E tests verify real user journeys.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the testing pyramid?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Use async queries like findByText or waitFor, which retry until the element appears or a timeout expires.",
+      "Add a fixed setTimeout of 5 seconds before asserting.",
+      "Use getByText immediately after render.",
+      "Async code cannot be tested."
+    ],
+    "correctIndex": 0,
+    "explanation": "Async queries wait for the UI to settle after a fetch or state update, while getBy queries throw immediately if the element is not there yet.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do you test a component that loads data asynchronously?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A test that always fails.",
+      "A test with no assertions.",
+      "A test that passes or fails inconsistently, usually because of timing, shared state, or reliance on real time and network.",
+      "A test that runs too slowly."
+    ],
+    "correctIndex": 2,
+    "explanation": "Flaky tests erode trust in the suite; fixes include awaiting real conditions instead of fixed delays, isolating state per test, and mocking the network and timers.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a flaky test, and how do you fix one?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Mock the network layer with a tool like MSW or a fetch mock, then assert on the loading state, the rendered data, and the error state.",
+      "Call the real API in every test.",
+      "Components that fetch data cannot be unit tested.",
+      "Only test the loading state."
+    ],
+    "correctIndex": 0,
+    "explanation": "Intercepting requests keeps tests fast and deterministic while still verifying the component handles loading, success, and failure states correctly.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "How do you test a component that fetches data from an API?",
+    "source": "interview",
+    "subject": "Testing",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A tool that writes JavaScript code for you.",
+      "A package registry like npm.",
+      "A tool that combines many modules into one or more bundles the browser can load.",
+      "A test runner."
+    ],
+    "correctIndex": 2,
+    "explanation": "Bundlers like Webpack, Vite, and esbuild resolve imports, transform code, and emit optimized bundles with splitting, minification, and tree shaking.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is a bundler?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A JavaScript framework.",
+      "A package manager and registry for installing, sharing, and versioning JavaScript libraries.",
+      "A test runner.",
+      "A bundler."
+    ],
+    "correctIndex": 1,
+    "explanation": "npm installs dependencies from the registry, records them in package.json, and locks exact versions in package-lock.json for reproducible installs.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is npm?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "devDependencies are needed at runtime and dependencies are not.",
+      "They are identical; the split is only cosmetic.",
+      "dependencies are needed at runtime, while devDependencies are only needed for development and testing.",
+      "dependencies are for production builds and devDependencies are never installed."
+    ],
+    "correctIndex": 2,
+    "explanation": "Libraries your app imports belong in dependencies, while tools like test runners and linters belong in devDependencies so production installs stay lean.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What is the difference between dependencies and devDependencies?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A tool that runs tests.",
+      "A tool that statically analyzes code for errors, style issues, and likely bugs before it runs.",
+      "A tool that bundles code for production.",
+      "A tool that formats code automatically."
+    ],
+    "correctIndex": 1,
+    "explanation": "A linter like ESLint catches unused variables, missing dependencies, and common mistakes, and enforces team conventions without executing the code.",
+    "format": "multiple-choice",
+    "level": "Junior",
+    "prompt": "What does a linter like ESLint do?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "It is a faster version of Webpack with the same architecture.",
+      "It only works with React.",
+      "It removes the need for a dev server entirely.",
+      "It uses native ES modules and esbuild for instant server start and fast hot updates, bundling only for production."
+    ],
+    "correctIndex": 3,
+    "explanation": "Vite serves source files as native ESM in development, so startup is near-instant and updates are fast; it uses Rollup to produce optimized production bundles.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is Vite, and why is it fast in development?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Removing unused exports from the final bundle by analyzing the static import graph.",
+      "Removing unused CSS classes.",
+      "A technique for compressing images.",
+      "Shaking the dependency tree to find vulnerabilities."
+    ],
+    "correctIndex": 0,
+    "explanation": "Because ES module imports are static, bundlers can prove which exports are never used and drop them, which only works reliably with ESM and side-effect-free code.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is tree shaking?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "TypeScript replaces the bundler.",
+      "TypeScript runs the code in the browser.",
+      "TypeScript type-checks the code and strips the types away, emitting plain JavaScript.",
+      "TypeScript only checks types in the editor, never in the build."
+    ],
+    "correctIndex": 2,
+    "explanation": "The TypeScript compiler validates types with tsc and emits JavaScript with types erased; bundlers like Vite use esbuild to strip types quickly without full checking.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is TypeScript's role in the build?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Updating a changed module in the running app without a full page reload, preserving application state.",
+      "Reloading the entire page on every save.",
+      "A test runner feature.",
+      "A way to deploy code to production."
+    ],
+    "correctIndex": 0,
+    "explanation": "Hot module replacement swaps the edited module in place, so a developer sees changes instantly without losing the current state of the app.",
+    "format": "multiple-choice",
+    "level": "Mid",
+    "prompt": "What is hot module replacement (HMR)?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "Webpack is a highly configurable all-in-one bundler, Vite is fast in development with native ESM and uses Rollup for production, and esbuild is an extremely fast bundler and minifier often used as a building block.",
+      "They are three names for the same tool.",
+      "Vite cannot produce production builds.",
+      "Webpack is fastest and esbuild is slowest."
+    ],
+    "correctIndex": 0,
+    "explanation": "Webpack offers deep customization and a huge plugin ecosystem, Vite optimizes the developer experience, and esbuild trades configurability for raw speed in Go.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What are the trade-offs between Webpack, Vite, and esbuild?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "A backup copy of the source code.",
+      "A map of all dependencies in the project.",
+      "A file that maps minified production code back to the original source, so errors and debugger breakpoints show real file names and line numbers.",
+      "A file that lists the build steps."
+    ],
+    "correctIndex": 2,
+    "explanation": "Source maps are generated alongside bundles and let browser devtools and error trackers translate a stack trace in minified code to the original source location.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is a source map?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "An automated pipeline that runs tests, lint, and type checks on every push or pull request, catching regressions before they reach production.",
+      "A tool for deploying code manually.",
+      "A way to run tests only on a developer's machine.",
+      "A code review process done by humans."
+    ],
+    "correctIndex": 0,
+    "explanation": "Continuous integration gives every change the same verification, so broken builds are caught in minutes and the main branch stays releasable.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is continuous integration (CI), and why run tests and lint there?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  },
+  {
+    "choices": [
+      "npm ci installs fewer packages than npm install.",
+      "They are identical commands.",
+      "npm ci does a clean install from the lockfile, deleting node_modules first, while npm install may update the lockfile to satisfy version ranges.",
+      "npm install is only for CI servers."
+    ],
+    "correctIndex": 2,
+    "explanation": "npm ci guarantees the exact locked versions, which makes CI builds reproducible; npm install is for development, where the lockfile may legitimately change.",
+    "format": "multiple-choice",
+    "level": "Senior",
+    "prompt": "What is the difference between npm ci and npm install?",
+    "source": "interview",
+    "subject": "Tooling",
+    "track": "Frontend"
+  }
+]

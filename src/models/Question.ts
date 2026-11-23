@@ -22,14 +22,13 @@ const questionSchema = new Schema(
     track: {
       type: String,
       required: true,
-      enum: ["Frontend", "Backend", "Fullstack", "DevOps"],
+      enum: ["Frontend", "A+"],
     },
     subject: { type: String, required: true, index: true },
-    metadata: {
-      model: String,
-      generatedAt: Date,
-      tokenEstimate: Number,
-    },
+    format: { type: String, default: "multiple-choice" },
+    source: { type: String, default: "bank" },
+    origin: { type: String },
+    key: { type: String, unique: true, sparse: true },
   },
   { timestamps: true },
 );

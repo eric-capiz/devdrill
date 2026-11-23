@@ -29,47 +29,11 @@ function navClass(active: boolean) {
   ].join(" ");
 }
 
-function DailyQuestionCounter({
-  bankMode,
-  estimatedQuestionsLeft,
-}: {
-  bankMode: boolean;
-  estimatedQuestionsLeft: number;
-}) {
-  const title = bankMode
-    ? "New questions are paused for today. Rounds use stored questions until reset."
-    : `About ${estimatedQuestionsLeft} new questions can still be written today. After that, rounds use stored questions until reset.`;
-
-  return (
-    <p
-      title={title}
-      className="flex min-w-0 items-baseline justify-center gap-1.5 font-extrabold uppercase tracking-[0.1em]"
-    >
-      {bankMode ? (
-        <span className="truncate text-[0.7rem] text-[var(--buzzer)] sm:text-xs">
-          Stored questions today
-        </span>
-      ) : (
-        <>
-          <span className="font-display text-lg tracking-wide text-[var(--gold)] sm:text-xl">
-            {estimatedQuestionsLeft}
-          </span>
-          <span className="truncate text-[0.65rem] text-[var(--spot)] sm:text-xs">
-            new questions left today
-          </span>
-        </>
-      )}
-    </p>
-  );
-}
-
 export function SiteHeader({
   username,
-  aiBudget,
   player,
 }: {
   username: string | null;
-  aiBudget: { bankMode: boolean; estimatedQuestionsLeft: number };
   player: { xp: number; streakCount: number } | null;
 }) {
   const pathname = usePathname();
@@ -109,10 +73,7 @@ export function SiteHeader({
           </Link>
         </div>
 
-        <DailyQuestionCounter
-          bankMode={aiBudget.bankMode}
-          estimatedQuestionsLeft={aiBudget.estimatedQuestionsLeft}
-        />
+        <div className="hidden sm:block" />
 
         <nav className="flex w-full items-center justify-between text-[0.7rem] font-extrabold uppercase tracking-wide max-sm:border-t max-sm:border-[var(--line)] max-sm:pt-2 sm:w-auto sm:justify-end sm:gap-2 sm:text-sm">
           {username ? (

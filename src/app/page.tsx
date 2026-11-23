@@ -11,9 +11,7 @@ export const revalidate = 60;
 
 const TRACK_BLURBS: Record<string, string> = {
   Frontend: "Pixels, components, and the DOM under pressure.",
-  Backend: "APIs, databases, and servers that never sleep.",
-  Fullstack: "The whole stack. No place to hide.",
-  DevOps: "Pipelines, containers, and 3 AM incidents.",
+  "A+": "Hardware, networking, and everything CompTIA A+ throws at you.",
 };
 
 export default async function HomePage() {
@@ -64,7 +62,7 @@ export default async function HomePage() {
             CHOOSE YOUR CATEGORY
           </h2>
           <p className="mt-3 max-w-xl text-sm font-semibold text-[var(--muted)] sm:text-base">
-            Four seats at the table. Pick the one where you&apos;re dangerous —
+            Two seats at the table. Pick the one where you&apos;re dangerous —
             or the one where you need the reps.
           </p>
         </Reveal>

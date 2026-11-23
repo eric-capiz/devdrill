@@ -1,14 +1,8 @@
 "use client";
 
-import { useActionState, useMemo, useState } from "react";
+import { useActionState, useState } from "react";
 import { motion } from "motion/react";
-import {
-  LEVELS,
-  QUIZ_LENGTHS,
-  SUBJECTS,
-  TRACKS,
-  type Track,
-} from "@/lib/catalog";
+import { LEVELS, QUIZ_LENGTHS, TRACKS, type Track } from "@/lib/catalog";
 import { startQuizAction, type ActionResult } from "@/app/actions/quiz";
 import { Buzzer } from "@/components/bits/Buzzer";
 
@@ -17,22 +11,16 @@ const initial: ActionResult = { ok: false };
 export function QuizSetupForm({
   initialTrack,
   initialLevel,
-  initialSubject,
   initialLength,
 }: {
   initialTrack?: Track;
   initialLevel?: (typeof LEVELS)[number];
-  initialSubject?: string;
   initialLength?: string;
 }) {
   const [level, setLevel] = useState<(typeof LEVELS)[number]>(
     initialLevel ?? "Junior",
   );
   const [track, setTrack] = useState<Track>(initialTrack ?? "Frontend");
-  const subjects = useMemo(() => SUBJECTS[track], [track]);
-  const [subject, setSubject] = useState<string>(
-    initialSubject ?? SUBJECTS[initialTrack ?? "Frontend"][0],
-  );
   const [length, setLength] = useState<string>(initialLength ?? "5");
   const [state, formAction, pending] = useActionState(startQuizAction, initial);
 
@@ -71,7 +59,6 @@ export function QuizSetupForm({
                 checked={track === t}
                 onChange={() => {
                   setTrack(t);
-                  setSubject(SUBJECTS[t][0]);
                 }}
                 className="sr-only"
               />
@@ -80,25 +67,6 @@ export function QuizSetupForm({
           ))}
         </div>
       </fieldset>
-
-      <div>
-        <label htmlFor="subject" className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">
-          CATEGORY
-        </label>
-        <select
-          id="subject"
-          name="subject"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          className="field mt-3"
-        >
-          {subjects.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-      </div>
 
       <fieldset>
         <legend className="font-display text-xl tracking-wide text-[var(--spot)] sm:text-2xl">

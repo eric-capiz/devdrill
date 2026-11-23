@@ -1,7 +1,7 @@
-export const LEVELS = ["Junior", "Mid", "Senior", "All"] as const;
+export const LEVELS = ["Junior", "Mid", "Senior"] as const;
 export type Level = (typeof LEVELS)[number];
 
-export const TRACKS = ["Frontend", "Backend", "Fullstack", "DevOps"] as const;
+export const TRACKS = ["Frontend", "A+"] as const;
 export type Track = (typeof TRACKS)[number];
 
 export const QUIZ_LENGTHS = [5, 10, 15, 20, 25, "Unlimited"] as const;
@@ -14,48 +14,24 @@ export const SUBJECTS = {
     "JavaScript",
     "TypeScript",
     "React",
-    "Vue",
-    "Angular",
-    "State management (Redux, Zustand, Pinia, etc.)",
     "Next.js",
+    "APIs & Fetch",
     "Browser APIs / DOM",
     "Accessibility",
     "Performance",
-    "Testing (Jest, Vitest, Playwright, Cypress)",
-    "Tooling (Vite, Webpack, npm/pnpm)",
-  ],
-  Backend: [
-    "Express / Node",
-    "APIs (REST, GraphQL)",
-    "Python (Flask / FastAPI / Django)",
-    "Databases (SQL, NoSQL, ORM)",
-    "Auth (sessions, JWT, OAuth)",
-    "Security",
-    "Caching (Redis)",
-    "Background jobs / queues",
-    "Validation & error handling",
     "Testing",
-    "Architecture (layers, services, clean structure)",
+    "Tooling",
   ],
-  Fullstack: [
-    "Fullstack mix",
-    "Client ↔ API integration",
-    "Auth across client and server",
-    "SSR / hydration",
-    "Env / config",
-    "Deploying a full app",
-  ],
-  DevOps: [
-    "Git / GitHub",
-    "CI/CD",
-    "Docker",
-    "Linux / shell basics",
-    "Hosting / cloud (Vercel, AWS, etc.)",
-    "Env vars & secrets",
-    "Monitoring / logging",
-    "Networking basics (DNS, HTTPS, reverse proxies)",
-    "Nginx / reverse proxy",
-    "Infrastructure as code (Terraform basics)",
+  "A+": [
+    "Hardware",
+    "Networking",
+    "Mobile Devices",
+    "Printers",
+    "Virtualization & Cloud",
+    "Operating Systems",
+    "Security",
+    "Software Troubleshooting",
+    "Operational Procedures",
   ],
 } as const satisfies Record<Track, readonly string[]>;
 

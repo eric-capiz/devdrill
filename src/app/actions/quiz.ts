@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { z } from "zod";
-import { LEVELS, SUBJECTS, TRACKS } from "@/lib/catalog";
+import { LEVELS, TRACKS } from "@/lib/catalog";
 import { connectDB } from "@/lib/db";
 import { ladderFor, winningsFor } from "@/lib/ladder";
 import { getQuestionsForQuiz } from "@/lib/questions";
@@ -16,7 +16,6 @@ import { User } from "@/models/User";
 const startSchema = z.object({
   level: z.enum(LEVELS),
   track: z.enum(TRACKS),
-  subject: z.string().min(1),
   length: z.enum(["5", "10", "15", "20", "25", "Unlimited"]),
 });
 
@@ -34,7 +33,6 @@ export async function startQuizAction(
   const parsed = startSchema.safeParse({
     level: formData.get("level"),
     track: formData.get("track"),
-    subject: formData.get("subject"),
     length: formData.get("length"),
   });
 
@@ -42,11 +40,7 @@ export async function startQuizAction(
     return { ok: false, message: "Invalid quiz setup" };
   }
 
-  const { level, track, subject, length: lengthRaw } = parsed.data;
-  const allowed = SUBJECTS[track] as readonly string[];
-  if (!allowed.includes(subject)) {
-    return { ok: false, message: "Subject does not match track" };
-  }
+  const { level, track, length: lengthRaw } = parsed.data;
 
   const mode = lengthRaw === "Unlimited" ? "unlimited" : "fixed";
   const length = lengthRaw === "Unlimited" ? null : Number(lengthRaw);
@@ -56,7 +50,6 @@ export async function startQuizAction(
     const result = await getQuestionsForQuiz({
       level,
       track,
-      subject,
       count,
     });
 
@@ -69,7 +62,7 @@ export async function startQuizAction(
       userId: session.userId,
       level,
       track,
-      subject,
+      subject: "Mixed",
       mode,
       length: mode === "fixed" ? length : null,
       questionIds: result.questions.map((q) => q._id),
@@ -89,7 +82,7 @@ export async function startQuizAction(
     return {
       ok: false,
       message:
-        "Could not start this quiz. Try again, or pick another subject.",
+        "Could not start this quiz. Try again, or pick another level or topic.",
     };
   }
 }
@@ -141,7 +134,6 @@ export async function extendUnlimitedAction(
   const result = await getQuestionsForQuiz({
     level: attempt.level as (typeof LEVELS)[number],
     track: attempt.track as (typeof TRACKS)[number],
-    subject: attempt.subject,
     count: 5,
     excludeIds: attempt.questionIds.map((id) => id.toString()),
   });

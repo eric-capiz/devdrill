@@ -26,7 +26,7 @@ const quizAttemptSchema = new Schema(
     track: {
       type: String,
       required: true,
-      enum: ["Frontend", "Backend", "Fullstack", "DevOps"],
+      enum: ["Frontend", "A+"],
     },
     subject: { type: String, required: true },
     mode: { type: String, required: true, enum: ["fixed", "unlimited"] },
