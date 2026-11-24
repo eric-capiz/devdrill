@@ -30,14 +30,12 @@ function usernameFrom(userId: unknown) {
   return undefined;
 }
 
-export async function getQuestionBankCount() {
-  await connectDB();
-  return Question.countDocuments();
-}
-
 export async function getBoardCounts() {
   await connectDB();
+  // Only bank questions count — the DB still holds old AI-generated rows
+  // that are never served (getQuestionsForQuiz filters source:"bank").
   const rows = await Question.aggregate([
+    { $match: { source: "bank" } },
     { $group: { _id: { track: "$track", level: "$level" }, count: { $sum: 1 } } },
   ]);
   const counts: Record<string, Record<string, number>> = {};

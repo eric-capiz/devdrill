@@ -72,6 +72,10 @@ export function QuizPlayer({
   const [failed, setFailed] = useState(false);
   const [correctStreak, setCorrectStreak] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(SHOT_CLOCK);
+  // The board is not playable until the client has mounted, painted, and
+  // the document is fully loaded. The shot clock must not run before that,
+  // or a cold start eats into the player's 30 seconds before they can act.
+  const [boardReady, setBoardReady] = useState(false);
   const autoExtendTried = useRef(false);
   const timedOutFor = useRef<string | null>(null);
   const onSkipRef = useRef<() => void>(() => {});
@@ -303,9 +307,27 @@ export function QuizPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, current, pending, extending]);
 
-  // Shot clock: 30 seconds per question
+  // Mark the board ready once the client is mounted + painted and the
+  // document is fully loaded. Until then the clock stays frozen at 0:30.
   useEffect(() => {
-    if (!currentId) return;
+    let raf = 0;
+    let done = false;
+    const markReady = () => {
+      if (done) return;
+      done = true;
+      raf = requestAnimationFrame(() => setBoardReady(true));
+    };
+    if (document.readyState === "complete") markReady();
+    else window.addEventListener("load", markReady, { once: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("load", markReady);
+    };
+  }, []);
+
+  // Shot clock: 30 seconds per question, starting only once the board is ready
+  useEffect(() => {
+    if (!boardReady || !currentId) return;
     timedOutFor.current = null;
     setEliminated([]);
     setAudienceVotes(null);
@@ -316,7 +338,7 @@ export function QuizPlayer({
       setSecondsLeft((s) => Math.max(0, s - 1));
     }, 1000);
     return () => clearInterval(id);
-  }, [currentId]);
+  }, [boardReady, currentId]);
 
   useEffect(() => {
     if (
