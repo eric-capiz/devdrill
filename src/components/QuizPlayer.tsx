@@ -41,8 +41,6 @@ type Props = {
   >;
 };
 
-const SHOT_CLOCK = 30;
-
 type LifelineKind = "fifty" | "audience" | "phone";
 
 export function QuizPlayer({
@@ -71,15 +69,7 @@ export function QuizPlayer({
   const [revealed, setRevealed] = useState<boolean | null>(null);
   const [failed, setFailed] = useState(false);
   const [correctStreak, setCorrectStreak] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(SHOT_CLOCK);
-  // The board is not playable until the client has mounted, painted, and
-  // the document is fully loaded. The shot clock must not run before that,
-  // or a cold start eats into the player's 30 seconds before they can act.
-  const [boardReady, setBoardReady] = useState(false);
   const autoExtendTried = useRef(false);
-  const timedOutFor = useRef<string | null>(null);
-  const onSkipRef = useRef<() => void>(() => {});
-  const onTimeoutFixedRef = useRef<() => void>(() => {});
 
   const currentId =
     phase === "main" ? order[mainIndex] : skipQueue[0] ?? null;
@@ -233,26 +223,6 @@ export function QuizPlayer({
     gradeNow();
   }
 
-  function onTimeoutFixed() {
-    if (!current || revealed !== null || failed || pending) return;
-    const questionId = current.id;
-    const selectedIndex = selected;
-    startTransition(async () => {
-      if (selectedIndex !== null) {
-        await saveAnswerAction({
-          attemptId,
-          questionId,
-          selectedIndex,
-          skipped: false,
-        });
-      }
-      setRevealed(false);
-      setFailed(true);
-      setMessage("Time's up! That counts as a miss.");
-      window.setTimeout(() => gradeNow(), 2200);
-    });
-  }
-
   function useLifeline(kind: LifelineKind) {
     if (
       !current ||
@@ -291,9 +261,6 @@ export function QuizPlayer({
     });
   }
 
-  onSkipRef.current = onSkip;
-  onTimeoutFixedRef.current = onTimeoutFixed;
-
   // If unlimited lands on an empty pass with no current question, keep going
   useEffect(() => {
     if (mode !== "unlimited") return;
@@ -307,52 +274,15 @@ export function QuizPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, current, pending, extending]);
 
-  // Mark the board ready once the client is mounted + painted and the
-  // document is fully loaded. Until then the clock stays frozen at 0:30.
+  // Reset per-question lifeline display state when the question changes.
+  // Questions are untimed — there is no clock and no timeout.
   useEffect(() => {
-    let raf = 0;
-    let done = false;
-    const markReady = () => {
-      if (done) return;
-      done = true;
-      raf = requestAnimationFrame(() => setBoardReady(true));
-    };
-    if (document.readyState === "complete") markReady();
-    else window.addEventListener("load", markReady, { once: true });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("load", markReady);
-    };
-  }, []);
-
-  // Shot clock: 30 seconds per question, starting only once the board is ready
-  useEffect(() => {
-    if (!boardReady || !currentId) return;
-    timedOutFor.current = null;
+    if (!currentId) return;
     setEliminated([]);
     setAudienceVotes(null);
     setFriendSays(null);
     setRevealed(null);
-    setSecondsLeft(SHOT_CLOCK);
-    const id = setInterval(() => {
-      setSecondsLeft((s) => Math.max(0, s - 1));
-    }, 1000);
-    return () => clearInterval(id);
-  }, [boardReady, currentId]);
-
-  useEffect(() => {
-    if (
-      secondsLeft === 0 &&
-      current &&
-      revealed === null &&
-      !failed &&
-      timedOutFor.current !== current.id
-    ) {
-      timedOutFor.current = current.id;
-      if (mode === "fixed") onTimeoutFixedRef.current();
-      else onSkipRef.current();
-    }
-  }, [secondsLeft, current, revealed, failed, mode]);
+  }, [currentId]);
 
   const showHeaderGrade = mode === "unlimited";
 
@@ -402,29 +332,16 @@ export function QuizPlayer({
               {progressLabel}
             </h1>
           </div>
-          <div className="flex items-center gap-3">
-            <div
-              className={`shot-clock${secondsLeft <= 10 ? " shot-clock-low" : ""}`}
-              title="Shot clock — answer before it hits zero"
+          {showHeaderGrade ? (
+            <button
+              type="button"
+              onClick={() => gradeNow()}
+              disabled={pending}
+              className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
             >
-              <span className="shot-clock-digits">
-                0:{String(secondsLeft).padStart(2, "0")}
-              </span>
-              <span className="shot-clock-bar">
-                <span style={{ width: `${(secondsLeft / SHOT_CLOCK) * 100}%` }} />
-              </span>
-            </div>
-            {showHeaderGrade ? (
-              <button
-                type="button"
-                onClick={() => gradeNow()}
-                disabled={pending}
-                className="btn btn-gold w-full shrink-0 text-xs disabled:opacity-60 sm:w-auto"
-              >
-                Lock in my score
-              </button>
-            ) : null}
-          </div>
+              Lock in my score
+            </button>
+          ) : null}
         </div>
       </div>
 
@@ -619,7 +536,7 @@ export function QuizPlayer({
                   </p>
                 ) : (
                   <p className="mt-4 text-xs font-semibold leading-relaxed text-[var(--muted)]">
-                    Wrong answer or an empty clock ends the run — you keep your
+                    A wrong answer ends the run — you keep your
                     last safe haven.
                   </p>
                 )}

@@ -191,50 +191,6 @@ body {
   transition: width 0.6s ease;
 }
 
-.shot-clock {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(244, 241, 255, 0.05);
-  padding: 0.45rem 0.85rem;
-}
-
-.shot-clock-digits {
-  font-family: var(--font-display), sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.06em;
-  color: var(--spot);
-  min-width: 3.2rem;
-}
-
-.shot-clock-bar {
-  display: block;
-  width: 5rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: rgba(244, 241, 255, 0.12);
-  overflow: hidden;
-}
-
-.shot-clock-bar > span {
-  display: block;
-  height: 100%;
-  border-radius: 999px;
-  background: var(--lime);
-  transition: width 1s linear;
-}
-
-.shot-clock-low .shot-clock-digits {
-  color: var(--bad);
-  animation: pulse-dot 0.8s ease-in-out infinite;
-}
-
-.shot-clock-low .shot-clock-bar > span {
-  background: var(--bad);
-}
-
 .lifeline-btn {
   display: inline-flex;
   align-items: center;
@@ -978,8 +934,7 @@ select.field {
   .spotlight,
   .marquee-track,
   .champ-plate,
-  .ladder-rung-current,
-  .shot-clock-low .shot-clock-digits {
+  .ladder-rung-current {
     animation: none !important;
   }
 }

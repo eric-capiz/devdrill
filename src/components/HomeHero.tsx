@@ -35,8 +35,8 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
         >
-          30 seconds on the clock. Three lifelines. A ladder of prize
-          rungs with safe havens. Answer fast, climb high, and know
+          Three lifelines. A ladder of prize
+          rungs with safe havens. Take your time, climb high, and know
           when to walk away.
         </motion.p>
 
@@ -75,7 +75,7 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
           transition={{ delay: 0.55 }}
         >
           <span>
-            <span className="text-[var(--lime)]">30s</span> shot clock
+            <span className="text-[var(--lime)]">Untimed</span> questions
           </span>
           <span>
             <span className="text-[var(--lime)]">3</span> lifelines
@@ -90,7 +90,7 @@ export function HomeHero({ loggedIn }: { loggedIn: boolean }) {
         <div className="marquee-track">
           {Array.from({ length: 2 }).flatMap((_, copy) =>
             [
-              "Beat the clock",
+              "Take your time",
               "Use your lifeline",
               "Climb the ladder",
               "Daily streaks",

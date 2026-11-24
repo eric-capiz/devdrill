@@ -9,6 +9,15 @@ import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export const revalidate = 60;
 
+// The Hall of Fame shows the all-time best attempt, which may predate the
+// current tracks — an old record can carry a subject that already contains
+// its track ("Fullstack mix" under track "Fullstack"). Don't repeat it.
+function bestLabel(track: string, subject: string, level: string) {
+  return subject.toLowerCase().startsWith(track.toLowerCase())
+    ? `${subject} · ${level}`
+    : `${track} · ${subject} · ${level}`;
+}
+
 const TRACK_BLURBS: Record<string, string> = {
   Frontend: "Pixels, components, and the DOM under pressure.",
   "A+": "Hardware, networking, and everything CompTIA A+ throws at you.",
@@ -99,8 +108,8 @@ export default async function HomePage() {
           {[
             [
               "01",
-              "BEAT THE CLOCK",
-              "Every question gets 30 seconds. Let it hit zero and it counts as a miss. Fast fingers, faster brain.",
+              "TAKE YOUR TIME",
+              "No clock, no rush. Every question waits for your answer — think it through, then lock it in when you're ready.",
               "",
             ],
             [
@@ -198,7 +207,7 @@ export default async function HomePage() {
                   <FlipScore value={`${topFixed.scorePercent}%`} />
                 </p>
                 <p className="mt-2 text-sm font-bold leading-snug text-[var(--muted)]">
-                  {topFixed.track} · {topFixed.subject} · {topFixed.level}
+                  {bestLabel(topFixed.track, topFixed.subject, topFixed.level)}
                 </p>
               </>
             ) : (
@@ -228,7 +237,11 @@ export default async function HomePage() {
                   <span className="ml-2 text-xl text-[var(--muted)] sm:text-2xl">PTS</span>
                 </p>
                 <p className="mt-2 text-sm font-bold leading-snug text-[var(--muted)]">
-                  {topUnlimited.track} · {topUnlimited.subject} · {topUnlimited.level}
+                  {bestLabel(
+                    topUnlimited.track,
+                    topUnlimited.subject,
+                    topUnlimited.level,
+                  )}
                 </p>
               </>
             ) : (
